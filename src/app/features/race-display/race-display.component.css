@@ -1,0 +1,60 @@
+.main-container {
+  background-color: black;
+  height: 100vh;
+  width: 95%;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 20px;
+}
+
+.top-row {
+  grid-area: 1 / 3 / span 1 / span 4;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.tyre-pres {
+  grid-area: 1 / 1 / span 2 / span 2;
+}
+
+.tyre-temps {
+  grid-area: 3 / 1 / span 2 / span 2;
+}
+
+.brake-temps {
+  grid-area: 5 / 1 / span 2 / span 2;
+}
+
+.fuel {
+  grid-area: 2 / 3 / span 3 / span 1;
+}
+
+.conditions {
+  grid-area: 2 / 5 / span 3 / span 1;
+}
+
+.laptimes {
+  grid-area: 2 / 6 / span 5 / span 1;
+}
+
+.flag {
+  grid-area: 2 / 4 / span 3 / span 1;
+  width: 100%;
+  height: 100%;
+  background-color: green;
+}
+
+.setup {
+  grid-area: 6 / 3 / span 1 / span 3;
+  display: flex;
+}
+
+.grid-2cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+

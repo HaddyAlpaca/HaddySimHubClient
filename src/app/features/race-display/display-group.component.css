@@ -1,0 +1,26 @@
+.container {
+  border: 5px solid;
+  border-radius: 5px;
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 20px;
+}
+
+.title {
+  color: white;
+  background-color: black;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 2rem;
+  display: inline-block;
+  margin: -25px auto 28px auto;
+  padding: 0 15px;
+}
+
+.data {
+  color: #ffffff;
+  text-align: center;
+  font-size: 2rem;
+}

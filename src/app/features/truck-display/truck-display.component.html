@@ -1,0 +1,59 @@
+<div class="container-fluid main-container">
+    <div class="row">
+        <div class="col">
+            <div class="data-grid">
+                <!-- Current time -->
+                <img src="/assets/images/clock.svg" class="filter-white">
+                <div>{{data.time | date:'HH:mm'}} ({{currentTime | date:'HH:mm'}})</div>
+
+                <!-- Next rest -->
+                <img src="/assets/images/sleep.svg" class="filter-green">
+                <div>{{data.restTimeRemaining | timespan}} ({{data.timeRemainingIrl | timespan}})</div>
+
+                <!-- Fuel -->
+                <img src="/assets/images/fuel.svg" class="filter-orange">
+                <div>{{data.fuelDistance}} km</div>
+
+                <!-- Destination information -->
+                <img [class.hidden]="!data.destination" src="/assets/images/finish-flag.svg" class="filter-white">
+                <div [class.hidden]="!data.destination">
+                  <div>{{data.destination}}</div>
+                  <div>{{data.timeRemaining | timespan}} ({{data.timeRemainingIrl | timespan}}) / {{data.distanceRemaining}} km</div>
+                </div>
+
+                <!-- Deadline -->
+                <img  [class.hidden]="!data.destination" src="/assets/images/deadline.svg" class="filter-white">
+                <div  [class.hidden]="!data.destination">{{data.jobTimeRemaining | timespan}} ({{data.jobTimeRemainingIrl | timespan}})</div>
+
+                <!-- Job income -->
+                <img [class.hidden]="!data.jobIncome" src="/assets/images/money.svg" class="filter-white">
+                <div [class.hidden]="!data.jobIncome">&euro; {{data.jobIncome | number}}</div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="dashboard">
+                <div class="dashboard-lights-container">
+                    <img id="low-beam" src="/assets/images/low-beam.svg" [ngClass]="data.lowBeamOn ? 'filter-green' : 'transparent'">
+                    <img id="high-beam" src="/assets/images/high-beam.svg"  [ngClass]="data.highBeamOn ? 'filter-blue' : 'transparent'">
+                    <img id="brake-warning" src="/assets/images/brake-warning.svg"  [ngClass]="data.parkingBrakeOn ? 'filter-red' : 'transparent'">
+                    <img id="battery-warning" src="/assets/images/battery.svg"  [ngClass]="data.batteryWarningOn ? 'filter-red' : 'transparent'">
+                </div>
+                <div class="rev-counter">
+                  <div class="rev-counter-overlay" [style.--rpm]="data.rpm" [style.--rpm-max]="data.rpmMax"></div>
+                  <div class="current-speed">{{data.speed}}</div>
+                    <div class="speed-unit">km/h</div>
+                    <div class="speed-limit" *ngIf="data.speedLimit">{{data.speedLimit}}</div>
+                    <div class="cruise-control" *ngIf="data.cruiseControlOn">
+                        <img src="/assets/images/cruise-control.png">
+                        <div class="cruise-control-speed">{{data.cruiseControlSpeed}}</div>
+                    </div>
+                    <div class="current-gear">{{data.gear | gear}}</div>
+                    <ul class="gear-range">
+                        <li [class.transparent]="data.gearRange !== GearRange.Low">L</li>
+                        <li [class.transparent]="data.gearRange !== GearRange.High">H</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
