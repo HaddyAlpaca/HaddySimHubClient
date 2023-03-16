@@ -25,25 +25,25 @@ jobs:
       - name: Build app
         run: npm run build --prod
 
-      # - name: Create release
-      #   id: create_release
-      #   uses: actions/create-release@v1.0.0
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     tag_name: v${{ github.ref }}
-      #     release_name: Release v${{ github.ref }}
-      #     body: |
-      #       This is a new release of the Angular app.
-      #     draft: false
-      #     prerelease: false
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ github.ref }}
+          release_name: Release v${{ github.ref }}
+          body: |
+            This is a new release of the Angular app.
+          draft: false
+          prerelease: false
 
-      # - name: Upload release assets
-      #   uses: actions/upload-release-asset@v1.0.1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-      #     asset_path: ./dist/my-angular-app.zip
-      #     asset_name: my-angular-app.zip
-      #     asset_content_type: application/zip
+      - name: Upload release assets
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist/my-angular-app.zip
+          asset_name: my-angular-app.zip
+          asset_content_type: application/zip
