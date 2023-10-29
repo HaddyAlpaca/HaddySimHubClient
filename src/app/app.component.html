@@ -1,3 +1,9 @@
-<!-- <app-truck-display *ngIf="telemetryType === TelemetryType.Truck"></app-truck-display>
-<app-race-display *ngIf="telemetryType === TelemetryType.Race"></app-race-display> -->
-<app-race-essentials></app-race-essentials>
+<app-truck-display *ngIf="telemetryType === TelemetryType.Truck"></app-truck-display>
+<app-race-display *ngIf="telemetryType === TelemetryType.Race"></app-race-display>
+<div *ngIf="telemetryType === TelemetryType.Unknown" class="test-container">
+  <h1>Select dash type</h1>
+  <div class="test-button-container">
+    <button class="btn btn-secondary" (click)="selectTelemetryType(TelemetryType.Truck)">Truck</button>
+    <button class="btn btn-secondary" (click)="selectTelemetryType(TelemetryType.Race)">Race</button>
+  </div>
+</div>

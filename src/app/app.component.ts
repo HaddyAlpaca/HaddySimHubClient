@@ -22,4 +22,8 @@ export class AppComponent {
       this._telemetryType = update.Type;
     });
   }
+
+  selectTelemetryType(telemetryType: TelemetryType): void {
+    this._telemetryType = telemetryType;
+  }
 }
