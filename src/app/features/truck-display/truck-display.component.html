@@ -1,31 +1,129 @@
-<div class="container-fluid main-container">
+<div class="container-fluid">
+  <div class="row">
+    <div class="card col-4">
+      <div class="card-header">
+        <h2 class="card-title">Route</h2>
+      </div>
+      <div class="card-body">
+        <div class="data-row">
+          <div class="data-label">Vertrek</div>
+          <div class="data-item" *ngIf="!data.departureCity && !data.departureCompany" id="departure">-</div>
+          <div class="data-item" *ngIf="data.departureCity && !data.departureCompany" id="departure">{{data.departureCity}}</div>
+          <div class="data-item" *ngIf="data.departureCity && data.departureCompany" id="departure">{{data.departureCity}} ({{data.departureCompany}})</div>
+        </div>
+        <div class="data-row">
+          <div class="data-label">Aankomst</div>
+          <div class="data-item" *ngIf="!data.destinationCity && !data.destinationCompany" id="destination">-</div>
+          <div class="data-item" *ngIf="data.destinationCity && !data.destinationCompany" id="destination">{{data.destinationCity}}</div>
+          <div class="data-item" *ngIf="data.destinationCity && data.destinationCompany" id="destination">{{data.destinationCity}} ({{data.destinationCompany}})</div>
+        </div>
+        <div class="data-row">
+          <div class="data-label">Resterend</div>
+          <div class="data-item"><span>2d 13:24</span> / <span>{{data.distanceRemaining}} km</span>(02:16)</div>
+        </div>
+        <div class="data-row">
+          <div class="data-label">Volgend rustmoment</div>
+          <div class="data-item" *ngIf="!data.restTimeRemaining">-</div>
+          <div class="data-item" *ngIf="data.restTimeRemaining">{{data.restTimeRemaining | timespan}} ({{data.restTimeRemainingIrl | timespan}})</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card col-4">
+      <div class="card-header">
+        <h2 class="card-title">Opdracht</h2>
+      </div>
+      <div class="card-body">
+        <div class="data-row">
+          <div class="data-label">Deadline</div>
+          <div class="data-item" *ngIf="!data.jobTimeRemaining">-</div>
+          <div class="data-item" *ngIf="data.jobTimeRemaining">{{data.jobTimeRemaining | timespan}} ({{data.jobTimeRemainingIrl | timespan}})</div>
+        </div>
+        <div class="data-row">
+          <div class="data-label">Inkomen</div>
+          <div class="data-item" *ngIf="!data.jobIncome">-</div>
+          <div class="data-item" *ngIf="data.jobIncome">&euro; {{data.jobIncome | number}}</div>
+        </div>
+        <div class="data-row">
+          <div class="data-label">Lading</div>
+          <div class="data-item" *ngIf="!data.jobCargoDescription">-</div>
+          <div class="data-item" *ngIf="data.jobCargoDescription">{{data.jobCargoDescription}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card col-4">
+      <div class="card-header">
+        <h2 class="card-title">Status</h2>
+      </div>
+      <div class="card-body">
+        <div class="data-row">
+          <div class="data-label">Brandstof</div>
+          <div class="data-item">{{data.fuelPercentage}} % / {{data.fuelDistance}} km</div>
+        </div>
+        <div class="data-row">
+          <div class="data-label">Schade truck</div>
+          <div class="data-item">1 %</div>
+        </div>
+        <div class="data-row">
+          <div class="data-label">Schade trailer</div>
+          <div class="data-item">3 %</div>
+        </div>
+        <div class="data-row">
+          <div class="data-label">Schade lading</div>
+          <div class="data-item">0 %</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="card col-12 dashboard">
+
+      <div class="dashboard-lights-container">
+        <img id="low-beam" src="/assets/images/low-beam.svg" [ngClass]="data.lowBeamOn ? 'filter-green' : 'transparent'">
+        <img id="high-beam" src="/assets/images/high-beam.svg"  [ngClass]="data.highBeamOn ? 'filter-blue' : 'transparent'">
+        <img id="brake-warning" src="/assets/images/brake-warning.svg"  [ngClass]="data.parkingBrakeOn ? 'filter-red' : 'transparent'">
+        <img id="battery-warning" src="/assets/images/battery.svg"  [ngClass]="data.batteryWarningOn ? 'filter-red' : 'transparent'">
+      </div>
+
+      <div class="rev-counter">
+        <div class="rev-counter-overlay" [style.--rpm]="data.rpm" [style.--rpm-max]="data.rpmMax"></div>
+        <div class="current-speed">{{data.speed}}</div>
+        <div class="speed-unit">km/h</div>
+        <div class="current-gear">{{data.gear | gear}}</div>
+      </div>
+
+      <div class="dashboard-lights-container">
+        <div class="speed-limit" *ngIf="!data.speedLimit">{{data.speedLimit}}</div>
+        <div class="cruise-control">
+          <img src="/assets/images/cruise-control.png">
+          <div>{{data.cruiseControlSpeed}} km/h</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="container-fluid main-container">
     <div class="row">
         <div class="col">
             <div class="data-grid">
-                <!-- Current time -->
                 <img src="/assets/images/clock.svg" class="filter-white">
                 <div>{{data.time | date:'HH:mm'}} ({{currentTime | date:'HH:mm'}})</div>
 
-                <!-- Next rest -->
                 <img src="/assets/images/sleep.svg" class="filter-green">
                 <div>{{data.restTimeRemaining | timespan}} ({{data.timeRemainingIrl | timespan}})</div>
 
-                <!-- Fuel -->
-                <img src="/assets/images/fuel.svg" class="filter-orange">
-                <div>{{data.fuelDistance}} km</div>
-
-                <!-- Destination information -->
-                <img [class.hidden]="!data.destination" src="/assets/images/finish-flag.svg" class="filter-white">
                 <div [class.hidden]="!data.destination">
                   <div>{{data.destination}}</div>
                   <div>{{data.timeRemaining | timespan}} ({{data.timeRemainingIrl | timespan}}) / {{data.distanceRemaining}} km</div>
                 </div>
 
-                <!-- Deadline -->
                 <img  [class.hidden]="!data.destination" src="/assets/images/deadline.svg" class="filter-white">
                 <div  [class.hidden]="!data.destination">{{data.jobTimeRemaining | timespan}} ({{data.jobTimeRemainingIrl | timespan}})</div>
 
-                <!-- Job income -->
                 <img [class.hidden]="!data.jobIncome" src="/assets/images/money.svg" class="filter-white">
                 <div [class.hidden]="!data.jobIncome">&euro; {{data.jobIncome | number}}</div>
             </div>
@@ -48,12 +146,8 @@
                         <div class="cruise-control-speed">{{data.cruiseControlSpeed}}</div>
                     </div>
                     <div class="current-gear">{{data.gear | gear}}</div>
-                    <ul class="gear-range">
-                        <li [class.transparent]="data.gearRange !== GearRange.Low">L</li>
-                        <li [class.transparent]="data.gearRange !== GearRange.High">H</li>
-                    </ul>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</div> -->

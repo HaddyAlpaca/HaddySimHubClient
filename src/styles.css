@@ -3,7 +3,7 @@ html, body {
   min-height: 100vh;
   height: auto;
   margin: 0;
-  background-color: black;
+  background-color: #1e1e2f;
   overflow: hidden;
 }
 
