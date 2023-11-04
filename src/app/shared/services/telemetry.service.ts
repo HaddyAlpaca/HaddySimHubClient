@@ -5,7 +5,8 @@ import { Subject } from 'rxjs';
 export enum TelemetryType{
   Unknown,
   Race,
-  Truck
+  Truck,
+  RawData
 }
 
 export interface TelemetryUpdate {
