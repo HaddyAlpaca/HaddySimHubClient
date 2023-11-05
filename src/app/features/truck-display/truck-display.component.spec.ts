@@ -4,35 +4,25 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 import { TruckDisplayComponent } from './truck-display.component';
 import { TruckDashComponentHarness } from './truck-display.component.harness';
-import { Component } from '@angular/core';
 import { TelemetryService, TelemetryType, TelemetryUpdate } from 'src/app/shared/services/telemetry.service';
-import { Subject } from 'rxjs';
 import { TruckData } from './truck-data';
-
-class MockTelemetryService {
-  telemetry$: Subject<TelemetryUpdate> = new Subject<TelemetryUpdate>;
-}
-
-@Component({
-  template: '<app-truck-display></app-truck-display>',
-})
-class TruckDisplayTestComponent { }
+import { Subject } from 'rxjs';
 
 describe('TruckDisplayComponent', () => {
-  let fixture: ComponentFixture<TruckDisplayTestComponent>;
+  let fixture: ComponentFixture<TruckDisplayComponent>;
   let data: TruckData;
-  let mockTelemetryService: MockTelemetryService;
+  let mockTelemetryService: jasmine.SpyObj<TelemetryService>;
 
   beforeEach(async () => {
-    mockTelemetryService = new MockTelemetryService();
+    mockTelemetryService = jasmine.createSpyObj<TelemetryService>('telemetryService', ['telemetry$']);
+    mockTelemetryService.telemetry$ = new Subject<TelemetryUpdate>();
 
     //Set default values for the truck data
     data = new TruckData();
 
     await TestBed.configureTestingModule({
       declarations: [
-        TruckDisplayComponent,
-        TruckDisplayTestComponent
+        TruckDisplayComponent
       ],
       imports: [
         SharedModule
@@ -43,7 +33,7 @@ describe('TruckDisplayComponent', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TruckDisplayTestComponent);
+    fixture = TestBed.createComponent(TruckDisplayComponent);
   });
 
   describe('Departure tests', () => {

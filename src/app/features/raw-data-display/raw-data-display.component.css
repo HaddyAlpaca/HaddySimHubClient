@@ -1,0 +1,23 @@
+app-raw-data-display {
+  font-family: 'Courier New', Courier, monospace;
+
+  .pairs-container {
+    display: flex;
+    flex-flow: column wrap;
+    padding: 20px;
+    height: 100vh;
+  }
+
+  .key {
+   color: greenyellow;
+   margin-right: 10px;
+  }
+
+  .key::after {
+    content: ':';
+  }
+
+  .value {
+    color: white;
+  }
+}

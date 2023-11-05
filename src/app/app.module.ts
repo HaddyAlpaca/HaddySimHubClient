@@ -4,8 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TruckDisplayModule } from './features/truck-display/truck-display.module';
-import { RaceDisplayModule } from './features/race-display/race-display.module';
+import { FeaturesModule } from './features/features.module';
 
 @NgModule({
     declarations: [
@@ -17,8 +16,7 @@ import { RaceDisplayModule } from './features/race-display/race-display.module';
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-        TruckDisplayModule,
-        RaceDisplayModule
+        FeaturesModule
     ]
 })
 export class AppModule { }
