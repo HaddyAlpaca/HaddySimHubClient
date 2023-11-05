@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { filter, tap } from 'rxjs';
 import { TelemetryService } from 'src/app/shared/services';
@@ -10,10 +10,12 @@ import { TruckData } from './truck-data';
 @Component({
   selector: 'app-truck-display',
   templateUrl: 'truck-display.component.html',
-  styleUrls: ['truck-display.component.css']
+  styleUrls: ['truck-display.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TruckDisplayComponent implements OnInit {
-  private _data = new TruckData();
+  private _data: TruckData = new TruckData();
+
   get data(): TruckData{
     return this._data;
   }

@@ -1,3 +1,176 @@
+app-truck-display {
+  height: 100vh;
+  font-family: Poppins, sans-serif;
+
+  .card {
+    background-color: #27293d;
+  }
+
+  .card .container {
+    padding: 0;
+  }
+
+  .data-label {
+    color: gray;
+    font-size: 1rem;
+  }
+
+  .data-item {
+    color: white;
+    font-size: 1.5rem;
+  }
+
+  .card-header {
+    border: none;
+  }
+
+  .card-title {
+    color: white;
+    font-size: 2rem;
+  }
+
+  .card-body label {
+    color: white;
+    font-size: 1.5rem;
+  }
+
+  .dashboard {
+    color: white;
+    font-size: 1.5em;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .dashboard-lights-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+  }
+
+  .dashboard img {
+    width: 2em;
+    height: auto;
+  }
+
+  .transparent {
+    color: transparent;
+  }
+
+  .rev-counter {
+    width: auto;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .rev-counter::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: conic-gradient(from 240deg, green 20%, yellow 30%, red 67%, transparent 0);
+    mask: radial-gradient(#0000 55%, #000 0);
+    mask-mode: alpha;
+  }
+
+  .rev-counter-overlay {
+    --rpm: 0;
+    --rpm-max: 1;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background: conic-gradient(from 240deg, transparent calc(var(--rpm) / var(--rpm-max) * 67%), black 0);
+    mask: radial-gradient(#0000 55%, #000 0);
+    mask-mode: alpha;
+    margin: 0;
+  }
+
+  .speed-limit {
+    display: inline-block;
+    border:.5rem solid red;
+    border-radius: 50%;
+    background-color: white;
+    color:black;
+    width: 3em;
+    aspect-ratio: 1;
+    /* position: absolute;
+    left: 50%;
+    top: 15%; */
+    text-align: center;
+    transform: translateX(-50%);
+  }
+
+  .cruise-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .current-speed {
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    color:white;
+    font-size: 5em;
+  }
+
+  .speed-unit {
+    position: absolute;
+    left: 50%;
+    top: 62%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1em;
+  }
+
+  .current-gear {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    font-size: 1.4em;
+    border-radius: 50%;
+    border: 5px solid white;
+    aspect-ratio: 1;
+    width: 15%;
+    display: grid;
+    place-items: center;
+    transform: translateX(-50%);
+    z-index: 3;
+  }
+
+  .filter-white{
+    filter: invert(100%) sepia(24%) saturate(2%) hue-rotate(284deg) brightness(103%) contrast(101%);
+  }
+
+  .filter-green{
+    filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);
+  }
+
+  .filter-blue{
+    filter: invert(8%) sepia(99%) saturate(7448%) hue-rotate(247deg) brightness(92%) contrast(145%);
+  }
+
+  .filter-red{
+    filter: invert(16%) sepia(97%) saturate(6444%) hue-rotate(358deg) brightness(100%) contrast(110%);
+  }
+
+  .filter-orange{
+    filter: brightness(0) saturate(100%) invert(56%) sepia(31%) saturate(3171%) hue-rotate(1deg) brightness(104%) contrast(104%);
+  }
+}
+/*
+
 .main-container {
   background-color: black;
   color:white;
@@ -17,94 +190,6 @@
   gap: 20px;
 }
 
-.dashboard-lights-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  gap: 1em;
-}
-
-.data-grid {
-  display: grid;
-  grid-template-columns: 20% 1fr;
-  gap: 10px;
-  height: 100vh;
-}
-
-img {
-  width: 2em;
-  height: auto;
-}
-
-.speed-limit {
-  display: inline-block;
-  border:.5rem solid red;
-  border-radius: 50%;
-  background-color: white;
-  color:black;
-  width: 2em;
-  aspect-ratio: 1;
-  position: absolute;
-  left: 50%;
-  top: 15%;
-  text-align: center;
-  transform: translateX(-50%);
-}
-
-.rev-counter {
-  width: 100%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  position: relative;
-  overflow: hidden;
-}
-
-.rev-counter::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: conic-gradient(from 240deg, green 20%, yellow 30%, red 67%, transparent 0);
-  mask: radial-gradient(#0000 55%, #000 0);
-  mask-mode: alpha;
-}
-
-.rev-counter-overlay {
-  --rpm: 0;
-  --rpm-max: 1;
-
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  background: conic-gradient(from 240deg, transparent calc(var(--rpm) / var(--rpm-max) * 67%), black 0);
-  mask: radial-gradient(#0000 55%, #000 0);
-  mask-mode: alpha;
-  margin: 0;
-}
-
-.current-speed {
-  position: absolute;
-  left: 50%;
-  top: 45%;
-  transform: translate(-50%, -50%);
-  color:white;
-  font-size: 5em;
-}
-
-.speed-unit {
-  position: absolute;
-  left: 50%;
-  top: 62%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-size: 1em;
-}
-
 .cruise-control {
   position: absolute;
   left: 75%;
@@ -118,49 +203,5 @@ img {
   vertical-align: middle;
 }
 
-.current-gear {
-  position: absolute;
-  top: 75%;
-  left: 50%;
-  font-size: 1.4em;
-  border-radius: 50%;
-  border: 5px solid white;
-  aspect-ratio: 1;
-  width: 15%;
-  display: grid;
-  place-items: center;
-  transform: translateX(-50%);
-  z-index: 3;
-}
 
-.gear-range {
-  position: absolute;
-  top: 75%;
-  left: 55%;
-  list-style-type: none;
-  z-index: 3;
-}
-
-.transparent {
-  color: transparent;
-}
-
-.filter-white{
-  filter: invert(100%) sepia(24%) saturate(2%) hue-rotate(284deg) brightness(103%) contrast(101%);
-}
-
-.filter-green{
-  filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);
-}
-
-.filter-blue{
-  filter: invert(8%) sepia(99%) saturate(7448%) hue-rotate(247deg) brightness(92%) contrast(145%);
-}
-
-.filter-red{
-  filter: invert(16%) sepia(97%) saturate(6444%) hue-rotate(358deg) brightness(100%) contrast(110%);
-}
-
-.filter-orange{
-  filter: brightness(0) saturate(100%) invert(56%) sepia(31%) saturate(3171%) hue-rotate(1deg) brightness(104%) contrast(104%);
-}
+ */

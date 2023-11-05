@@ -36,23 +36,97 @@ describe('TruckDisplayComponent', () => {
     fixture = TestBed.createComponent(TruckDisplayComponent);
   });
 
+  describe('Departure tests', () => {
+    it('When city is not set a placeholder is shown', async () => {
+      const harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, TruckDashComponentHarness);
+
+      data.departureCity = '';
+      data.departureCity = '';
+      setTelemetry(data);
+
+      expect(await harness.getDeparture()).toEqual('-');
+    });
+
+    it('City is displayed when company is not set', async () => {
+      const harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, TruckDashComponentHarness);
+
+      data.departureCity = 'Berlin';
+      data.departureCompany = '';
+      setTelemetry(data);
+
+      expect(await harness.getDeparture()).toEqual('Berlin');
+    });
+
+    it('City and company are displayed both are set', async () => {
+      const harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, TruckDashComponentHarness);
+
+      data.departureCity = 'Berlin';
+      data.departureCompany = 'Company B';
+      setTelemetry(data);
+
+      expect(await harness.getDeparture()).toEqual('Berlin (Company B)');
+    });
+  });
+
+  describe('Destination tests', () => {
+    it('When city is not set a placeholder is shown', async () => {
+      const harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, TruckDashComponentHarness);
+
+      data.destinationCity = '';
+      data.destinationCompany = '';
+      setTelemetry(data);
+
+      expect(await harness.getDestination()).toEqual('-');
+    });
+
+    it('City is displayed when company is not set', async () => {
+      const harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, TruckDashComponentHarness);
+
+      data.destinationCity = 'Paris';
+      data.destinationCompany = '';
+      setTelemetry(data);
+
+      expect(await harness.getDestination()).toEqual('Paris');
+    });
+
+    it('City and company are displayed both are set', async () => {
+      const harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, TruckDashComponentHarness);
+
+      data.destinationCity = 'Paris';
+      data.destinationCompany = 'Company A';
+      setTelemetry(data);
+
+      expect(await harness.getDestination()).toEqual('Paris (Company A)');
+    });
+  });
+
   it('Gears should be displayed', async () => {
     const harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, TruckDashComponentHarness);
 
-    //Reverse
+    //Reverse 1
     data.gear = -1;
     setTelemetry(data);
-    expect(await harness.getSelectedGear()).toBe('R1');
+    expect(await harness.getSelectedGear()).toEqual('R1');
+
+    //Reverse 2
+    data.gear = -2;
+    setTelemetry(data);
+    expect(await harness.getSelectedGear()).toEqual('R2');
 
     //Neutral
     data.gear = 0;
     setTelemetry(data);
-    expect(await harness.getSelectedGear()).toBe('N');
+    expect(await harness.getSelectedGear()).toEqual('N');
 
     //First
     data.gear = 1;
     setTelemetry(data);
-    expect(await harness.getSelectedGear()).toBe('1');
+    expect(await harness.getSelectedGear()).toEqual('1');
+
+    //Seconde
+    data.gear = 2;
+    setTelemetry(data);
+    expect(await harness.getSelectedGear()).toEqual('2');
   });
 
   const setTelemetry = (data: TruckData): void => {
