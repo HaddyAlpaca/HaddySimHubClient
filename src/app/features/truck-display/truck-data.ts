@@ -1,9 +1,12 @@
 export class TruckData {
-  destination = '';
+  departureCity = '';
+  departureCompany = '';
+  destinationCity = '';
+  destinationCompany = '';
   distanceRemaining = 0;
   timeRemaining = 0;
   timeRemainingIrl = 0;
-  time = new Date;
+  time = new Date();
   restTimeRemaining = 0;
   restTimeRemainingIrl = 0;
   fuelPercentage = 0;
@@ -11,6 +14,8 @@ export class TruckData {
   jobTimeRemaining = 0;
   jobTimeRemainingIrl = 0;
   jobIncome = 0;
+  jobCargoDescription = '';
+  jobCargoWeight = 0;
   speed = 0;
   speedLimit = 0;
   rpm = 0;
@@ -23,4 +28,3 @@ export class TruckData {
   parkingBrakeOn = false;
   batteryWarningOn = false;
 }
-
