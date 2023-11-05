@@ -18,8 +18,8 @@ interface EssentialData {
 @UntilDestroy()
 @Component({
   selector: 'app-race-essentials',
-  templateUrl: './race-essentials.component.html',
-  styleUrls: ['./race-essentials.component.css']
+  templateUrl: 'race-essentials.component.html',
+  styleUrls: ['race-essentials.component.css']
 })
 export class RaceEssentialsComponent implements OnInit {
   private readonly rpmMiddleRangePct = 75;

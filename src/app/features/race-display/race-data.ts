@@ -31,46 +31,46 @@ export enum WeatherType {
   Thunderstorm
 }
 
-export interface RaceData {
-  isTimedSession: boolean;
-  completedLaps: number;
-  totalLaps: number;
-  sessionTimeRemaining: number;
-  position: number;
-  numberOfCars: number;
-  speed: number;
-  gear: number;
-  rpm: number;
-  rpmMax: number;
-  gripLevel: GripLevel;
-  flag: Flag;
-  weatherType: WeatherType;
-  trackTemp: number;
-  airTemp: number;
-  fuel: number;
-  fuelPerLap: number;
+export class RaceData {
+  isTimedSession = false;
+  completedLaps = 0;
+  totalLaps = 0;
+  sessionTimeRemaining = 0;
+  position = 0;
+  numberOfCars = 0;
+  speed = 0;
+  gear = 0;
+  rpm = 0;
+  rpmMax = 0;
+  gripLevel = GripLevel.Unknown;
+  flag = Flag.None;
+  weatherType = WeatherType.Unknown;
+  trackTemp = 0;
+  airTemp = 0;
+  fuel = 0;
+  fuelPerLap = 0;
   // Tyres temperatures [LF, RF, LR, RR]
-  tyreTemps: number[];
+  tyreTemps = [0, 0, 0, 0];
   // Tyres pressures [LF, RF, LR, RR]
-  tyrePressures: number[];
+  tyrePressures = [0, 0, 0, 0];
   // Brake temperatures [LF, RF, LR, RR]
-  brakeTemps: number[];
-  tcLevel: number;
-  absLevel: number;
-  engineMapping: number;
-  brakeBias: number;
+  brakeTemps = [0, 0, 0, 0];
+  tcLevel = 0;
+  absLevel = 0;
+  engineMapping = 0;
+  brakeBias = 0;
   //Current laptime in milliseconds
-  currentLapTime: number;
+  currentLapTime = 0;
   // Estimated laptime in milliseconds
-  estimatedLapTime: number;
+  estimatedLapTime = 0;
   // Last laptime in milliseconds
-  lastLapTime: number;
+  lastLapTime = 0;
   // Best laptime in milliseconds
-  bestLapTime: number;
+  bestLapTime = 0;
   // Delta time in milliseconds
-  deltaTime: number;
+  deltaTime = 0;
   // Gap behind in milliseconds
-  gapBehind: number;
+  gapBehind = 0;
   // Gap ahead in milliseconds
-  gapAhead: number;
+  gapAhead = 0;
 }

@@ -48,10 +48,6 @@
                         <div class="cruise-control-speed">{{data.cruiseControlSpeed}}</div>
                     </div>
                     <div class="current-gear">{{data.gear | gear}}</div>
-                    <ul class="gear-range">
-                        <li [class.transparent]="data.gearRange !== GearRange.Low">L</li>
-                        <li [class.transparent]="data.gearRange !== GearRange.High">H</li>
-                    </ul>
                 </div>
             </div>
         </div>

@@ -4,60 +4,25 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 import { TruckDisplayComponent } from './truck-display.component';
 import { TruckDashComponentHarness } from './truck-display.component.harness';
-import { Component } from '@angular/core';
 import { TelemetryService, TelemetryType, TelemetryUpdate } from 'src/app/shared/services/telemetry.service';
+import { TruckData } from './truck-data';
 import { Subject } from 'rxjs';
-import { GearRange, TruckData } from './data';
-
-class MockTelemetryService {
-  telemetry$: Subject<TelemetryUpdate> = new Subject<TelemetryUpdate>;
-}
-
-@Component({
-  template: '<app-truck-display></app-truck-display>',
-})
-class TruckDisplayTestComponent { }
 
 describe('TruckDisplayComponent', () => {
-  let fixture: ComponentFixture<TruckDisplayTestComponent>;
+  let fixture: ComponentFixture<TruckDisplayComponent>;
   let data: TruckData;
-  let mockTelemetryService: MockTelemetryService;
+  let mockTelemetryService: jasmine.SpyObj<TelemetryService>;
 
   beforeEach(async () => {
-    mockTelemetryService = new MockTelemetryService();
+    mockTelemetryService = jasmine.createSpyObj<TelemetryService>('telemetryService', ['telemetry$']);
+    mockTelemetryService.telemetry$ = new Subject<TelemetryUpdate>();
 
     //Set default values for the truck data
-    data = {
-      destination: "",
-      distanceRemaining: 0,
-      timeRemaining: 0,
-      timeRemainingIrl: 0,
-      time: new Date(),
-      restTimeRemaining: 0,
-      restTimeRemainingIrl: 0,
-      fuelPercentage: 0,
-      fuelDistance: 0,
-      jobTimeRemaining: 0,
-      jobTimeRemainingIrl: 0,
-      jobIncome: 0,
-      speed: 0,
-      speedLimit: 0,
-      rpm: 0,
-      rpmMax: 0,
-      cruiseControlOn: false,
-      cruiseControlSpeed: 0,
-      gear: 0,
-      gearRange: GearRange.Low,
-      lowBeamOn: false,
-      highBeamOn: false,
-      parkingBrakeOn: false,
-      batteryWarningOn: false
-    };
+    data = new TruckData();
 
     await TestBed.configureTestingModule({
       declarations: [
-        TruckDisplayComponent,
-        TruckDisplayTestComponent
+        TruckDisplayComponent
       ],
       imports: [
         SharedModule
@@ -68,7 +33,7 @@ describe('TruckDisplayComponent', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TruckDisplayTestComponent);
+    fixture = TestBed.createComponent(TruckDisplayComponent);
   });
 
   it('Gears should be displayed', async () => {

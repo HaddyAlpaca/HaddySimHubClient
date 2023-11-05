@@ -1,71 +1,28 @@
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Subject } from 'rxjs';
 import { TelemetryService, TelemetryType, TelemetryUpdate } from 'src/app/shared/services/telemetry.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DisplayElementComponent } from './display-element.component';
 import { DisplayGroupComponent } from './display-group.component';
-import { Flag, GripLevel, RaceData, WeatherType } from './race-data';
+import { RaceData } from './race-data';
 import { RaceDisplayComponent } from './race-display.component';
 import { RaceDisplayComponentHarness } from './race-display.component.harness';
 
-class MockTelemetryService {
-  telemetry$: Subject<TelemetryUpdate> = new Subject<TelemetryUpdate>;
-}
-
-@Component({
-  template: '<app-race-display></app-race-display>'
-})
-class RaceDisplayTestComponent {
-}
-
 describe('Race display component test', () => {
-  let fixture: ComponentFixture<RaceDisplayTestComponent>;
-  let mockTelemetryService: MockTelemetryService;
+  let fixture: ComponentFixture<RaceDisplayComponent>;
+  let mockTelemetryService: jasmine.SpyObj<TelemetryService>;
   let data: RaceData;
 
   beforeEach(async () => {
-    mockTelemetryService = new MockTelemetryService();
+    mockTelemetryService = jasmine.createSpyObj<TelemetryService>('telemetryService', ['telemetry$']);
+    mockTelemetryService.telemetry$ = new Subject<TelemetryUpdate>();
 
-    data = {
-      isTimedSession: false,
-      completedLaps: 0,
-      totalLaps: 0,
-      sessionTimeRemaining: 0,
-      position: 0,
-      numberOfCars: 0,
-      speed: 0,
-      gear: 0,
-      rpm: 0,
-      rpmMax: 0,
-      gripLevel: GripLevel.Unknown,
-      flag: Flag.None,
-      weatherType: WeatherType.Unknown,
-      trackTemp: 0,
-      airTemp: 0,
-      fuel: 0,
-      fuelPerLap: 0,
-      tyreTemps: [0, 0, 0, 0],
-      tyrePressures: [0, 0, 0, 0],
-      brakeTemps: [0, 0, 0, 0],
-      tcLevel: 0,
-      absLevel: 0,
-      engineMapping: 0,
-      brakeBias: 0,
-      currentLapTime: 0,
-      estimatedLapTime: 0,
-      lastLapTime: 0,
-      bestLapTime: 0,
-      deltaTime: 0,
-      gapBehind: 0,
-      gapAhead: 0
-    };
+    data = new RaceData();
 
     await TestBed.configureTestingModule({
       declarations: [
         RaceDisplayComponent,
-        RaceDisplayTestComponent,
         DisplayElementComponent,
         DisplayGroupComponent
       ],
@@ -78,7 +35,7 @@ describe('Race display component test', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RaceDisplayTestComponent);
+    fixture = TestBed.createComponent(RaceDisplayComponent);
   });
 
   it('RPM is displayed', async () => {
