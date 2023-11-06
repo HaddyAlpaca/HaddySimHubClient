@@ -4,7 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FeaturesModule } from './features/features.module';
+import { ServicesModule } from './services/services.module';
+import { DisplaysModule } from './displays/displays.module';
 
 @NgModule({
     declarations: [
@@ -16,7 +17,8 @@ import { FeaturesModule } from './features/features.module';
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-        FeaturesModule
+        ServicesModule,
+        DisplaysModule
     ]
 })
 export class AppModule { }

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { filter, tap } from 'rxjs';
-import { TelemetryService } from 'src/app/shared/services';
-import { TelemetryType } from 'src/app/shared/services/telemetry.service';
 import { RaceData } from './race-data';
+import { TelemetryService, TelemetryType } from 'src/app/services/telemetry.service';
 
 @UntilDestroy()
 @Component({
