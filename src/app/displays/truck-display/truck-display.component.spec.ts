@@ -1,12 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { SharedModule } from 'src/app/shared/shared.module';
 
 import { TruckDisplayComponent } from './truck-display.component';
 import { TruckDashComponentHarness } from './truck-display.component.harness';
-import { TelemetryService, TelemetryType, TelemetryUpdate } from 'src/app/shared/services/telemetry.service';
 import { TruckData } from './truck-data';
 import { Subject } from 'rxjs';
+import { TelemetryService, TelemetryType, TelemetryUpdate } from 'src/app/services/telemetry.service';
+import { GearPipe } from './pipes/gear/gear.pipe';
+import { TimespanPipe } from './pipes/timespan/timespan.pipe';
 
 describe('TruckDisplayComponent', () => {
   let fixture: ComponentFixture<TruckDisplayComponent>;
@@ -22,10 +23,9 @@ describe('TruckDisplayComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [
-        TruckDisplayComponent
-      ],
-      imports: [
-        SharedModule
+        TruckDisplayComponent,
+        GearPipe,
+        TimespanPipe
       ],
       providers: [
         { provide: TelemetryService, useValue: mockTelemetryService }

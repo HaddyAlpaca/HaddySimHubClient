@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { TelemetryService } from './shared/services';
-import { TelemetryType } from './shared/services/telemetry.service';
+import { TelemetryService, TelemetryType } from './services/telemetry.service';
 
 @UntilDestroy()
 @Component({

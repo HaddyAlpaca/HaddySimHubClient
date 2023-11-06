@@ -1,13 +1,14 @@
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Subject } from 'rxjs';
-import { TelemetryService, TelemetryType, TelemetryUpdate } from 'src/app/shared/services/telemetry.service';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { DisplayElementComponent } from './display-element.component';
 import { DisplayGroupComponent } from './display-group.component';
 import { RaceData } from './race-data';
 import { RaceDisplayComponent } from './race-display.component';
 import { RaceDisplayComponentHarness } from './race-display.component.harness';
+import { TelemetryService, TelemetryType, TelemetryUpdate } from 'src/app/services/telemetry.service';
+import { LapTimePipe } from './pipes/laptime/laptime.pipe';
+import { DeltaTimePipe } from './pipes/delta-time/delta-time.pipe';
 
 describe('Race display component test', () => {
   let fixture: ComponentFixture<RaceDisplayComponent>;
@@ -24,10 +25,9 @@ describe('Race display component test', () => {
       declarations: [
         RaceDisplayComponent,
         DisplayElementComponent,
-        DisplayGroupComponent
-      ],
-      imports: [
-        SharedModule
+        DisplayGroupComponent,
+        LapTimePipe,
+        DeltaTimePipe
       ],
       providers: [
         { provide: TelemetryService, useValue: mockTelemetryService }

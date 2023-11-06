@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RawDataDisplayComponent } from './raw-data-display.component';
-import { TelemetryService } from 'src/app/shared/services';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { RawDataDisplayComponentHarness } from './raw-data-display.component.harness';
 import { Subject } from 'rxjs';
-import { TelemetryType, TelemetryUpdate } from 'src/app/shared/services/telemetry.service';
+import { TelemetryService, TelemetryType, TelemetryUpdate } from 'src/app/services/telemetry.service';
+import { ServicesModule } from 'src/app/services/services.module';
 
 describe('Raw data display tests', () => {
   let fixture: ComponentFixture<RawDataDisplayComponent>;
