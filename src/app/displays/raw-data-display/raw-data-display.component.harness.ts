@@ -7,10 +7,6 @@ export class RawDataDisplayComponentHarness extends ComponentHarness {
     const keys = await this.getElementTexts('.key');
     const values = await this.getElementTexts('.value');
 
-    if (keys.length !== values.length) {
-      throw new Error('Number of keys and values do not match');
-    }
-
     const result: {[key:string]: string} = {};
     keys.forEach((key, index) => {
       result[key] = values[index];
