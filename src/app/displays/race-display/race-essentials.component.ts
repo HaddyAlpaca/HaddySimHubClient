@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { filter, tap } from 'rxjs';
 import { Flag, RaceData } from './race-data';
-import { TelemetryService, TelemetryType } from 'src/app/services/telemetry.service';
+import { TelemetryService, TelemetryType } from 'src/app/services/telemetry/telemetry.service';
 
 interface EssentialData {
   gear: number;

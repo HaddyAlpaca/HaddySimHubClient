@@ -5,7 +5,7 @@ import { TruckDisplayComponent } from './truck-display.component';
 import { TruckDashComponentHarness } from './truck-display.component.harness';
 import { TruckData } from './truck-data';
 import { Subject } from 'rxjs';
-import { TelemetryService, TelemetryType, TelemetryUpdate } from 'src/app/services/telemetry.service';
+import { TelemetryService, TelemetryType, TelemetryUpdate } from 'src/app/services/telemetry/telemetry.service';
 import { GearPipe } from './pipes/gear/gear.pipe';
 import { TimespanPipe } from './pipes/timespan/timespan.pipe';
 

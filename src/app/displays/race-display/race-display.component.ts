@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { filter, tap } from 'rxjs';
 import { RaceData } from './race-data';
-import { TelemetryService, TelemetryType } from 'src/app/services/telemetry.service';
+import { TelemetryService, TelemetryType } from 'src/app/services/telemetry/telemetry.service';
 import { LapTimePipe } from './pipes/laptime/laptime.pipe';
 import { DecimalPipe } from '@angular/common';
 import { DisplayElementComponent } from './display-element.component';

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { filter, tap } from 'rxjs';
-import { TelemetryService, TelemetryType } from 'src/app/services/telemetry.service';
+import { TelemetryService, TelemetryType } from 'src/app/services/telemetry/telemetry.service';
 
 @UntilDestroy()
 @Component({
