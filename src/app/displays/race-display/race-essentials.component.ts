@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { filter, tap } from 'rxjs';
-import { TelemetryService } from 'src/app/shared/services';
-import { TelemetryType } from 'src/app/shared/services/telemetry.service';
 import { Flag, RaceData } from './race-data';
+import { TelemetryService, TelemetryType } from 'src/app/services/telemetry.service';
 
 interface EssentialData {
   gear: number;
@@ -19,7 +18,8 @@ interface EssentialData {
 @Component({
   selector: 'app-race-essentials',
   templateUrl: 'race-essentials.component.html',
-  styleUrls: ['race-essentials.component.css']
+  styleUrls: ['race-essentials.component.css'],
+  standalone: true
 })
 export class RaceEssentialsComponent implements OnInit {
   private readonly rpmMiddleRangePct = 75;

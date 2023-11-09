@@ -3,14 +3,19 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { filter, tap } from 'rxjs';
 import { TruckData } from './truck-data';
 import { TelemetryService, TelemetryType } from 'src/app/services/telemetry.service';
+import { TimespanPipe } from './pipes/timespan/timespan.pipe';
+import { GearPipe } from './pipes/gear/gear.pipe';
+import { NgIf, NgClass, DecimalPipe } from '@angular/common';
 
 
 @UntilDestroy()
 @Component({
-  selector: 'app-truck-display',
-  templateUrl: 'truck-display.component.html',
-  styleUrls: ['truck-display.component.css'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-truck-display',
+    templateUrl: 'truck-display.component.html',
+    styleUrls: ['truck-display.component.css'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [NgIf, NgClass, DecimalPipe, GearPipe, TimespanPipe]
 })
 export class TruckDisplayComponent implements OnInit {
   private _data: TruckData = new TruckData();

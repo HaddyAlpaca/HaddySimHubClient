@@ -22,17 +22,15 @@ describe('Race display component test', () => {
     data = new RaceData();
 
     await TestBed.configureTestingModule({
-      declarations: [
-        RaceDisplayComponent,
+    imports: [RaceDisplayComponent,
         DisplayElementComponent,
         DisplayGroupComponent,
         LapTimePipe,
-        DeltaTimePipe
-      ],
-      providers: [
+        DeltaTimePipe],
+    providers: [
         { provide: TelemetryService, useValue: mockTelemetryService }
-      ]
-    })
+    ]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(RaceDisplayComponent);

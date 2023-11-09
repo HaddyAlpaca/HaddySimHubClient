@@ -3,12 +3,18 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { filter, tap } from 'rxjs';
 import { RaceData } from './race-data';
 import { TelemetryService, TelemetryType } from 'src/app/services/telemetry.service';
+import { LapTimePipe } from './pipes/laptime/laptime.pipe';
+import { DecimalPipe } from '@angular/common';
+import { DisplayElementComponent } from './display-element.component';
+import { DisplayGroupComponent } from './display-group.component';
 
 @UntilDestroy()
 @Component({
-  selector: 'app-race-display',
-  templateUrl: 'race-display.component.html',
-  styleUrls: ['race-display.component.css']
+    selector: 'app-race-display',
+    templateUrl: 'race-display.component.html',
+    styleUrls: ['race-display.component.css'],
+    standalone: true,
+    imports: [DisplayGroupComponent, DisplayElementComponent, DecimalPipe, LapTimePipe]
 })
 export class RaceDisplayComponent implements OnInit {
   private _data: RaceData = new RaceData();

@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-display-element',
-  templateUrl: './display-element.component.html',
-  styleUrls: ['./display-element.component.css']
+    selector: 'app-display-element',
+    templateUrl: './display-element.component.html',
+    styleUrls: ['./display-element.component.css'],
+    standalone: true
 })
 export class DisplayElementComponent {
   @Input() title = '';
