@@ -1,6 +1,7 @@
 app-truck-display {
   height: 100vh;
   font-family: Poppins, sans-serif;
+  color: white;
 
   .card {
     background-color: #27293d;
@@ -16,7 +17,6 @@ app-truck-display {
   }
 
   .data-item {
-    color: white;
     font-size: 1.5rem;
   }
 
@@ -25,31 +25,42 @@ app-truck-display {
   }
 
   .card-title {
-    color: white;
     font-size: 2rem;
   }
 
   .card-body label {
-    color: white;
     font-size: 1.5rem;
   }
 
-  .dashboard {
-    color: white;
+  .dashboard-row {
     font-size: 1.5em;
     display: flex;
     flex-direction: row;
   }
 
-  .dashboard-lights-container {
+  .center-column {
+    border-radius: 50px;
+    background-color: darkgray;
+  }
+
+  .left-column {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 40px;
+    padding: 50px;
+  }
+
+  .right-column {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    flex-wrap: wrap;
+    align-items: left;
     gap: 40px;
   }
 
-  .dashboard img {
+  .dashboard-light {
     width: 2em;
     height: auto;
   }
@@ -58,95 +69,60 @@ app-truck-display {
     color: transparent;
   }
 
-  .rev-counter {
-    width: auto;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .rev-counter::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: conic-gradient(from 240deg, green 20%, yellow 30%, red 67%, transparent 0);
-    mask: radial-gradient(#0000 55%, #000 0);
-    mask-mode: alpha;
-  }
-
-  .rev-counter-overlay {
-    --rpm: 0;
-    --rpm-max: 1;
-
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    background: conic-gradient(from 240deg, transparent calc(var(--rpm) / var(--rpm-max) * 67%), black 0);
-    mask: radial-gradient(#0000 55%, #000 0);
-    mask-mode: alpha;
-    margin: 0;
-  }
-
   .speed-limit {
     display: inline-block;
     border:.5rem solid red;
     border-radius: 50%;
     background-color: white;
     color:black;
-    width: 3em;
+    width: 4em;
     aspect-ratio: 1;
-    /* position: absolute;
-    left: 50%;
-    top: 15%; */
     text-align: center;
-    transform: translateX(-50%);
+    padding-top: 22px;
+    position: relative;
+    left: 50px;
+    margin-top: 20px;
   }
 
-  .cruise-control {
+  .icon-text-control {
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 10px;
+    padding-left: 30px;
   }
 
   .current-speed {
-    position: absolute;
-    left: 50%;
-    top: 45%;
-    transform: translate(-50%, -50%);
-    color:white;
     font-size: 5em;
+    text-align: center;
+    margin-top: -20px;
   }
 
   .speed-unit {
-    position: absolute;
-    left: 50%;
-    top: 62%;
-    transform: translate(-50%, -50%);
-    color: white;
     font-size: 1em;
+    text-align: center;
+    position: relative;
+    top: -40px;
   }
 
   .current-gear {
-    position: absolute;
-    top: 75%;
-    left: 50%;
-    font-size: 1.4em;
-    border-radius: 50%;
-    border: 5px solid white;
-    aspect-ratio: 1;
-    width: 15%;
-    display: grid;
-    place-items: center;
-    transform: translateX(-50%);
-    z-index: 3;
+    font-size: 2.6em;
+    text-align: center;
+    margin-top: -20px;
+  }
+
+  #rpm {
+    width: calc(100% - 40px);
+    height: 80px;
+    margin-top: 20px;
+    margin-left: 20px;
+  }
+
+  .footer-row {
+    font-size: 1.6em;
+  }
+
+  .footer-row .clock {
+    float: right;
   }
 
   .filter-white{
@@ -169,39 +145,3 @@ app-truck-display {
     filter: brightness(0) saturate(100%) invert(56%) sepia(31%) saturate(3171%) hue-rotate(1deg) brightness(104%) contrast(104%);
   }
 }
-/*
-
-.main-container {
-  background-color: black;
-  color:white;
-  font-size: 2em;
-}
-
-.hidden {
-  visibility: hidden;
-}
-
-.dashboard {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100vh;
-  aspect-ratio: 1;
-  gap: 20px;
-}
-
-.cruise-control {
-  position: absolute;
-  left: 75%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.cruise-control-speed {
-  font-size: 1.4em;
-  display: inline;
-  vertical-align: middle;
-}
-
-
- */
