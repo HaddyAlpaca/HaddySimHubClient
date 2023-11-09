@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { filter, tap } from 'rxjs';
 import { TruckData } from './truck-data';
-import { TelemetryService, TelemetryType } from 'src/app/services/telemetry.service';
+import { TelemetryService, TelemetryType } from 'src/app/services/telemetry/telemetry.service';
 import { TimespanPipe } from './pipes/timespan/timespan.pipe';
 import { GearPipe } from './pipes/gear/gear.pipe';
 import { NgIf, NgClass, DecimalPipe } from '@angular/common';

@@ -6,7 +6,7 @@ import { DisplayGroupComponent } from './display-group.component';
 import { RaceData } from './race-data';
 import { RaceDisplayComponent } from './race-display.component';
 import { RaceDisplayComponentHarness } from './race-display.component.harness';
-import { TelemetryService, TelemetryType, TelemetryUpdate } from 'src/app/services/telemetry.service';
+import { TelemetryService, TelemetryType, TelemetryUpdate } from 'src/app/services/telemetry/telemetry.service';
 import { LapTimePipe } from './pipes/laptime/laptime.pipe';
 import { DeltaTimePipe } from './pipes/delta-time/delta-time.pipe';
 
