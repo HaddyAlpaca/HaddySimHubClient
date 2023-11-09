@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'gear'
+    name: 'gear',
+    standalone: true
 })
 export class GearPipe implements PipeTransform {
 

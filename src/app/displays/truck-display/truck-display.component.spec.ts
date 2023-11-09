@@ -22,15 +22,13 @@ describe('TruckDisplayComponent', () => {
     data = new TruckData();
 
     await TestBed.configureTestingModule({
-      declarations: [
-        TruckDisplayComponent,
+    imports: [TruckDisplayComponent,
         GearPipe,
-        TimespanPipe
-      ],
-      providers: [
+        TimespanPipe],
+    providers: [
         { provide: TelemetryService, useValue: mockTelemetryService }
-      ]
-    })
+    ]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(TruckDisplayComponent);

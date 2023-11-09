@@ -15,12 +15,11 @@ describe('Raw data display tests', () => {
     mockTelemetryService.telemetry$ = new Subject<TelemetryUpdate>();
 
     await TestBed.configureTestingModule({
-      declarations: [RawDataDisplayComponent],
-      imports: [],
-      providers: [
+    imports: [RawDataDisplayComponent],
+    providers: [
         { provide: TelemetryService, useValue: mockTelemetryService }
-      ]
-    }).compileComponents();
+    ]
+}).compileComponents();
 
     fixture = TestBed.createComponent(RawDataDisplayComponent);
   });
