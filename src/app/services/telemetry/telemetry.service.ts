@@ -3,7 +3,6 @@ import * as signalR from '@microsoft/signalr';
 import { Subject } from 'rxjs';
 
 export enum TelemetryType{
-  Unknown,
   Race,
   Truck,
   RawData
@@ -11,7 +10,7 @@ export enum TelemetryType{
 
 export interface TelemetryUpdate {
   Type: TelemetryType;
-  Data: unknown;
+  Data: Record<string, number | string | boolean>;
 }
 
 @Injectable({
@@ -25,6 +24,7 @@ export class TelemetryService {
   constructor() {
     this.connection = new signalR.HubConnectionBuilder()
       .withUrl('telemetry')
+      .withAutomaticReconnect()
       .build();
 
     this.connection.start();

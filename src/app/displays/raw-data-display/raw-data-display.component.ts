@@ -14,8 +14,8 @@ import { TelemetryService, TelemetryType } from 'src/app/services/telemetry/tele
     imports: [CommonModule]
 })
 export class RawDataDisplayComponent implements OnInit {
-  private _data: {[key: string]: number | string | boolean } = {};
-  get data(): {[key: string]: number | string | boolean } {
+  private _data: Record<string, number | string | boolean> = {};
+  get data(): Record<string, number | string | boolean> {
     return this._data;
   }
 
@@ -26,9 +26,7 @@ export class RawDataDisplayComponent implements OnInit {
     //Subscribe to the truck data
     this._telemetryService.telemetry$.pipe(
       filter(update => update.Type === TelemetryType.RawData),
-      tap(update => {
-        this._data = update.Data as {[key: string]: number | string | boolean }
-      }),
+      tap(update => this._data = update.Data),
       untilDestroyed(this)).subscribe();
   }
 }
