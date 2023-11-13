@@ -10,7 +10,7 @@ export enum TelemetryType{
 
 export interface TelemetryUpdate {
   Type: TelemetryType;
-  Data: Record<string, number | string | boolean>;
+  Data: unknown;
 }
 
 @Injectable({

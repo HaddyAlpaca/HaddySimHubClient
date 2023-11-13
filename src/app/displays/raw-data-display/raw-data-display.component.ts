@@ -26,7 +26,7 @@ export class RawDataDisplayComponent implements OnInit {
     //Subscribe to the truck data
     this._telemetryService.telemetry$.pipe(
       filter(update => update.Type === TelemetryType.RawData),
-      tap(update => this._data = update.Data),
+      tap(update => this._data = update.Data as Record<string, string | number | boolean>),
       untilDestroyed(this)).subscribe();
   }
 }
