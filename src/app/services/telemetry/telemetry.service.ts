@@ -3,6 +3,7 @@ import * as signalR from '@microsoft/signalr';
 import { Subject } from 'rxjs';
 
 export enum TelemetryType{
+  Unknown,
   Race,
   Truck,
   RawData

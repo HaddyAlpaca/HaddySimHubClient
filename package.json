@@ -8,9 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "build:prod": "ng build --prod",
-    "test_ci": "ng test --browsers ChromeHeadless --no-watch --code-coverage",
-    "coverage": "ng test --browsers ChromeHeadless --no-watch --code-coverage"
+    "build_ci": "ng build --prod",
+    "test_ci": "ng test --browsers ChromeHeadless --no-watch --code-coverage"
   },
   "private": true,
   "dependencies": {
@@ -25,7 +24,6 @@
     "@angular/router": "^17.0.2",
     "@microsoft/signalr": "^6.0.11",
     "@ngneat/until-destroy": "^9.2.3",
-    "@ngrx/store": "^16.3.0",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.2",
     "ngx-signalr-websocket": "^0.4.1",

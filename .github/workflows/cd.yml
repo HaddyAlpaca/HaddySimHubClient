@@ -1,0 +1,56 @@
+name: CD
+
+on:
+    workflow_dispatch:
+    push:
+        branches: [main]
+
+# Allow only 1 CD workflow at a time
+concurrency:
+    group: cd
+    cancel-in-progress: false
+
+jobs:
+  build_ci:
+    uses: ./.github/workflows/ci.yml
+
+  create_github_release:
+    needs: build_ci
+    runs-on: windows-latest
+
+    env:
+      RELEASE_VERSION: v0.1.${{github.run_number}}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # - name: Find last succesful CD workflow run
+      #   uses: nrwl/last-successful-commit-action@v1
+      #   id: find_workflow
+      #   with:
+      #     github_token: "${{secrets.GITHUB_TOKEN}}"
+      #     branch: "main"
+      #     workflow_id: "cd.yml"
+
+      # - name: "Build Changelog"
+      #   id: build_changelog
+      #   uses: mikepenz/release-changelog-builder-action@v3
+      #   with:
+      #     path: ./git/.github/workflows
+      #     configuration: changelog-config.json  # Must be available/checked out
+      #     token: ${{secrets.GITHUB_TOKEN}}
+      #     fromTag: ${{steps.find_workflow.outputs.commit_hash}}
+      #     toTag: ${{github.sha}} # Build the changelog up-to the commit that triggered this workflow.
+
+      # - name: Create Release
+      #   id: create_release
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      #   with:
+      #     tag_name: ${{env.RELEASE_VERSION}}
+      #     release_name: Release ${{env.RELEASE_VERSION}}
+      #     body: ${{steps.build_changelog.outputs.changelog}}
+      #     draft: false
+      #     prerelease: false

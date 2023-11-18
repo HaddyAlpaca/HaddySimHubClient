@@ -1,0 +1,7 @@
+{
+  "category": {
+      "labels": ["dontcategorize"]
+  },
+  "template": "${{UNCATEGORIZED}}",
+  "pr_template": "- ${{TITLE}}\n    - PR: #${{NUMBER}}\n    - AUTHOR: ${{AUTHOR}}\n    - MERGED_AT: ${{MERGED_AT}}"
+}
