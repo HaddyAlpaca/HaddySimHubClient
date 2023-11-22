@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { filter, tap } from 'rxjs';
-import { TelemetryService, TelemetryType } from 'src/app/services/telemetry/telemetry.service';
+import { tap } from 'rxjs';
+import { GameDataService } from 'src/app/services/game-data.service';
 
 @UntilDestroy()
 @Component({
     selector: 'app-raw-data-display',
     templateUrl: 'raw-data-display.component.html',
-    styleUrls: ['raw-data-display.component.css'],
+    styleUrl: 'raw-data-display.component.css',
     encapsulation: ViewEncapsulation.None,
     standalone: true,
     imports: [CommonModule]
@@ -19,16 +19,13 @@ export class RawDataDisplayComponent implements OnInit {
     return this._data;
   }
 
-  constructor(private _telemetryService: TelemetryService) {
+  constructor(private _gameDataSerivce: GameDataService) {
   }
 
   ngOnInit(): void {
-    //Subscribe to the truck data
-    this._telemetryService.telemetry$.pipe(
-      filter(update => update.Type === TelemetryType.RawData),
-      tap(update => {
-        this._data = update.Data as {[key: string]: number | string | boolean }
-      }),
-      untilDestroyed(this)).subscribe();
+    this._gameDataSerivce.rawData$.pipe(
+      tap(data =>this._data = data! as {[key: string]: number | string | boolean }),
+      untilDestroyed(this)
+    ).subscribe();
   }
 }

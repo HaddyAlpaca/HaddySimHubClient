@@ -1,76 +1,45 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4 behind">
+      <div class="delta-time">+1.234</div>
+      <div class="driver-name">John Doe</div>
+    </div>
+    <div class="col-4">
+      0
+    </div>
+    <div class="col-4 ahead">
+      <div class="delta-time">+1.234</div>
+      <div class="driver-name">Maarten Gerritzen</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div>--:--.---</div>
+</div>
+
+
 <div class="main-container">
-<div class="main-container">
-  <!-- Top row items -->
-  <div class="top-row">
-    <app-display-group title="Behind" borderColor="yellow">{{data.gapBehind}}</app-display-group>
-    <app-display-group title="Delta" borderColor="yellow">{{data.deltaTime}}</app-display-group>
-    <app-display-group title="Ahead" borderColor="yellow">{{data.gapAhead}}</app-display-group>
-    <app-display-group title="Lap" borderColor="yellow">{{data.completedLaps}}/{{data.totalLaps}}</app-display-group>
+  <div class="rpm-bar">
+    <div class="rpm-fill" [style.width]="rpmPercentage+ '%'" [style.background-color]="rpmFillColor"></div>
+    <div class="rpm-label" [style.color]="rpmLabelColor">{{data.rpm}}</div>
   </div>
 
-  <progress id="rpm" value="{{data.rpm}}" max="{{data.rpmMax}}"></progress>
-  <div id="speed">{{data.speed}}</div>
-  <div id="gear">{{data.gear === 0 ? 'N' : data.gear === -1 ? 'R' : data.gear}}</div>
-
-  <!-- Tyre pressures -->
-  <app-display-group title="Tyre pres" borderColor="green" class="tyre-pres">
-    <div class="grid-2cols">
-      <div id="tyrePressLf">{{data.tyrePressures[0] | number: '1.1-1'}}</div>
-      <div id="tyrePressRf">{{data.tyrePressures[1] | number: '1.1-1'}}</div>
-      <div id="tyrePressLr">{{data.tyrePressures[2] | number: '1.1-1'}}</div>
-      <div id="tyrePressRr">{{data.tyrePressures[3] | number: '1.1-1'}}</div>
+  <div class="columns">
+    <div class="column-1">
+      <!-- Row 1 -->
+      <div>
+        <div>{{data.position}}</div>
+        <div>{{data.completedLaps}}</div>
+      </div>
     </div>
-  </app-display-group>
-
-  <!-- Tyre temps -->
-  <app-display-group title="Tyre temp" borderColor="green" class="tyre-temps">
-    <div class="grid-2cols">
-      <div id="tyreTempLf">{{data.tyreTemps[0]}}</div>
-      <div id="tyreTempRf">{{data.tyreTemps[1]}}</div>
-      <div id="tyreTempLr">{{data.tyreTemps[2]}}</div>
-      <div id="tyreTempRr">{{data.tyreTemps[3]}}</div>
+    <div class="column-2">
+      <div class="gear display-element">{{data.gear === 0 ? 'N' : data.gear === -1 ? 'R' : data.gear}}</div>
+      <div class="speed display-element">{{data.speed}}</div>
     </div>
-  </app-display-group>
-
-  <!-- Brake temps -->
-  <app-display-group title="Brake temp" borderColor="red" class="brake-temps">
-    <div class="grid-2cols">
-      <div id="brakeTempLf">{{data.brakeTemps[0]}}</div>
-      <div id="brakeTempRf">{{data.brakeTemps[1]}}</div>
-      <div id="brakeTempLr">{{data.brakeTemps[2]}}</div>
-      <div id="brakeTempRr">{{data.brakeTemps[3]}}</div>
+    <div class="column-3">
     </div>
-  </app-display-group>
-
-  <!-- Fuel -->
-  <app-display-group title="Fuel" borderColor="purple" class="fuel">
-    <app-display-element id="fuelRemaining" title="Remaining">{{data.fuel | number: '1.1-1'}}</app-display-element>
-    <app-display-element id="fuelPerLap" title="Con (Lap)">{{data.fuelPerLap | number: '1.1-1'}}</app-display-element>
-    <app-display-element id="fuelLapsRemaining" title="Laps Rem">{{fuelLapsRemaining | number: '1.1-1'}}</app-display-element>
-  </app-display-group>
-
-  <!-- Track conditions -->
-  <app-display-group title="Conditions" borderColor="blue" class="conditions">
-    <app-display-element title="Weather">{{data.weatherType}}</app-display-element>
-    <app-display-element title="Track temp">{{data.trackTemp}}</app-display-element>
-    <app-display-element title="Air temp">{{data.airTemp}}</app-display-element>
-  </app-display-group>
-
-  <!-- Lap times -->
-  <app-display-group title="Lap times" borderColor="yellow" class="laptimes">
-    <app-display-element id="currentLapTime" title="Current" contentAlign="right">{{data.currentLapTime | laptime}}</app-display-element>
-    <app-display-element id="predictedLapTime" title="Predicted" titleColor="green" contentAlign="right">{{data.estimatedLapTime | laptime}}</app-display-element>
-    <app-display-element id="lastLapTime" title="Last" titleColor="orange" contentAlign="right">{{data.lastLapTime | laptime}}</app-display-element>
-    <app-display-element id="bestLapTime" title="Best" titleColor="purple" contentAlign="right">{{data.bestLapTime | laptime}}</app-display-element>
-  </app-display-group>
-
-  <app-display-group id="position" title="Pos" borderColor="purple">{{data.position}}/{{data.numberOfCars}}</app-display-group>
-  <app-display-group title="Flag" borderColor="white" class="flag">Green</app-display-group>
-
-  <div class="setup">
-    <app-display-group id="tcLevel" title="TC" borderColor="blue">{{data.tcLevel}}</app-display-group>
-    <app-display-group id="engineMapping" title="Map" borderColor="blue">{{data.engineMapping}}</app-display-group>
-    <app-display-group id="absLevel" title="Abs" borderColor="red">{{data.absLevel}}</app-display-group>
-    <app-display-group id="brakeBias" title="Bias" borderColor="red">{{data.brakeBias | number : '1.1-1'}}</app-display-group>
   </div>
+  <!-- Flag -->
+  <div class="flag" [style.background-color]="flagColor"></div>
 </div>

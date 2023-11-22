@@ -1,60 +1,79 @@
 .main-container {
-  background-color: black;
-  height: 100vh;
-  width: 95%;
+  height: 100%;
+  --yellow-bg-color: #3a3a10;
+}
+
+.ahead {
+  border: white 4px solid;
+  border-top-right-radius: 20px;
+  color: white;
+}
+
+.behind {
+  border: white 4px solid;
+  border-top-left-radius: 20px;
+  color: white;
+}
+
+.delta-time {
+  text-align: center;
+}
+
+.driver-name {
+  text-align: center;
+  width: 100%;
+}
+
+.columns {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(6, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
 }
 
-.top-row {
-  grid-area: 1 / 3 / span 1 / span 4;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+
+.display-element {
+  border-radius: 50px;
+  margin: 15px;
+  background-color: darkslategrey;
 }
 
-.tyre-pres {
-  grid-area: 1 / 1 / span 2 / span 2;
+.rpm-bar {
+  position: relative;
+  height: 12vh;
+  margin: 10px;
 }
 
-.tyre-temps {
-  grid-area: 3 / 1 / span 2 / span 2;
+.rpm-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 30px;
 }
 
-.brake-temps {
-  grid-area: 5 / 1 / span 2 / span 2;
+.rpm-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 7vh;
+  font-weight: bold;
 }
 
-.fuel {
-  grid-area: 2 / 3 / span 3 / span 1;
+.gear {
+  text-align: center;
+  color: yellow;
+  font-size: 36vh;
+  background-color: var(--yellow-bg-color);
 }
 
-.conditions {
-  grid-area: 2 / 5 / span 3 / span 1;
-}
-
-.laptimes {
-  grid-area: 2 / 6 / span 5 / span 1;
+.speed {
+  color: #c2c513;
+  text-align: center;
+  font-size: 12vh;
+  font-style: italic;
+  background-color: var(--yellow-bg-color);
 }
 
 .flag {
-  grid-area: 2 / 4 / span 3 / span 1;
-  width: 100%;
-  height: 100%;
-  background-color: green;
+  height: 15%;
 }
-
-.setup {
-  grid-area: 6 / 3 / span 1 / span 3;
-  display: flex;
-}
-
-.grid-2cols {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-

@@ -10,27 +10,6 @@ export enum Flag {
   Chequered
 }
 
-export enum GripLevel {
-  Unknown,
-  Green,
-  Fast,
-  Optimum,
-  Greasy,
-  Damp,
-  Wet,
-  Flooded
-}
-
-export enum WeatherType {
-  Unknown,
-  Dry,
-  Drizzle,
-  LightRain,
-  MediumRain,
-  HeavyRain,
-  Thunderstorm
-}
-
 export class RaceData {
   isTimedSession = false;
   completedLaps = 0;
@@ -42,9 +21,7 @@ export class RaceData {
   gear = 0;
   rpm = 0;
   rpmMax = 0;
-  gripLevel = GripLevel.Unknown;
   flag = Flag.None;
-  weatherType = WeatherType.Unknown;
   trackTemp = 0;
   airTemp = 0;
   fuel = 0;

@@ -4,31 +4,33 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { TruckDisplayComponent } from './truck-display.component';
 import { TruckDashComponentHarness } from './truck-display.component.harness';
 import { TruckData } from './truck-data';
-import { Subject } from 'rxjs';
-import { TelemetryService, TelemetryType, TelemetryUpdate } from 'src/app/services/telemetry/telemetry.service';
 import { GearPipe } from './pipes/gear/gear.pipe';
 import { TimespanPipe } from './pipes/timespan/timespan.pipe';
+import { GameDataService } from 'src/app/services/game-data.service';
+import { Subject } from 'rxjs';
 
 describe('TruckDisplayComponent', () => {
   let fixture: ComponentFixture<TruckDisplayComponent>;
   let data: TruckData;
-  let mockTelemetryService: jasmine.SpyObj<TelemetryService>;
+  let mockGameDataService: jasmine.SpyObj<GameDataService>;
+  let truckDataSubject: Subject<TruckData>;
 
   beforeEach(async () => {
-    mockTelemetryService = jasmine.createSpyObj<TelemetryService>('telemetryService', ['telemetry$']);
-    mockTelemetryService.telemetry$ = new Subject<TelemetryUpdate>();
-
     //Set default values for the truck data
     data = new TruckData();
 
+    //Setup mocking services
+    mockGameDataService = jasmine.createSpyObj('gameDataService', ['truckData$']);
+    truckDataSubject = new Subject<TruckData>();
+    mockGameDataService.truckData$ = truckDataSubject.asObservable();
+
     await TestBed.configureTestingModule({
-    imports: [TruckDisplayComponent,
+      imports: [
+        TruckDisplayComponent,
         GearPipe,
         TimespanPipe],
-    providers: [
-        { provide: TelemetryService, useValue: mockTelemetryService }
-    ]
-})
+      providers: [{ provide: GameDataService, useValue: mockGameDataService }]
+    })
     .compileComponents();
 
     fixture = TestBed.createComponent(TruckDisplayComponent);
@@ -40,7 +42,7 @@ describe('TruckDisplayComponent', () => {
 
       data.departureCity = '';
       data.departureCity = '';
-      setTelemetry(data);
+      truckDataSubject.next(data);
 
       expect(await harness.getDeparture()).toEqual('-');
     });
@@ -50,7 +52,7 @@ describe('TruckDisplayComponent', () => {
 
       data.departureCity = 'Berlin';
       data.departureCompany = '';
-      setTelemetry(data);
+      truckDataSubject.next(data);
 
       expect(await harness.getDeparture()).toEqual('Berlin');
     });
@@ -60,7 +62,7 @@ describe('TruckDisplayComponent', () => {
 
       data.departureCity = 'Berlin';
       data.departureCompany = 'Company B';
-      setTelemetry(data);
+      truckDataSubject.next(data);
 
       expect(await harness.getDeparture()).toEqual('Berlin (Company B)');
     });
@@ -72,7 +74,7 @@ describe('TruckDisplayComponent', () => {
 
       data.destinationCity = '';
       data.destinationCompany = '';
-      setTelemetry(data);
+      truckDataSubject.next(data);
 
       expect(await harness.getDestination()).toEqual('-');
     });
@@ -82,7 +84,7 @@ describe('TruckDisplayComponent', () => {
 
       data.destinationCity = 'Paris';
       data.destinationCompany = '';
-      setTelemetry(data);
+      truckDataSubject.next(data);
 
       expect(await harness.getDestination()).toEqual('Paris');
     });
@@ -92,7 +94,7 @@ describe('TruckDisplayComponent', () => {
 
       data.destinationCity = 'Paris';
       data.destinationCompany = 'Company A';
-      setTelemetry(data);
+      truckDataSubject.next(data);
 
       expect(await harness.getDestination()).toEqual('Paris (Company A)');
     });
@@ -103,34 +105,27 @@ describe('TruckDisplayComponent', () => {
 
     //Reverse 1
     data.gear = -1;
-    setTelemetry(data);
+    truckDataSubject.next(data);
     expect(await harness.getSelectedGear()).toEqual('R1');
 
     //Reverse 2
     data.gear = -2;
-    setTelemetry(data);
+    truckDataSubject.next(data);
     expect(await harness.getSelectedGear()).toEqual('R2');
 
     //Neutral
     data.gear = 0;
-    setTelemetry(data);
+    truckDataSubject.next(data);
     expect(await harness.getSelectedGear()).toEqual('N');
 
     //First
     data.gear = 1;
-    setTelemetry(data);
+    truckDataSubject.next(data);
     expect(await harness.getSelectedGear()).toEqual('1');
 
     //Seconde
     data.gear = 2;
-    setTelemetry(data);
+    truckDataSubject.next(data);
     expect(await harness.getSelectedGear()).toEqual('2');
   });
-
-  const setTelemetry = (data: TruckData): void => {
-    mockTelemetryService.telemetry$?.next({
-      Type: TelemetryType.Truck,
-      Data: data
-    });
-  }
 });
