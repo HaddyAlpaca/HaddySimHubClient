@@ -2,23 +2,24 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RawDataDisplayComponent } from './raw-data-display.component';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { RawDataDisplayComponentHarness } from './raw-data-display.component.harness';
+import { GameDataService } from 'src/app/services/game-data.service';
 import { Subject } from 'rxjs';
-import { TelemetryService, TelemetryType, TelemetryUpdate } from 'src/app/services/telemetry/telemetry.service';
 
 describe('Raw data display tests', () => {
   let fixture: ComponentFixture<RawDataDisplayComponent>;
-  let mockTelemetryService: jasmine.SpyObj<TelemetryService>;
+  let mockGameDataService: jasmine.SpyObj<GameDataService>;
+  let rawDataSubject: Subject<object>;
 
   beforeEach(async () => {
-    mockTelemetryService = jasmine.createSpyObj<TelemetryService>('telemetryService', ['telemetry$']);
-    mockTelemetryService.telemetry$ = new Subject<TelemetryUpdate>();
+    //Setup mocks
+    mockGameDataService = jasmine.createSpyObj('gameDataService', ['rawData$']);
+    rawDataSubject = new Subject<object>();
+    mockGameDataService.rawData$ = rawDataSubject.asObservable();
 
     await TestBed.configureTestingModule({
-    imports: [RawDataDisplayComponent],
-    providers: [
-        { provide: TelemetryService, useValue: mockTelemetryService }
-    ]
-}).compileComponents();
+      imports: [RawDataDisplayComponent],
+      providers: [{provide: GameDataService, useValue: mockGameDataService }]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(RawDataDisplayComponent);
   });
@@ -26,7 +27,7 @@ describe('Raw data display tests', () => {
   it('Raw data is displayed as key value pairs', async () => {
     const harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, RawDataDisplayComponentHarness);
 
-    setTelemetry({
+    rawDataSubject.next({
       "Key string": "Value string",
       "Key number": 18,
       "Key boolean": true
@@ -38,11 +39,4 @@ describe('Raw data display tests', () => {
       'Key boolean': 'true'
     });
   });
-
-  const setTelemetry = (data: unknown): void => {
-    mockTelemetryService.telemetry$?.next({
-      Type: TelemetryType.RawData,
-      Data: data
-    });
-  };
 });

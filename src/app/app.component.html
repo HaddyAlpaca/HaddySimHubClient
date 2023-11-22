@@ -1,4 +1,12 @@
-<app-truck-display *ngIf="telemetryType === TelemetryType.Truck"></app-truck-display>
-<app-race-display *ngIf="telemetryType === TelemetryType.Race"></app-race-display>
-<app-raw-data-display *ngIf="telemetryType === TelemetryType.RawData"></app-raw-data-display>
-<app-truck-display></app-truck-display>
+@if (gameDataType === GameDataType.RawData) {
+  <app-raw-data-display></app-raw-data-display>
+}
+@else if(gameDataType === GameDataType.TruckData) {
+  <app-truck-display></app-truck-display>
+}
+@else if(gameDataType === GameDataType.RaceData) {
+  <app-race-display></app-race-display>
+}
+@else {
+  <div class="connection-state">{{ connectionStatusDescription }}</div>
+}

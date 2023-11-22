@@ -7,15 +7,27 @@
       <div class="card-body">
         <div class="data-row">
           <div class="data-label">Vertrekpunt</div>
-          <div class="data-item" *ngIf="!data.departureCity && !data.departureCompany" id="departure">-</div>
-          <div class="data-item" *ngIf="data.departureCity && !data.departureCompany" id="departure">{{data.departureCity}}</div>
-          <div class="data-item" *ngIf="data.departureCity && data.departureCompany" id="departure">{{data.departureCity}} ({{data.departureCompany}})</div>
+          @if (!data.departureCity && !data.departureCompany) {
+<div class="data-item" id="departure">-</div>
+}
+          @if (data.departureCity && !data.departureCompany) {
+<div class="data-item" id="departure">{{data.departureCity}}</div>
+}
+          @if (data.departureCity && data.departureCompany) {
+<div class="data-item" id="departure">{{data.departureCity}} ({{data.departureCompany}})</div>
+}
         </div>
         <div class="data-row">
           <div class="data-label">Bestemming</div>
-          <div class="data-item" *ngIf="!data.destinationCity && !data.destinationCompany" id="destination">-</div>
-          <div class="data-item" *ngIf="data.destinationCity && !data.destinationCompany" id="destination">{{data.destinationCity}}</div>
-          <div class="data-item" *ngIf="data.destinationCity && data.destinationCompany" id="destination">{{data.destinationCity}} ({{data.destinationCompany}})</div>
+          @if (!data.destinationCity && !data.destinationCompany) {
+<div class="data-item" id="destination">-</div>
+}
+          @if (data.destinationCity && !data.destinationCompany) {
+<div class="data-item" id="destination">{{data.destinationCity}}</div>
+}
+          @if (data.destinationCity && data.destinationCompany) {
+<div class="data-item" id="destination">{{data.destinationCity}} ({{data.destinationCompany}})</div>
+}
         </div>
         <div class="data-row">
           <div class="data-label">Resterend</div>
@@ -23,8 +35,12 @@
         </div>
         <div class="data-row">
           <div class="data-label">Volgend rustmoment</div>
-          <div class="data-item" *ngIf="!data.restTimeRemaining">-</div>
-          <div class="data-item" *ngIf="data.restTimeRemaining">{{data.restTimeRemaining | timespan}} ({{data.restTimeRemainingIrl | timespan}})</div>
+          @if (!data.restTimeRemaining) {
+<div class="data-item">-</div>
+}
+          @if (data.restTimeRemaining) {
+<div class="data-item">{{data.restTimeRemaining | timespan}} ({{data.restTimeRemainingIrl | timespan}})</div>
+}
         </div>
       </div>
     </div>
@@ -36,18 +52,30 @@
       <div class="card-body">
         <div class="data-row">
           <div class="data-label">Deadline</div>
-          <div class="data-item" *ngIf="!data.jobTimeRemaining">-</div>
-          <div class="data-item" *ngIf="data.jobTimeRemaining">{{data.jobTimeRemaining | timespan}} ({{data.jobTimeRemainingIrl | timespan}})</div>
+          @if (!data.jobTimeRemaining) {
+<div class="data-item">-</div>
+}
+          @if (data.jobTimeRemaining) {
+<div class="data-item">{{data.jobTimeRemaining | timespan}} ({{data.jobTimeRemainingIrl | timespan}})</div>
+}
         </div>
         <div class="data-row">
           <div class="data-label">Inkomen</div>
-          <div class="data-item" *ngIf="!data.jobIncome">-</div>
-          <div class="data-item" *ngIf="data.jobIncome">&euro; {{data.jobIncome | number}}</div>
+          @if (!data.jobIncome) {
+<div class="data-item">-</div>
+}
+          @if (data.jobIncome) {
+<div class="data-item">&euro; {{data.jobIncome | number}}</div>
+}
         </div>
         <div class="data-row">
           <div class="data-label">Lading</div>
-          <div class="data-item" *ngIf="!data.jobCargoDescription">-</div>
-          <div class="data-item" *ngIf="data.jobCargoDescription">{{data.jobCargoDescription}}</div>
+          @if (!data.jobCargoDescription) {
+<div class="data-item">-</div>
+}
+          @if (data.jobCargoDescription) {
+<div class="data-item">{{data.jobCargoDescription}}</div>
+}
         </div>
       </div>
     </div>
@@ -116,7 +144,9 @@
       </div>
 
       <div class="right-column col-4">
-        <div class="speed-limit" *ngIf="!data.speedLimit">{{data.speedLimit}}</div>
+        @if (!data.speedLimit) {
+          <div class="speed-limit">{{data.speedLimit}}</div>
+        }
         <div class="icon-text-control">
           <img class="dashboard-light" src="/assets/images/cruise-control.png">
           <div>{{data.cruiseControlSpeed}} km/h</div>
