@@ -1,45 +1,66 @@
-<div class="container">
+d<div class="container">
   <div class="row">
-    <div class="col-4 behind">
-      <div class="delta-time">+1.234</div>
-      <div class="driver-name">John Doe</div>
+    <div class="col-12">
+      <div class="label clock">{{currentTime | date: 'HH:mm'}}</div>
     </div>
+  </div>
+  <div class="row">
     <div class="col-4">
-      0
-    </div>
-    <div class="col-4 ahead">
-      <div class="delta-time">+1.234</div>
-      <div class="driver-name">Maarten Gerritzen</div>
-    </div>
-  </div>
-</div>
-
-<div class="container">
-  <div>--:--.---</div>
-</div>
-
-
-<div class="main-container">
-  <div class="rpm-bar">
-    <div class="rpm-fill" [style.width]="rpmPercentage+ '%'" [style.background-color]="rpmFillColor"></div>
-    <div class="rpm-label" [style.color]="rpmLabelColor">{{data.rpm}}</div>
-  </div>
-
-  <div class="columns">
-    <div class="column-1">
-      <!-- Row 1 -->
-      <div>
-        <div>{{data.position}}</div>
-        <div>{{data.completedLaps}}</div>
+      <div class="opponent-delta border-radius-top-left group-border border-blue" [ngClass]="{'hidden': !data.driverBehind}">
+        <div class="delta-time">{{data.gapBehind}}</div>
+        <div class="label driver-name" id="driverBehind">{{data.driverBehind}}</div>
       </div>
     </div>
-    <div class="column-2">
-      <div class="gear display-element">{{data.gear === 0 ? 'N' : data.gear === -1 ? 'R' : data.gear}}</div>
-      <div class="speed display-element">{{data.speed}}</div>
+    <div class="col-4">
+      <div class="delta-time" id="deltaTime">{{data.deltaTime | deltatime}}</div>
     </div>
-    <div class="column-3">
+    <div class="col-4">
+      <div class="opponent-delta border-radius-top-right group-border border-blue" [ngClass]="{'hidden': !data.driverAhead}">
+        <div class="delta-time">{{data.gapAhead}}</div>
+        <div class="label driver-name">{{data.driverAhead}}</div>
+      </div>
     </div>
   </div>
-  <!-- Flag -->
-  <div class="flag" [style.background-color]="flagColor"></div>
+  <div class="row">
+    <div class="col-4">
+      <div class="group-border border-radius-bottom-left border-blue" [ngClass]="{'border-radius-top-left': !data.driverBehind}">
+        <div class="label">Lap</div>
+        @if(data.totalLaps) {
+          <div id="laps">{{data.completedLaps}}/{{data.totalLaps}}</div>
+        }
+        @else {
+          <div id="laps">{{data.completedLaps}}</div>
+        }
+        <div class="label">Time remaining</div>
+        <div id="sessionTimeRemaining">{{data.sessionTimeRemaining | timespan}}</div>
+        <div class="label">Position</div>
+        <div id="position">{{data.position}}/{{data.numberOfCars}}</div>
+        <div class="label">Last laptime</div>
+        <div id="lastLapTime">{{data.lastLapTime | laptime}}</div>
+        <div class="label">Session best laptime</div>
+        <div class="best-laptime" id="bestLapTime">{{data.bestLapTime | laptime}}</div>
+      </div>
+    </div>
+    <div class="col-4 group-border border-yellow">
+      <div class="label text-center">RPM</div>
+      <div class="text-center" id="rpm">{{data.rpm}}</div>
+      <div class="gear" id="gear">{{data.gear | gear}}</div>
+      <div class="text-center" id="speed">{{data.speed}}</div>
+      <div class="label text-center">Speed</div>
+    </div>
+    <div class="col-4">
+      <div class="group-border border-radius-bottom-right border-blue" [ngClass]="{'border-radius-top-right': !data.driverAhead}">
+        <div class="label">Brake bias</div>
+        <div id="brakeBias">{{data.brakeBias | number: '1.1-1'}}</div>
+        <div class="label">Fuel laps</div>
+        <div id="fuelLaps">{{data.fuelLaps | number: '1.1-1'}}</div>
+        <div class="label">Air/Track</div>
+        <div id="temps">{{data.airTemp | number: '1.1-1'}}&deg;C/{{data.trackTemp | number: '1.1-1'}}&deg;C</div>
+        <div class="label">Session type</div>
+        <div id="sessionType">{{ data.sessionType }}</div>
+        <div class="label">Time</div>
+        <div>23:01</div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,79 +1,81 @@
-.main-container {
-  height: 100%;
-  --yellow-bg-color: #3a3a10;
+.container {
+  max-width: unset;
+  color: white;
+  font-size: 32pt;
+  text-align: right;
 }
 
-.ahead {
-  border: white 4px solid;
-  border-top-right-radius: 20px;
-  color: white;
+.row {
+  margin-top: 10px;
 }
 
-.behind {
-  border: white 4px solid;
-  border-top-left-radius: 20px;
-  color: white;
+.label {
+  text-transform: uppercase;
+  font-size: 16pt;
+  text-align: right;
+  color: gold;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.clock {
+  text-align: right;
 }
 
 .delta-time {
+  font-weight: bold;
   text-align: center;
+}
+
+.best-laptime {
+  color: purple;
 }
 
 .driver-name {
+  color: yellowgreen;
   text-align: center;
-  width: 100%;
 }
 
-.columns {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.opponent-delta {
+  text-align: center;
 }
 
-
-.display-element {
-  border-radius: 50px;
-  margin: 15px;
-  background-color: darkslategrey;
+.group-border {
+  border: white 4px solid;
+  padding: 10px 20px 10px 20px;
 }
 
-.rpm-bar {
-  position: relative;
-  height: 12vh;
-  margin: 10px;
+.border-radius-top-right {
+  border-top-right-radius: 20px;
 }
 
-.rpm-fill {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  border-radius: 30px;
+.border-radius-top-left {
+  border-top-left-radius: 20px;
 }
 
-.rpm-label {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 7vh;
-  font-weight: bold;
+.border-radius-bottom-right {
+  border-bottom-right-radius: 20px;
+}
+
+.border-radius-bottom-left {
+  border-bottom-left-radius: 20px;
+}
+
+.border-blue {
+  border-color: rgba(0, 0, 255, 0.555);
+}
+
+.border-yellow {
+  border-color: yellow;
 }
 
 .gear {
   text-align: center;
-  color: yellow;
-  font-size: 36vh;
-  background-color: var(--yellow-bg-color);
+  font-size: 180px;
 }
 
-.speed {
-  color: #c2c513;
-  text-align: center;
-  font-size: 12vh;
-  font-style: italic;
-  background-color: var(--yellow-bg-color);
-}
-
-.flag {
-  height: 15%;
+.hidden {
+  visibility: hidden;
 }

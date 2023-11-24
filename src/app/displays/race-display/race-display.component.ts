@@ -1,51 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { tap } from 'rxjs';
-import { Flag, RaceData } from './race-data';
+import { RaceData } from './race-data';
 import { ClockService } from 'src/app/services/clock.service';
 import { GameDataService } from 'src/app/services/game-data.service';
+import { CommonModule } from '@angular/common';
+import { DeltaTimePipe } from '../pipes/delta-time/delta-time.pipe';
+import { GearPipe } from '../pipes/gear/gear.pipe';
+import { LapTimePipe } from '../pipes/laptime/laptime.pipe';
+import { TimespanPipe } from './pipes/timespan/timespan.pipe';
 
 @UntilDestroy()
 @Component({
   selector: 'app-race-display',
   templateUrl: 'race-display.component.html',
   styleUrls: ['race-display.component.css'],
-  standalone: true
+  standalone: true,
+  imports: [CommonModule, DeltaTimePipe, GearPipe, LapTimePipe, TimespanPipe]
 })
 export class RaceDisplayComponent implements OnInit {
-  private readonly rpmMiddleRangePct = 75;
-  private readonly rpmHighRangePct = 90;
-
   private _data: RaceData = new RaceData();
   get data(): RaceData {
     return this._data;
-  }
-
-  get rpmPercentage(): number {
-    if (this._data.rpmMax === 0) return 0;
-
-    return Math.round(this._data.rpm / this._data.rpmMax * 100);
-  }
-
-  get rpmFillColor(): string {
-    if (this.rpmPercentage >= 90) return 'red';
-    if (this.rpmPercentage >= this.rpmMiddleRangePct) return 'green';
-
-    return 'white';
-  }
-
-  get rpmLabelColor(): string {
-    return this.rpmPercentage >= this.rpmMiddleRangePct ? 'white' : 'black';
-  }
-
-  get flagColor(): string {
-
-    switch(this._data.flag) {
-      case Flag.Green:
-        return 'green';
-      default:
-        return 'transparent';
-    }
   }
 
   private _currentTime = new Date();
