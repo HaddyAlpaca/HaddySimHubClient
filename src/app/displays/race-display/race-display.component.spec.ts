@@ -144,7 +144,6 @@ describe('Race display component tests', () => {
       patchData({ bestLapTime: 1 * 60 * 1000 + 32 * 1000 + 876 });
 
       expect(await harness.getElementText('#bestLapTime')).toEqual('01:32.876');
-
     });
   });
 
@@ -171,15 +170,117 @@ describe('Race display component tests', () => {
       patchData({ deltaTime: 0.231 });
 
       expect(await harness.getElementText('#deltaTime')).toEqual('+0.231');
-    })
+    });
+
+    it('Delta time is green when 0', async () => {
+      patchData({ deltaTime: 0 });
+
+      expect(await harness.elementHasClass('#deltaTime', 'text-green')).toBeTrue();
+    });
+
+    it('Delta time is green when > 0', async () => {
+      patchData({ deltaTime: 0.234 });
+
+      expect(await harness.elementHasClass('#deltaTime', 'text-green')).toBeTrue();
+    });
+
+    it('Delta time is green when < 0', async () => {
+      patchData({ deltaTime: -0.234 });
+
+      expect(await harness.elementHasClass('#deltaTime', 'text-red')).toBeTrue();
+    });
   });
 
   describe('Driver behind', () => {
-    it('Driver name is displayed', async () => {
+    it('Driver name and delta are displayed', async () => {
       patchData({ driverBehind: 'David Coulthard' });
 
       expect(await harness.getElementText('#driverBehind')).toEqual('David Coulthard');
     });
+
+    it('Block is displayed when driver name is available', async () => {
+      patchData({ driverBehind: 'David Coulthard' });
+
+      expect(await harness.elementHasClass('#driverBehindBlock', 'hidden')).toBeFalse();
+    });
+
+    it('Block is displayed when driver name is available', async () => {
+      patchData({ driverAhead: '' });
+
+      expect(await harness.elementHasClass('#driverBehindBlock', 'hidden')).toBeTrue();
+    });
+
+    it('Delta time is displayed', async () => {
+      patchData({ gapBehind: 1.2 });
+
+      expect(await harness.getElementText('#gapBehind')).toEqual('1.200');
+    });
+
+    it('Delta time is yellow when it is decreased', async () => {
+      patchData({ gapBehind: 1.2 });
+      patchData({ gapBehind: 1.1 });
+
+      expect(await harness.elementHasClass('#gapBehind', 'text-yellow')).toBeTrue();
+    });
+
+    it('Delta time is green when it is increased', async () => {
+      patchData({ gapBehind: 1.1 });
+      patchData({ gapBehind: 1.3 });
+
+      expect(await harness.elementHasClass('#gapBehind', 'text-green')).toBeTrue();
+    });
+  });
+
+  describe('Driver ahead', () => {
+    it('Driver name and delta are displayed', async () => {
+      patchData({ driverAhead: 'Enrique Bernoldi' });
+
+      expect(await harness.getElementText('#driverAhead')).toEqual('Enrique Bernoldi');
+    });
+
+    it('Block is displayed when driver name is available', async () => {
+      patchData({ driverAhead: 'Enrique Bernoldi' });
+
+      expect(await harness.elementHasClass('#driverAheadBlock', 'hidden')).toBeFalse();
+    });
+
+    it('Block is displayed when driver name is available', async () => {
+      patchData({ driverAhead: '' });
+
+      expect(await harness.elementHasClass('#driverAheadBlock', 'hidden')).toBeTrue();
+    });
+
+    it('Delta time is displayed', async () => {
+      patchData({ gapAhead: 1.2 });
+
+      expect(await harness.getElementText('#gapAhead')).toEqual('1.200');
+    });
+
+    it('Delta time is green when it is decreased', async () => {
+      patchData({ gapAhead: 1.2 });
+      patchData({ gapAhead: 1.1 });
+
+      expect(await harness.elementHasClass('#gapAhead', 'text-green')).toBeTrue();
+    });
+
+    it('Delta time is yellow when it is increased', async () => {
+      patchData({ gapAhead: 1.1 });
+      patchData({ gapAhead: 1.3 });
+
+      expect(await harness.elementHasClass('#gapAhead', 'text-yellow')).toBeTrue();
+    });
+  });
+
+  it('Throttle percentage is displayed', async () => {
+    patchData({ throttlePct: 26 });
+
+      expect(await harness.getThrottlePct()).toEqual('26');
+  });
+
+  it('Brake percentage is displayed', async () => {
+    patchData({ brakePct: 43 });
+
+      expect(await harness.getBrakePct()).toEqual('43');
   });
 
   const setupMockClockSerivce = () => {

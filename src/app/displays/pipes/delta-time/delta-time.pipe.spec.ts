@@ -34,4 +34,9 @@ describe('DeltaTimePipe', () => {
   it('Format delta: -5.492', () => {
     expect(pipe.transform(-5.492)).toBe('-5.492');
   });
+
+  it('Sign can be supressed', () => {
+    expect(pipe.transform(-5.492, false)).toBe('5.492');
+    expect(pipe.transform(5.492, false)).toBe('5.492');
+  })
 });

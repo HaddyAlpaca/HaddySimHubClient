@@ -1,23 +1,26 @@
 d<div class="container">
   <div class="row">
-    <div class="col-12">
+    <div class="col-6">
       <div class="label clock">{{currentTime | date: 'HH:mm'}}</div>
+    </div>
+    <div class="col-6">
+      <div class="label sessionType" id="sessionType">{{data.sessionType}}</div>
     </div>
   </div>
   <div class="row">
     <div class="col-4">
-      <div class="opponent-delta border-radius-top-left group-border border-blue" [ngClass]="{'hidden': !data.driverBehind}">
-        <div class="delta-time">{{data.gapBehind}}</div>
+      <div class="opponent-delta border-radius-top-left group-border border-blue" id="driverBehindBlock" [ngClass]="{'hidden': !data.driverBehind}">
+        <div class="delta-time" id="gapBehind" [ngClass]="{'text-green': gapBehindIncreased, 'text-yellow': !gapBehindIncreased}">{{data.gapBehind | deltatime: false}}</div>
         <div class="label driver-name" id="driverBehind">{{data.driverBehind}}</div>
       </div>
     </div>
     <div class="col-4">
-      <div class="delta-time" id="deltaTime">{{data.deltaTime | deltatime}}</div>
+      <div class="delta-time" id="deltaTime" [ngClass]="{'text-green': data.deltaTime >= 0, 'text-red': data.deltaTime < 0}">{{data.deltaTime | deltatime}}</div>
     </div>
     <div class="col-4">
-      <div class="opponent-delta border-radius-top-right group-border border-blue" [ngClass]="{'hidden': !data.driverAhead}">
-        <div class="delta-time">{{data.gapAhead}}</div>
-        <div class="label driver-name">{{data.driverAhead}}</div>
+      <div class="opponent-delta border-radius-top-right group-border border-blue" id="driverAheadBlock" [ngClass]="{'hidden': !data.driverAhead}">
+        <div class="delta-time" id="gapAhead" [ngClass]="{'text-green': gapAheadDecreased, 'text-yellow': !gapAheadDecreased}">{{data.gapAhead | deltatime: false}}</div>
+        <div class="label driver-name" id="driverAhead">{{data.driverAhead}}</div>
       </div>
     </div>
   </div>
@@ -56,10 +59,10 @@ d<div class="container">
         <div id="fuelLaps">{{data.fuelLaps | number: '1.1-1'}}</div>
         <div class="label">Air/Track</div>
         <div id="temps">{{data.airTemp | number: '1.1-1'}}&deg;C/{{data.trackTemp | number: '1.1-1'}}&deg;C</div>
-        <div class="label">Session type</div>
-        <div id="sessionType">{{ data.sessionType }}</div>
-        <div class="label">Time</div>
-        <div>23:01</div>
+        <div class="label">Throttle</div>
+        <progress id="throttle" [value]="data.throttlePct" max="100"></progress>
+        <div class="label">Brake</div>
+        <progress id="brake" [value]="data.brakePct" max="100"></progress>
       </div>
     </div>
   </div>

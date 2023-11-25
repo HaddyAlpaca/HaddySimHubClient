@@ -18,5 +18,7 @@ export class RaceData {
   gapBehind = 0;
   driverBehind = ''
   gapAhead = 0;
-  driverAhead = ''
+  driverAhead = '';
+  throttlePct = 0;
+  brakePct = 0;
 }
