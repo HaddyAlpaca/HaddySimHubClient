@@ -19,6 +19,9 @@ import { TimespanPipe } from './pipes/timespan/timespan.pipe';
   imports: [CommonModule, DeltaTimePipe, GearPipe, LapTimePipe, TimespanPipe]
 })
 export class RaceDisplayComponent implements OnInit {
+  private _lastGapBehind = 0;
+  private _lastGapAhead = 0;
+
   private _data: RaceData = new RaceData();
   get data(): RaceData {
     return this._data;
@@ -27,6 +30,16 @@ export class RaceDisplayComponent implements OnInit {
   private _currentTime = new Date();
   public get currentTime(): Date {
     return this._currentTime;
+  }
+
+  private _gapBehindIncreased = false;
+  public get gapBehindIncreased(): boolean {
+    return this._gapBehindIncreased;
+  }
+
+  private _gapAheadDecreased = false;
+  public get gapAheadDecreased(): boolean {
+    return this._gapAheadDecreased;
   }
 
   constructor(
@@ -40,7 +53,13 @@ export class RaceDisplayComponent implements OnInit {
 
   ngOnInit(): void {
     this._gameDataService.raceData$.pipe(
-      tap(data => this._data = data),
+      tap(data => {
+        this._gapBehindIncreased = data.gapBehind > this._lastGapBehind;
+        this._lastGapBehind = data.gapBehind;
+        this._gapAheadDecreased = data.gapAhead < this._lastGapAhead;
+        this._lastGapAhead = data.gapAhead;
+        this._data = data;
+      }),
       untilDestroyed(this)
     ).subscribe();
   }

@@ -21,6 +21,10 @@
 }
 
 .clock {
+  text-align: left;
+}
+
+.sessionType {
   text-align: right;
 }
 
@@ -78,4 +82,26 @@
 
 .hidden {
   visibility: hidden;
+}
+
+#throttle {
+  width: 100%;
+  accent-color: green;
+}
+
+#brake {
+  width: 100%;
+  accent-color: red;
+}
+
+.text-red {
+  color: red;
+}
+
+.text-green {
+  color: green;
+}
+
+.text-yellow {
+  color: yellow;
 }
