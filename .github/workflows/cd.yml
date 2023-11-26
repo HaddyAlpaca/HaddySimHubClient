@@ -39,7 +39,8 @@ jobs:
 
     - name: Zip build result
       run: |
-        zip --junk-paths haddy-simhub-client ./dist
+        cd dist/haddy-sim-hub-client
+        zip -r haddy-simhub-client *
 
     - name: Create release
       id: create_release
