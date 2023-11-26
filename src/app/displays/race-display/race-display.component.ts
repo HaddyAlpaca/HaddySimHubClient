@@ -32,14 +32,14 @@ export class RaceDisplayComponent implements OnInit {
     return this._currentTime;
   }
 
-  private _gapBehindIncreased = false;
-  public get gapBehindIncreased(): boolean {
-    return this._gapBehindIncreased;
+  private _gapBehindDelta = 0;
+  public get gapBehindDelta(): number {
+    return this._gapBehindDelta;
   }
 
-  private _gapAheadDecreased = false;
-  public get gapAheadDecreased(): boolean {
-    return this._gapAheadDecreased;
+  private _gapAheadDelta = 0;
+  public get gapAheadDelta(): number {
+    return this._gapAheadDelta;
   }
 
   constructor(
@@ -54,9 +54,9 @@ export class RaceDisplayComponent implements OnInit {
   ngOnInit(): void {
     this._gameDataService.raceData$.pipe(
       tap(data => {
-        this._gapBehindIncreased = data.gapBehind > this._lastGapBehind;
+        this._gapBehindDelta = data.gapBehind - this._lastGapBehind;
         this._lastGapBehind = data.gapBehind;
-        this._gapAheadDecreased = data.gapAhead < this._lastGapAhead;
+        this._gapAheadDelta = data.gapAhead - this._lastGapAhead;
         this._lastGapAhead = data.gapAhead;
         this._data = data;
       }),

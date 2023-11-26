@@ -10,7 +10,7 @@ d<div class="container">
   <div class="row">
     <div class="col-4">
       <div class="opponent-delta border-radius-top-left group-border border-blue" id="driverBehindBlock" [ngClass]="{'hidden': !data.driverBehind}">
-        <div class="delta-time" id="gapBehind" [ngClass]="{'text-green': gapBehindIncreased, 'text-yellow': !gapBehindIncreased}">{{data.gapBehind | deltatime: false}}</div>
+        <div class="delta-time" id="gapBehind" [ngClass]="{'text-green': gapBehindDelta > 0, 'text-yellow': gapBehindDelta < 0}">{{data.gapBehind | deltatime: false}}</div>
         <div class="label driver-name" id="driverBehind">{{data.driverBehind}}</div>
       </div>
     </div>
@@ -19,7 +19,7 @@ d<div class="container">
     </div>
     <div class="col-4">
       <div class="opponent-delta border-radius-top-right group-border border-blue" id="driverAheadBlock" [ngClass]="{'hidden': !data.driverAhead}">
-        <div class="delta-time" id="gapAhead" [ngClass]="{'text-green': gapAheadDecreased, 'text-yellow': !gapAheadDecreased}">{{data.gapAhead | deltatime: false}}</div>
+        <div class="delta-time" id="gapAhead" [ngClass]="{'text-green': gapAheadDelta < 0, 'text-yellow': gapAheadDelta > 0}">{{data.gapAhead | deltatime: false}}</div>
         <div class="label driver-name" id="driverAhead">{{data.driverAhead}}</div>
       </div>
     </div>
