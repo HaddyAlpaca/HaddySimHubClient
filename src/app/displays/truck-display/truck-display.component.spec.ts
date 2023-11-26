@@ -14,6 +14,7 @@ describe('TruckDisplayComponent', () => {
   let data: TruckData;
   let mockGameDataService: jasmine.SpyObj<GameDataService>;
   let truckDataSubject: Subject<TruckData>;
+  let harness: TruckDashComponentHarness;
 
   beforeEach(async () => {
     //Set default values for the truck data
@@ -34,98 +35,97 @@ describe('TruckDisplayComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(TruckDisplayComponent);
+    harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, TruckDashComponentHarness);
   });
 
   describe('Departure tests', () => {
     it('When city is not set a placeholder is shown', async () => {
-      const harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, TruckDashComponentHarness);
+      patchData({ departureCity: '' });
 
-      data.departureCity = '';
-      data.departureCity = '';
-      truckDataSubject.next(data);
-
-      expect(await harness.getDeparture()).toEqual('-');
+      expect(await harness.getElementText('#departure')).toEqual('-');
     });
 
     it('City is displayed when company is not set', async () => {
-      const harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, TruckDashComponentHarness);
+      patchData({ departureCity: 'Berlin', departureCompany: '' });
 
-      data.departureCity = 'Berlin';
-      data.departureCompany = '';
-      truckDataSubject.next(data);
-
-      expect(await harness.getDeparture()).toEqual('Berlin');
+      expect(await harness.getElementText('#departure')).toEqual('Berlin');
     });
 
     it('City and company are displayed both are set', async () => {
-      const harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, TruckDashComponentHarness);
+      patchData({ departureCity: 'Berlin', departureCompany: 'Company B' });
 
-      data.departureCity = 'Berlin';
-      data.departureCompany = 'Company B';
-      truckDataSubject.next(data);
-
-      expect(await harness.getDeparture()).toEqual('Berlin (Company B)');
+      expect(await harness.getElementText('#departure')).toEqual('Berlin (Company B)');
     });
   });
 
   describe('Destination tests', () => {
     it('When city is not set a placeholder is shown', async () => {
-      const harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, TruckDashComponentHarness);
+      patchData({ destinationCity: '', destinationCompany: '' });
 
-      data.destinationCity = '';
-      data.destinationCompany = '';
-      truckDataSubject.next(data);
-
-      expect(await harness.getDestination()).toEqual('-');
+      expect(await harness.getElementText('#destination')).toEqual('-');
     });
 
     it('City is displayed when company is not set', async () => {
-      const harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, TruckDashComponentHarness);
+      patchData({ destinationCity: 'Paris', destinationCompany: '' });
 
-      data.destinationCity = 'Paris';
-      data.destinationCompany = '';
-      truckDataSubject.next(data);
-
-      expect(await harness.getDestination()).toEqual('Paris');
+      expect(await harness.getElementText('#destination')).toEqual('Paris');
     });
 
     it('City and company are displayed both are set', async () => {
-      const harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, TruckDashComponentHarness);
+      patchData({ destinationCity: 'Paris', destinationCompany: 'Company A' });
 
-      data.destinationCity = 'Paris';
-      data.destinationCompany = 'Company A';
-      truckDataSubject.next(data);
-
-      expect(await harness.getDestination()).toEqual('Paris (Company A)');
+      expect(await harness.getElementText('#destination')).toEqual('Paris (Company A)');
     });
   });
 
   it('Gears should be displayed', async () => {
-    const harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, TruckDashComponentHarness);
-
     //Reverse 1
-    data.gear = -1;
-    truckDataSubject.next(data);
-    expect(await harness.getSelectedGear()).toEqual('R1');
+    patchData({ gear: -1 });
+    expect(await harness.getElementText('.current-gear')).toEqual('R1');
 
     //Reverse 2
-    data.gear = -2;
-    truckDataSubject.next(data);
-    expect(await harness.getSelectedGear()).toEqual('R2');
+    patchData({ gear: -2 });
+    expect(await harness.getElementText('.current-gear')).toEqual('R2');
 
     //Neutral
-    data.gear = 0;
-    truckDataSubject.next(data);
-    expect(await harness.getSelectedGear()).toEqual('N');
+    patchData({ gear: 0 });
+    expect(await harness.getElementText('.current-gear')).toEqual('N');
 
     //First
-    data.gear = 1;
-    truckDataSubject.next(data);
-    expect(await harness.getSelectedGear()).toEqual('1');
+    patchData({ gear: 1 });
+    expect(await harness.getElementText('.current-gear')).toEqual('1');
 
-    //Seconde
-    data.gear = 2;
-    truckDataSubject.next(data);
-    expect(await harness.getSelectedGear()).toEqual('2');
+    //Second
+    patchData({ gear: 2 });
+    expect(await harness.getElementText('.current-gear')).toEqual('2');
   });
+
+  it('Fuel distance is displayed', async () => {
+    patchData({ fuelDistance: 814 });
+
+    expect(await harness.getElementText('#fuelDistance')).toEqual('814 km');
+  });
+
+  describe('Job income', () => {
+    it('should display a placeholder when not set', async () => {
+      patchData({ jobIncome: 0 });
+
+      expect(await harness.getElementText('#jobIncome')).toEqual('-');
+    });
+
+    it('should display jobIncome when set', async () => {
+      patchData({ jobIncome: 32_145 });
+
+      expect(await harness.getElementText('#jobIncome')).toEqual('€ 32.145');
+    });
+  });
+
+  const patchData = (value: { [key: string]: unknown; }) => {
+    const newData = {
+      ...data,
+      ...value
+    };
+
+    truckDataSubject.next(newData);
+  }
 });
