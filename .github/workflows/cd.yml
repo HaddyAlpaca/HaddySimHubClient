@@ -53,6 +53,10 @@ jobs:
         draft: true
         prerelease: false
 
+    - name: Debug
+      run: |
+        ls -a
+
     - name: Upload release assets
       uses: actions/upload-release-asset@v1.0.1
       env:
