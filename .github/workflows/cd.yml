@@ -12,12 +12,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build_ci:
-    uses: ./.github/workflows/ci.yml
-
   release:
     name: Create release
-    needs: build_ci
     runs-on: ubuntu-latest
 
     env:
@@ -55,6 +51,7 @@ jobs:
 
     - name: Debug
       run: |
+        cd dist/haddy-sim-hub-client
         ls -a
 
     - name: Upload release assets
@@ -63,7 +60,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: haddy-simhub-client.zip
+        asset_path: ./dist/haddy-sim-hub-client/haddy-simhub-client.zip
         asset_name: haddy-simhub-client.zip
         asset_content_type: application/zip
 
