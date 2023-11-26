@@ -20,37 +20,48 @@ jobs:
     needs: build_ci
     runs-on: ubuntu-latest
 
+    env:
+      node-version: '18.x'
+
     steps:
-      - uses: actions/checkout@v3
+    - uses: actions/checkout@v3
 
-      - name: Build app
-        run: npm run build --prod
+    - name: Use Node.js ${{ env.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ env.node-version }}
 
-      - name: Create release
-        id: create_release
-        uses: actions/create-release@v1.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: v${{ github.ref }}
-          release_name: Release v${{ github.ref }}
-          draft: false
-          prerelease: false
+    - name: Install dependencies
+      run: npm install
 
-      - name: Upload release assets
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/haddy-simhub-client.zip
-          asset_name: haddy-simhub-client.zip
-          asset_content_type: application/zip
+    - name: Build app
+      run: npm run build --prod
 
-      - name: Publish Release
-        uses: eregon/publish-release@v1
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        with:
-          release_id: ${{steps.create_release.outputs.id}}
+    - name: Create release
+      id: create_release
+      uses: actions/create-release@v1.0.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ github.ref }}
+        release_name: Release v${{ github.ref }}
+        draft: false
+        prerelease: false
+
+    - name: Upload release assets
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./dist/haddy-simhub-client.zip
+        asset_name: haddy-simhub-client.zip
+        asset_content_type: application/zip
+
+    - name: Publish Release
+      uses: eregon/publish-release@v1
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      with:
+        release_id: ${{steps.create_release.outputs.id}}
 
