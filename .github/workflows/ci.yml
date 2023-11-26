@@ -13,10 +13,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
       - name: Use Node.js ${{ env.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.node-version }}
-      - run: npm ci
-      - run: npm run test_ci
+
+      - name: Install dependencies
+        run: npm install
+
+      - run: npm run coverage
+
       - run: npm run lint
