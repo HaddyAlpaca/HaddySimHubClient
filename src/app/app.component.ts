@@ -32,7 +32,7 @@ export class AppComponent {
         break;
 
       case ConnectionStatus.Connecting:
-        description = 'Connecting';
+        description = 'Connecting...';
         break;
 
       case ConnectionStatus.ConnectionError:
