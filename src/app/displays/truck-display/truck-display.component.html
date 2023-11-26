@@ -8,26 +8,26 @@
         <div class="data-row">
           <div class="data-label">Vertrekpunt</div>
           @if (!data.departureCity && !data.departureCompany) {
-<div class="data-item" id="departure">-</div>
-}
+            <div class="data-item" id="departure">-</div>
+          }
           @if (data.departureCity && !data.departureCompany) {
-<div class="data-item" id="departure">{{data.departureCity}}</div>
-}
+            <div class="data-item" id="departure">{{data.departureCity}}</div>
+          }
           @if (data.departureCity && data.departureCompany) {
-<div class="data-item" id="departure">{{data.departureCity}} ({{data.departureCompany}})</div>
-}
+            <div class="data-item" id="departure">{{data.departureCity}} ({{data.departureCompany}})</div>
+          }
         </div>
         <div class="data-row">
           <div class="data-label">Bestemming</div>
           @if (!data.destinationCity && !data.destinationCompany) {
-<div class="data-item" id="destination">-</div>
-}
+            <div class="data-item" id="destination">-</div>
+          }
           @if (data.destinationCity && !data.destinationCompany) {
-<div class="data-item" id="destination">{{data.destinationCity}}</div>
-}
+            <div class="data-item" id="destination">{{data.destinationCity}}</div>
+          }
           @if (data.destinationCity && data.destinationCompany) {
-<div class="data-item" id="destination">{{data.destinationCity}} ({{data.destinationCompany}})</div>
-}
+            <div class="data-item" id="destination">{{data.destinationCity}} ({{data.destinationCompany}})</div>
+          }
         </div>
         <div class="data-row">
           <div class="data-label">Resterend</div>
@@ -62,20 +62,20 @@
         <div class="data-row">
           <div class="data-label">Inkomen</div>
           @if (!data.jobIncome) {
-<div class="data-item">-</div>
-}
+            <div class="data-item" id="jobIncome">-</div>
+          }
           @if (data.jobIncome) {
-<div class="data-item">&euro; {{data.jobIncome | number}}</div>
-}
+            <div class="data-item" id="jobIncome">&euro; {{data.jobIncome | number}}</div>
+          }
         </div>
         <div class="data-row">
           <div class="data-label">Lading</div>
           @if (!data.jobCargoDescription) {
-<div class="data-item">-</div>
-}
+            <div class="data-item">-</div>
+          }
           @if (data.jobCargoDescription) {
-<div class="data-item">{{data.jobCargoDescription}}</div>
-}
+            <div class="data-item">{{data.jobCargoDescription}}</div>
+          }
         </div>
       </div>
     </div>
@@ -153,7 +153,7 @@
         </div>
         <div class="icon-text-control">
           <img class="dashboard-light" src="/assets/images/fuel.svg">
-          <div>{{data.fuelDistance}} km</div>
+          <div id="fuelDistance">{{data.fuelDistance}} km</div>
         </div>
       </div>
     </div>
@@ -161,7 +161,7 @@
 
   <div class="row footer-row">
     <div class="card col-12">
-      <span>Scania P500</span>
+      <span id="truckName">Scania P500</span>
       <span class="clock">14:32 (8:09)</span>
     </div>
   </div>

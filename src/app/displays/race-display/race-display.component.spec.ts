@@ -290,13 +290,13 @@ describe('Race display component tests', () => {
   it('Throttle percentage is displayed', async () => {
     patchData({ throttlePct: 26 });
 
-      expect(await harness.getThrottlePct()).toEqual('26');
+      expect(await harness.getValue('#throttle')).toEqual('26');
   });
 
   it('Brake percentage is displayed', async () => {
     patchData({ brakePct: 43 });
 
-      expect(await harness.getBrakePct()).toEqual('43');
+      expect(await harness.getValue('#brake')).toEqual('43');
   });
 
   const setupMockClockSerivce = () => {

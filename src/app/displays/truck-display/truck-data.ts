@@ -6,10 +6,8 @@ export class TruckData {
   distanceRemaining = 0;
   timeRemaining = 0;
   timeRemainingIrl = 0;
-  time = new Date();
   restTimeRemaining = 0;
   restTimeRemainingIrl = 0;
-  fuelPercentage = 0;
   fuelDistance = 0;
   jobTimeRemaining = 0;
   jobTimeRemainingIrl = 0;
