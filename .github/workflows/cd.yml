@@ -1,13 +1,13 @@
-name: Release
+name: CD
 
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   release:
-    name: Release
+    name: CD
     runs-on: ubuntu-latest
 
     steps:
@@ -33,8 +33,6 @@ jobs:
         with:
           tag_name: v${{ github.ref }}
           release_name: Release v${{ github.ref }}
-          body: |
-            This is a new release of the Angular app.
           draft: false
           prerelease: false
 
@@ -44,6 +42,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/my-angular-app.zip
-          asset_name: my-angular-app.zip
+          asset_path: ./dist/haddy-simhub-client.zip
+          asset_name: haddy-simhub-client.zip
           asset_content_type: application/zip
