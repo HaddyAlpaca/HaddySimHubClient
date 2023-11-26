@@ -229,6 +229,14 @@ describe('Race display component tests', () => {
 
       expect(await harness.elementHasClass('#gapBehind', 'text-green')).toBeTrue();
     });
+
+    it('Delta time has no extra formatting when it has not changed', async () => {
+      patchData({ gapBehind: 1.7 });
+      patchData({ gapBehind: 1.7 });
+
+      expect(await harness.elementHasClass('#gapBehind', 'text-green')).toBeFalse();
+      expect(await harness.elementHasClass('#gapBehind', 'text-yellow')).toBeFalse();
+    });
   });
 
   describe('Driver ahead', () => {
@@ -268,6 +276,14 @@ describe('Race display component tests', () => {
       patchData({ gapAhead: 1.3 });
 
       expect(await harness.elementHasClass('#gapAhead', 'text-yellow')).toBeTrue();
+    });
+
+    it('Delta time has no extra formatting when it has not changed', async () => {
+      patchData({ gapAhead: 1.7 });
+      patchData({ gapAhead: 1.7 });
+
+      expect(await harness.elementHasClass('#gapAhead', 'text-green')).toBeFalse();
+      expect(await harness.elementHasClass('#gapAhead', 'text-yellow')).toBeFalse();
     });
   });
 
