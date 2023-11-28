@@ -1,5 +1,6 @@
 export class RaceData {
   sessionType = '';
+  isTimedSession = false;
   completedLaps = 0;
   totalLaps = 0;
   sessionTimeRemaining = 0;

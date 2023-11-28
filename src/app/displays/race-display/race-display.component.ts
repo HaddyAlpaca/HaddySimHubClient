@@ -5,9 +5,9 @@ import { RaceData } from './race-data';
 import { ClockService } from 'src/app/services/clock.service';
 import { GameDataService } from 'src/app/services/game-data.service';
 import { CommonModule } from '@angular/common';
-import { DeltaTimePipe } from '../pipes/delta-time/delta-time.pipe';
-import { GearPipe } from '../pipes/gear/gear.pipe';
-import { LapTimePipe } from '../pipes/laptime/laptime.pipe';
+import { DeltaTimePipe } from './pipes/delta-time/delta-time.pipe';
+import { GearPipe } from './pipes/gear/gear.pipe';
+import { LapTimePipe } from './pipes/laptime/laptime.pipe';
 import { TimespanPipe } from './pipes/timespan/timespan.pipe';
 
 @UntilDestroy()

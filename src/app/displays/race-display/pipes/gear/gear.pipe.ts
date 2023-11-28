@@ -11,7 +11,9 @@ export class GearPipe implements PipeTransform {
     if (value === 0) {
       return 'N';
     } else if(value === -1) {
-      return 'R'
+      return 'R';
+    } else if (value === -2) {
+      return 'N/A';
     }
 
     return this._numberFormat.format(value);

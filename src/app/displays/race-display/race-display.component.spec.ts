@@ -33,17 +33,18 @@ describe('Race display component tests', () => {
   })
 
   describe('Laps remaining tests', () => {
-    it('When total laps not known, display only laps completed', async () => {
+    it('When session is a timed session, display only laps completed', async () => {
       patchData({
-        completedLaps: 2,
-        totalLaps: 0
+        isTimedSession: true,
+        completedLaps: 2
       });
 
       expect(await harness.getElementText('#laps')).toEqual('2');
     });
 
-    it('When total laps known, display laps completed and total laps', async () => {
+    it('When session is not a timed session, display laps completed and total laps', async () => {
       patchData({
+        isTimeSession: false,
         completedLaps: 2,
         totalLaps: 10
       });
@@ -69,6 +70,12 @@ describe('Race display component tests', () => {
       patchData({ gear: -1 });
 
       expect(await harness.getElementText('.gear')).toEqual('R');
+    });
+
+    it('Not available gear is handled', async () => {
+      patchData({ gear: -2 });
+
+      expect(await harness.getElementText('.gear')).toEqual('N/A');
     });
   });
 
@@ -125,7 +132,7 @@ describe('Race display component tests', () => {
     });
 
     it('valid laptime', async () => {
-      patchData({ lastLapTime: 1 * 60 * 1000 + 34 * 1000 + 421 });
+      patchData({ lastLapTime: 94.421 });
 
       expect(await harness.getElementText('#lastLapTime')).toEqual('01:34.421');
 
@@ -141,7 +148,7 @@ describe('Race display component tests', () => {
     });
 
     it('valid laptime', async () => {
-      patchData({ bestLapTime: 1 * 60 * 1000 + 32 * 1000 + 876 });
+      patchData({ bestLapTime: 92.876 });
 
       expect(await harness.getElementText('#bestLapTime')).toEqual('01:32.876');
     });
