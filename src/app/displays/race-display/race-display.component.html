@@ -28,11 +28,11 @@ d<div class="container">
     <div class="col-4">
       <div class="group-border border-radius-bottom-left border-blue" [ngClass]="{'border-radius-top-left': !data.driverBehind}">
         <div class="label">Lap</div>
-        @if(data.totalLaps) {
-          <div id="laps">{{data.completedLaps}}/{{data.totalLaps}}</div>
+        @if(data.isTimedSession) {
+          <div id="laps">{{data.completedLaps}}</div>
         }
         @else {
-          <div id="laps">{{data.completedLaps}}</div>
+          <div id="laps">{{data.completedLaps}}/{{data.totalLaps}}</div>
         }
         <div class="label">Time remaining</div>
         <div id="sessionTimeRemaining">{{data.sessionTimeRemaining | timespan}}</div>
