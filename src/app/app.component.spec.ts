@@ -62,7 +62,7 @@ describe('App component tests', () => {
       gameDataTypeSubject.next(GameDataType.None);
       connectionStatusSubject.next(ConnectionStatus.Connected);
 
-      expect(await harness.getConnectionStatusText()).toEqual('Connected');
+      expect(await harness.getConnectionStatusText()).toEqual('Connected, waiting for game...');
     });
   });
 

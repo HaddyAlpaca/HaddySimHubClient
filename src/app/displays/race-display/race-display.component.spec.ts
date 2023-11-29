@@ -301,9 +301,23 @@ describe('Race display component tests', () => {
   });
 
   it('Brake percentage is displayed', async () => {
-    patchData({ brakePct: 43 });
+      patchData({ brakePct: 43 });
 
       expect(await harness.getValue('#brake')).toEqual('43');
+  });
+
+  describe('Pit limiter', () => {
+    it('Pit limter is not shown when off', async () => {
+      patchData({ pitLimiterOn: false });
+
+      expect(await harness.hasElement('.pit-limiter')).toBeFalse();
+    })
+
+    it('Pit limter is not shown when on', async () => {
+      patchData({ pitLimiterOn: true });
+
+      expect(await harness.hasElement('.pit-limiter')).toBeTrue();
+    })
   });
 
   const setupMockClockSerivce = () => {

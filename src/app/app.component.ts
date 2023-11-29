@@ -40,7 +40,7 @@ export class AppComponent {
         break;
 
       case ConnectionStatus.Connected:
-        description = 'Connected';
+        description = 'Connected, waiting for game...';
         break;
     }
 
