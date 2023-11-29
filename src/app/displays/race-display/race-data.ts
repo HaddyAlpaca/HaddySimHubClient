@@ -22,4 +22,5 @@ export class RaceData {
   driverAhead = '';
   throttlePct = 0;
   brakePct = 0;
+  pitLimiterOn = false;
 }

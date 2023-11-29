@@ -6,6 +6,7 @@ import { TimespanPipe } from './pipes/timespan/timespan.pipe';
 import { GearPipe } from './pipes/gear/gear.pipe';
 import { NgClass, DecimalPipe } from '@angular/common';
 import { GameDataService } from 'src/app/services/game-data.service';
+import { NumberNlPipe } from '../pipes/number-nl/number-nl.pipe';
 
 @UntilDestroy()
 @Component({
@@ -14,7 +15,7 @@ import { GameDataService } from 'src/app/services/game-data.service';
     styleUrl: 'truck-display.component.css',
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [NgClass, DecimalPipe, GearPipe, TimespanPipe]
+    imports: [NgClass, DecimalPipe, GearPipe, TimespanPipe, NumberNlPipe]
 })
 export class TruckDisplayComponent implements OnInit {
   private _data: TruckData = new TruckData();

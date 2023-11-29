@@ -1,6 +1,11 @@
 import { ComponentHarness } from '@angular/cdk/testing';
 
 export class ComponentHarnessBase extends ComponentHarness {
+  public async hasElement(selector: string): Promise<boolean> {
+    const elm = await this.locatorForOptional(selector)();
+    return !!elm;
+  }
+
   public async getElementText(selector: string): Promise<string> {
     const elm = await this.locatorFor(selector)();
     const text = await elm.text();
