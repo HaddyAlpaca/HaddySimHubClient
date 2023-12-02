@@ -4,9 +4,10 @@ import { tap } from 'rxjs';
 import { TruckData } from './truck-data';
 import { TimespanPipe } from './pipes/timespan/timespan.pipe';
 import { GearPipe } from './pipes/gear/gear.pipe';
-import { NgClass, DecimalPipe } from '@angular/common';
+import { NgClass, DecimalPipe, CommonModule } from '@angular/common';
 import { GameDataService } from 'src/app/services/game-data.service';
 import { NumberNlPipe } from '../pipes/number-nl/number-nl.pipe';
+import { ClockService } from 'src/app/services/clock.service';
 
 @UntilDestroy()
 @Component({
@@ -15,16 +16,26 @@ import { NumberNlPipe } from '../pipes/number-nl/number-nl.pipe';
     styleUrl: 'truck-display.component.css',
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [NgClass, DecimalPipe, GearPipe, TimespanPipe, NumberNlPipe]
+    imports: [NgClass, DecimalPipe, GearPipe, TimespanPipe, NumberNlPipe, CommonModule]
 })
 export class TruckDisplayComponent implements OnInit {
   private _data: TruckData = new TruckData();
   get data(): TruckData{
     return this._data;
   }
-  currentTime: Date = new Date();
 
-  constructor(private _gameDataService: GameDataService) {
+  private _currentTime = new Date();
+  public get currentTime(): Date {
+    return this._currentTime;
+  }
+
+  constructor(
+    private _gameDataService: GameDataService,
+    private _clockService: ClockService
+  ) {
+    this._clockService.getCurrentTime().pipe(
+      tap((time) => this._currentTime = time)
+    ).subscribe();
   }
 
   ngOnInit(): void {

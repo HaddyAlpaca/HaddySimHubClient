@@ -1,19 +1,27 @@
 export class TruckData {
-  departureCity = '';
-  departureCompany = '';
+  sourceCity = '';
+  sourceCompany = '';
   destinationCity = '';
   destinationCompany = '';
-  distanceRemaining = 0;
   timeRemaining = 0;
   timeRemainingIrl = 0;
+  distanceRemaining = 0;
   restTimeRemaining = 0;
   restTimeRemainingIrl = 0;
   fuelDistance = 0;
   jobTimeRemaining = 0;
   jobTimeRemainingIrl = 0;
   jobIncome = 0;
-  jobCargoDescription = '';
-  jobCargoWeight = 0;
+  jobCargoName = '';
+  jobCargoMass = 0;
+  jobCargoDamage = 0;
+  damageCabin = 0;
+  damageWheels = 0;
+  damageTransmission = 0;
+  damageEngine = 0;
+  damageChassis = 0;
+  trailerAttached = false;
+  damageTrailer = 0;
   speed = 0;
   speedLimit = 0;
   rpm = 0;
@@ -25,4 +33,5 @@ export class TruckData {
   highBeamOn = false;
   parkingBrakeOn = false;
   batteryWarningOn = false;
+  truckName = '';
 }

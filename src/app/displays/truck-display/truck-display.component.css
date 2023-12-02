@@ -122,7 +122,8 @@ app-truck-display {
   }
 
   .footer-row .clock {
-    float: right;
+    position: absolute;
+    right: 6px;;
   }
 
   .filter-white{
@@ -143,5 +144,9 @@ app-truck-display {
 
   .filter-orange{
     filter: brightness(0) saturate(100%) invert(56%) sepia(31%) saturate(3171%) hue-rotate(1deg) brightness(104%) contrast(104%);
+  }
+
+  .hidden {
+    visibility: hidden;
   }
 }
