@@ -7,12 +7,14 @@ import { TruckData } from './truck-data';
 import { GearPipe } from './pipes/gear/gear.pipe';
 import { TimespanPipe } from './pipes/timespan/timespan.pipe';
 import { GameDataService } from 'src/app/services/game-data.service';
-import { Subject } from 'rxjs';
+import { Subject, of } from 'rxjs';
+import { ClockService } from 'src/app/services/clock.service';
 
 describe('TruckDisplayComponent', () => {
   let fixture: ComponentFixture<TruckDisplayComponent>;
   let data: TruckData;
   let mockGameDataService: jasmine.SpyObj<GameDataService>;
+  let mockClockService: jasmine.SpyObj<ClockService>;
   let truckDataSubject: Subject<TruckData>;
   let harness: TruckDashComponentHarness;
 
@@ -21,16 +23,18 @@ describe('TruckDisplayComponent', () => {
     data = new TruckData();
 
     //Setup mocking services
-    mockGameDataService = jasmine.createSpyObj('gameDataService', ['truckData$']);
-    truckDataSubject = new Subject<TruckData>();
-    mockGameDataService.truckData$ = truckDataSubject.asObservable();
+    mockGameDataService = setupMockGameDataService();
+    mockClockService = setupMockClockSerivce();
 
     await TestBed.configureTestingModule({
       imports: [
         TruckDisplayComponent,
         GearPipe,
         TimespanPipe],
-      providers: [{ provide: GameDataService, useValue: mockGameDataService }]
+      providers: [
+        { provide: ClockService, useValue: mockClockService },
+        { provide: GameDataService, useValue: mockGameDataService }
+      ]
     })
     .compileComponents();
 
@@ -40,19 +44,19 @@ describe('TruckDisplayComponent', () => {
 
   describe('Departure tests', () => {
     it('When city is not set a placeholder is shown', async () => {
-      patchData({ departureCity: '' });
+      patchData({ sourceCity: '' });
 
       expect(await harness.getElementText('#departure')).toEqual('-');
     });
 
     it('City is displayed when company is not set', async () => {
-      patchData({ departureCity: 'Berlin', departureCompany: '' });
+      patchData({ sourceCity: 'Berlin', sourceCompany: '' });
 
       expect(await harness.getElementText('#departure')).toEqual('Berlin');
     });
 
     it('City and company are displayed both are set', async () => {
-      patchData({ departureCity: 'Berlin', departureCompany: 'Company B' });
+      patchData({ sourceCity: 'Berlin', sourceCompany: 'Company B' });
 
       expect(await harness.getElementText('#departure')).toEqual('Berlin (Company B)');
     });
@@ -106,19 +110,45 @@ describe('TruckDisplayComponent', () => {
     expect(await harness.getElementText('#fuelDistance')).toEqual('814 km');
   });
 
-  describe('Job income', () => {
-    it('should display a placeholder when not set', async () => {
+  describe('Job', () => {
+    it('Income should display a placeholder when not set', async () => {
       patchData({ jobIncome: 0 });
 
       expect(await harness.getElementText('#jobIncome')).toEqual('-');
     });
 
-    it('should display jobIncome when set', async () => {
+    it('Income should be displayed jobIncome when set', async () => {
       patchData({ jobIncome: 32_145 });
 
       expect(await harness.getElementText('#jobIncome')).toEqual('€ 32.145');
     });
+
+    it('Cargo name placeholder is shown when no cargo', async () => {
+      patchData({ jobCargoName: '' });
+
+      expect(await harness.getElementText('#jobCargoName')).toEqual('-');
+    });
+
+    it('Cargo name is shown', async () => {
+      patchData({ jobCargoName: 'Helicopter', jobCargoMass: 2500 });
+
+      expect(await harness.getElementText('#jobCargoName')).toEqual('Helicopter (2500 kg)');
+    });
   });
+
+  const setupMockClockSerivce = () => {
+    const service = jasmine.createSpyObj<ClockService>('clockService', ['getCurrentTime']);
+    service.getCurrentTime.and.returnValue(of(new Date()));
+
+    return service;
+  }
+
+  const setupMockGameDataService = () => {
+    const service = jasmine.createSpyObj('gameDataService', ['truckData$']);
+    truckDataSubject = new Subject<TruckData>();
+    service.truckData$ = truckDataSubject.asObservable();
+    return service;
+  }
 
   const patchData = (value: { [key: string]: unknown; }) => {
     const newData = {

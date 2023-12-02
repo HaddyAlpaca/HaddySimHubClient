@@ -7,14 +7,14 @@
       <div class="card-body">
         <div class="data-row">
           <div class="data-label">Vertrekpunt</div>
-          @if (!data.departureCity && !data.departureCompany) {
+          @if (!data.sourceCity && !data.sourceCompany) {
             <div class="data-item" id="departure">-</div>
           }
-          @if (data.departureCity && !data.departureCompany) {
-            <div class="data-item" id="departure">{{data.departureCity}}</div>
+          @if (data.sourceCity && !data.sourceCompany) {
+            <div class="data-item" id="departure">{{data.sourceCity}}</div>
           }
-          @if (data.departureCity && data.departureCompany) {
-            <div class="data-item" id="departure">{{data.departureCity}} ({{data.departureCompany}})</div>
+          @if (data.sourceCity && data.sourceCompany) {
+            <div class="data-item" id="departure">{{data.sourceCity}} ({{data.sourceCompany}})</div>
           }
         </div>
         <div class="data-row">
@@ -31,16 +31,21 @@
         </div>
         <div class="data-row">
           <div class="data-label">Resterend</div>
-          <div class="data-item"><span>2d 13:24</span> / <span>{{data.distanceRemaining}} km</span>(02:16)</div>
+          @if (data.timeRemaining) {
+            <div class="data-item"><span>{{data.timeRemaining | timespan}}</span> / <span>{{data.distanceRemaining}} km </span>({{data.timeRemainingIrl | timespan}})</div>
+          }
+          @else {
+            <div class="data-item">-</div>
+          }
         </div>
         <div class="data-row">
           <div class="data-label">Volgend rustmoment</div>
-          @if (!data.restTimeRemaining) {
-<div class="data-item">-</div>
-}
           @if (data.restTimeRemaining) {
-<div class="data-item">{{data.restTimeRemaining | timespan}} ({{data.restTimeRemainingIrl | timespan}})</div>
-}
+            <div class="data-item">{{data.restTimeRemaining | timespan}} ({{data.restTimeRemainingIrl | timespan}})</div>
+          }
+          @else {
+            <div class="data-item">-</div>
+          }
         </div>
       </div>
     </div>
@@ -52,29 +57,38 @@
       <div class="card-body">
         <div class="data-row">
           <div class="data-label">Deadline</div>
-          @if (!data.jobTimeRemaining) {
-<div class="data-item">-</div>
-}
           @if (data.jobTimeRemaining) {
-<div class="data-item">{{data.jobTimeRemaining | timespan}} ({{data.jobTimeRemainingIrl | timespan}})</div>
-}
+            <div class="data-item">{{data.jobTimeRemaining | timespan}} ({{data.jobTimeRemainingIrl | timespan}})</div>
+          }
+          @else {
+            <div class="data-item">-</div>
+          }
         </div>
         <div class="data-row">
           <div class="data-label">Inkomen</div>
-          @if (!data.jobIncome) {
-            <div class="data-item" id="jobIncome">-</div>
-          }
           @if (data.jobIncome) {
             <div class="data-item" id="jobIncome">&euro; {{data.jobIncome | numbernl}}</div>
+          }
+          @else {
+            <div class="data-item" id="jobIncome">-</div>
           }
         </div>
         <div class="data-row">
           <div class="data-label">Lading</div>
-          @if (!data.jobCargoDescription) {
-            <div class="data-item">-</div>
+          @if (data.jobCargoName) {
+            <div class="data-item" id="jobCargoName">{{data.jobCargoName}} ({{data.jobCargoMass}} kg)</div>
           }
-          @if (data.jobCargoDescription) {
-            <div class="data-item">{{data.jobCargoDescription}}</div>
+          @else {
+            <div class="data-item" id="jobCargoName">-</div>
+          }
+        </div>
+        <div class="data-row">
+          <div class="data-label">Schade lading</div>
+          @if (data.jobCargoName) {
+            <div class="data-item" id="jobCargoDamage">{{data.jobCargoDamage}} %</div>
+          }
+          @else {
+            <div class="data-item" id="jobCargoDamage">-</div>
           }
         </div>
       </div>
@@ -89,33 +103,33 @@
           <div class="row">
             <div class="col-6">
               <div class="data-label">Motor</div>
-              <div class="data-item">1 %</div>
+              <div class="data-item">{{data.damageEngine}} %</div>
             </div>
             <div class="col-6">
               <div class="data-label">Transmissie</div>
-              <div class="data-item">1 %</div>
+              <div class="data-item">{{data.damageTransmission}} %</div>
             </div>
           </div>
 
           <div class="row">
             <div class="col-6">
               <div class="data-label">Cabine</div>
-              <div class="data-item">1 %</div>
+              <div class="data-item">{{data.damageCabin}} %</div>
             </div>
             <div class="col-6">
               <div class="data-label">Chassis</div>
-              <div class="data-item">1 %</div>
+              <div class="data-item">{{data.damageChassis}} %</div>
             </div>
           </div>
 
           <div class="row">
             <div class="col-6">
               <div class="data-label">Wielen</div>
-              <div class="data-item">1 %</div>
+              <div class="data-item">{{data.damageWheels}} %</div>
             </div>
-            <div class="col-6">
+            <div class="col-6" [ngClass]="{'hidden': !data.trailerAttached}">
               <div class="data-label">Trailer</div>
-              <div class="data-item">1 %</div>
+              <div class="data-item">{{data.damageTrailer}} %</div>
             </div>
           </div>
         </div>
@@ -127,33 +141,31 @@
   <div class="row">
     <div class="card col-12 dashboard-row">
       <div class="left-column col-4">
-        <img class="dashboard-light" id="low-beam" src="/assets/images/low-beam.svg" [ngClass]="data.lowBeamOn ? 'filter-green' : 'transparent'">
-        <img class="dashboard-light" id="high-beam" src="/assets/images/high-beam.svg"  [ngClass]="data.highBeamOn ? 'filter-blue' : 'transparent'">
-        <img class="dashboard-light" id="brake-warning" src="/assets/images/brake-warning.svg"  [ngClass]="data.parkingBrakeOn ? 'filter-red' : 'transparent'">
-        <img class="dashboard-light" id="battery-warning" src="/assets/images/battery.svg"  [ngClass]="data.batteryWarningOn ? 'filter-red' : 'transparent'">
-        <img class="dashboard-light" id="hazard" src="/assets/images/hazard.svg" [ngClass]="data.lowBeamOn ? 'filter-green' : 'transparent'">
-        <img class="dashboard-light" id="engine-coolant" src="/assets/images/engine-coolant.svg" [ngClass]="data.lowBeamOn ? 'filter-green' : 'transparent'">
-        <img class="dashboard-light" id="oil-temp" src="/assets/images/oil_temp.svg" [ngClass]="data.lowBeamOn ? 'filter-green' : 'transparent'">
+        <img class="dashboard-light" id="low-beam" src="/assets/images/low-beam.svg" [ngClass]="{'filter-green': data.lowBeamOn}">
+        <img class="dashboard-light" id="high-beam" src="/assets/images/high-beam.svg"  [ngClass]="{'filter-blue': data.highBeamOn}">
+        <img class="dashboard-light" id="brake-warning" src="/assets/images/brake-warning.svg" [ngClass]="{'filter-red': data.parkingBrakeOn}">
+        <img class="dashboard-light" id="battery-warning" src="/assets/images/battery.svg" [ngClass]="{'filter-red': data.batteryWarningOn}">
+        <!-- <img class="dashboard-light" id="hazard" src="/assets/images/hazard.svg" [ngClass]="data.lowBeamOn ? 'filter-green' : 'transparent'"> -->
+        <!-- <img class="dashboard-light" id="engine-coolant" src="/assets/images/engine-coolant.svg" [ngClass]="data.lowBeamOn ? 'filter-green' : 'transparent'"> -->
+        <!-- <img class="dashboard-light" id="oil-temp" src="/assets/images/oil_temp.svg" [ngClass]="{'filter-red': data.lowBeamOn}"> -->
       </div>
 
       <div class="center-column col-4">
-        <progress id="rpm" value="10" max="100"></progress>
+        <progress id="rpm" [value]="data.rpm" [max]="data.rpmMax"></progress>
         <div class="current-speed">{{data.speed}}</div>
         <div class="speed-unit">km/h</div>
         <div class="current-gear">{{data.gear | gear}}</div>
       </div>
 
       <div class="right-column col-4">
-        @if (!data.speedLimit) {
-          <div class="speed-limit">{{data.speedLimit}}</div>
-        }
-        <div class="icon-text-control">
-          <img class="dashboard-light" src="/assets/images/cruise-control.png">
-          <div>{{data.cruiseControlSpeed}} km/h</div>
-        </div>
+        <div class="speed-limit" [ngClass]="{'hidden': !data.speedLimit}">{{data.speedLimit}}</div>
         <div class="icon-text-control">
           <img class="dashboard-light" src="/assets/images/fuel.svg">
           <div id="fuelDistance">{{data.fuelDistance}} km</div>
+        </div>
+        <div class="icon-text-control" [ngClass]="{'hidden': !data.cruiseControlOn}">
+          <img class="dashboard-light" src="/assets/images/cruise-control.png">
+          <div>{{data.cruiseControlSpeed}} km/h</div>
         </div>
       </div>
     </div>
@@ -161,8 +173,13 @@
 
   <div class="row footer-row">
     <div class="card col-12">
-      <span id="truckName">Scania P500</span>
-      <span class="clock">14:32 (8:09)</span>
+      @if(data.truckName) {
+        <span id="truckName">{{data.truckName}}</span>
+      }
+      @else {
+        <span id="truckName">-</span>
+      }
+      <span class="clock">14:32 ({{currentTime | date: 'HH:mm'}})</span>
     </div>
   </div>
 </div>
