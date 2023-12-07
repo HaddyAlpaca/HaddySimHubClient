@@ -75,6 +75,14 @@
   border-color: yellow;
 }
 
+#rpm {
+  font-size: 5rem;
+}
+
+#speed {
+  font-size: 5rem;
+}
+
 .gear {
   text-align: center;
   font-size: 180px;
@@ -82,6 +90,11 @@
 
 .hidden {
   visibility: hidden;
+}
+
+#clutch {
+  width: 100%;
+  accent-color: royalblue;
 }
 
 #throttle {

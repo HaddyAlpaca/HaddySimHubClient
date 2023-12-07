@@ -1,7 +1,7 @@
 export class RaceData {
   sessionType = '';
   isTimedSession = false;
-  completedLaps = 0;
+  currentLap = 0;
   totalLaps = 0;
   sessionTimeRemaining = 0;
   position = 0;
@@ -20,7 +20,10 @@ export class RaceData {
   driverBehind = ''
   gapAhead = 0;
   driverAhead = '';
+  clutchPct = 0;
   throttlePct = 0;
   brakePct = 0;
   pitLimiterOn = false;
+  incidents = 0;
+  maxIncidents = 0;
 }

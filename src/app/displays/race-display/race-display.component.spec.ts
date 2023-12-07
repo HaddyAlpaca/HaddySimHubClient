@@ -36,7 +36,7 @@ describe('Race display component tests', () => {
     it('When session is a timed session, display only laps completed', async () => {
       patchData({
         isTimedSession: true,
-        completedLaps: 2
+        currentLap: 2
       });
 
       expect(await harness.getElementText('#laps')).toEqual('2');
@@ -45,7 +45,7 @@ describe('Race display component tests', () => {
     it('When session is not a timed session, display laps completed and total laps', async () => {
       patchData({
         isTimeSession: false,
-        completedLaps: 2,
+        currentLap: 2,
         totalLaps: 10
       });
 
