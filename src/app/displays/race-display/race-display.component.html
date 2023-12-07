@@ -1,4 +1,4 @@
-d<div class="container">
+<div class="container">
   <div class="row">
     <div class="col-6">
       <div class="label clock">{{currentTime | date: 'HH:mm'}}</div>
@@ -29,15 +29,22 @@ d<div class="container">
       <div class="group-border border-radius-bottom-left border-blue" [ngClass]="{'border-radius-top-left': !data.driverBehind}">
         <div class="label">Lap</div>
         @if(data.isTimedSession) {
-          <div id="laps">{{data.completedLaps}}</div>
+          <div id="laps">{{data.currentLap}}</div>
         }
         @else {
-          <div id="laps">{{data.completedLaps}}/{{data.totalLaps}}</div>
+          <div id="laps">{{data.currentLap}}/{{data.totalLaps}}</div>
         }
         <div class="label">Time remaining</div>
         <div id="sessionTimeRemaining">{{data.sessionTimeRemaining | timespan}}</div>
         <div class="label">Position</div>
         <div id="position">{{data.position}}/{{data.numberOfCars}}</div>
+        <div class="label">Incidents</div>
+        @if (data.maxIncidents === 0) {
+          <div id="incidents">{{data.incidents}}</div>
+        }
+        @else {
+          <div id="incidents">{{data.incidents}}/{{data.maxIncidents}}</div>
+        }
         <div class="label">Last laptime</div>
         <div id="lastLapTime">{{data.lastLapTime | laptime}}</div>
         <div class="label">Session best laptime</div>
@@ -59,6 +66,8 @@ d<div class="container">
         <div id="fuelLaps">{{data.fuelLaps | number: '1.1-1'}}</div>
         <div class="label">Air/Track</div>
         <div id="temps">{{data.airTemp | number: '1.1-1'}}&deg;C/{{data.trackTemp | number: '1.1-1'}}&deg;C</div>
+        <div class="label">Clutch</div>
+        <progress id="clutch" [value]="data.clutchPct" max="100"></progress>
         <div class="label">Throttle</div>
         <progress id="throttle" [value]="data.throttlePct" max="100"></progress>
         <div class="label">Brake</div>
