@@ -155,15 +155,15 @@ describe('Race display component tests', () => {
   });
 
   it('Position is displayed', async () => {
-    patchData({ position: 3, numberOfCars: 20 });
+    patchData({ position: 3 });
 
-    expect(await harness.getElementText('#position')).toEqual('3/20');
+    expect(await harness.getElementText('#position')).toEqual('3');
   });
 
-  it('Fuel laps are displayed', async () => {
-    patchData({ fuelLaps: 14.2 });
+  it('Fuel remaining is displayed', async () => {
+    patchData({ fuelRemaining: 14.2 });
 
-    expect(await harness.getElementText('#fuelLaps')).toEqual('14.2');
+    expect(await harness.getElementText('#fuelRemaining')).toEqual('14.2');
   });
 
   it('Remaining session time is displayed', async () => {

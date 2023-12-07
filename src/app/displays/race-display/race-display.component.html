@@ -37,7 +37,7 @@
         <div class="label">Time remaining</div>
         <div id="sessionTimeRemaining">{{data.sessionTimeRemaining | timespan}}</div>
         <div class="label">Position</div>
-        <div id="position">{{data.position}}/{{data.numberOfCars}}</div>
+        <div id="position">{{data.position}}</div>
         <div class="label">Incidents</div>
         @if (data.maxIncidents === 0) {
           <div id="incidents">{{data.incidents}}</div>
@@ -62,8 +62,8 @@
       <div class="group-border border-radius-bottom-right border-blue" [ngClass]="{'border-radius-top-right': !data.driverAhead}">
         <div class="label">Brake bias</div>
         <div id="brakeBias">{{data.brakeBias | number: '1.1-1'}}</div>
-        <div class="label">Fuel laps</div>
-        <div id="fuelLaps">{{data.fuelLaps | number: '1.1-1'}}</div>
+        <div class="label">Fuel remaining</div>
+        <div id="fuelRemaining">{{data.fuelRemaining | number: '1.1-1'}}</div>
         <div class="label">Air/Track</div>
         <div id="temps">{{data.airTemp | number: '1.1-1'}}&deg;C/{{data.trackTemp | number: '1.1-1'}}&deg;C</div>
         <div class="label">Clutch</div>
