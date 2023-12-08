@@ -121,22 +121,12 @@
 
 .pit-limiter {
   position: absolute;
-  top: 50%;
+  top: 10px;
   left: 50%;
-  transform: translate(-50%, -50%);
-  text-transform: capitalize;
+  transform: translateX(-50%);
   background-color: green;
   font-size: 62pt;
   color: white;
-  padding: 10px 45px 10px 45px;
-}
-
-.blink {
-  animation: blinker 1s linear infinite;
-}
-
-@keyframes blinker {
-  50% {
-    opacity: 0;
-  }
+  padding: 5px 45px 5px 45px;
+  border-radius: 15px;
 }
