@@ -25,4 +25,5 @@ export class RaceData {
   pitLimiterOn = false;
   incidents = 0;
   maxIncidents = 0;
+  flag: '' | 'yellow' | 'green' | 'blue' | 'white' | 'finish' | 'black' | 'black-orange' | 'red' = '';
 }

@@ -78,7 +78,10 @@
 </div>
 
 @if (data.pitLimiterOn) {
-  <div class="pit-limiter">
+  <div class="pit-limiter blink-text">
     Pit Limiter
   </div>
+}
+@else if (data.flag) {
+  <div class="flag blink" [ngClass]="data.flag"></div>
 }

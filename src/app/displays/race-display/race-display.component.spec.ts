@@ -341,6 +341,20 @@ describe('Race display component tests', () => {
     });
   });
 
+  describe('Flags', () => {
+    it('Flag is not shown when not set', async () => {
+      patchData({ flag: '' });
+
+      expect(await harness.hasElement('.flag')).toBeFalse();
+    });
+
+    it('Flag is shown when set', async () => {
+      patchData({ flag: 'yellow' });
+
+      expect(await harness.hasElement('.flag')).toBeTrue();
+    });
+  });
+
   const setupMockClockSerivce = () => {
     const service = jasmine.createSpyObj<ClockService>('clockService', ['getCurrentTime']);
     service.getCurrentTime.and.returnValue(of(new Date()));
