@@ -63,7 +63,7 @@
         <div class="label">Brake bias</div>
         <div id="brakeBias">{{data.brakeBias | number: '1.1-1'}}</div>
         <div class="label">Fuel remaining</div>
-        <div id="fuelRemaining">{{data.fuelRemaining | number: '1.1-1'}}</div>
+        <div id="fuelRemaining">{{data.fuelRemaining | number: '1.1-1'}} L</div>
         <div class="label">Air/Track</div>
         <div id="temps">{{data.airTemp | number: '1.1-1'}}&deg;C/{{data.trackTemp | number: '1.1-1'}}&deg;C</div>
         <div class="label">Clutch</div>
@@ -77,6 +77,8 @@
   </div>
 </div>
 
-<div class="pit-limiter blink" *ngIf="data.pitLimiterOn">
-  Pit Limiter
-</div>
+@if (data.pitLimiterOn) {
+  <div class="pit-limiter">
+    Pit Limiter
+  </div>
+}

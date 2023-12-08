@@ -163,7 +163,7 @@ describe('Race display component tests', () => {
   it('Fuel remaining is displayed', async () => {
     patchData({ fuelRemaining: 14.2 });
 
-    expect(await harness.getElementText('#fuelRemaining')).toEqual('14.2');
+    expect(await harness.getElementText('#fuelRemaining')).toEqual('14.2 L');
   });
 
   it('Remaining session time is displayed', async () => {
@@ -294,6 +294,13 @@ describe('Race display component tests', () => {
     });
   });
 
+  it('Clutch percentage is displayed', async () => {
+    patchData({ clutchPct: 18 });
+
+      expect(await harness.getValue('#clutch')).toEqual('18');
+  });
+
+
   it('Throttle percentage is displayed', async () => {
     patchData({ throttlePct: 26 });
 
@@ -318,6 +325,20 @@ describe('Race display component tests', () => {
 
       expect(await harness.hasElement('.pit-limiter')).toBeTrue();
     })
+  });
+
+  describe('Incidents', () => {
+    it('Without max incidents only incidents are shown', async () => {
+      patchData({ incidents: 5 });
+
+      expect(await harness.getElementText('#incidents')).toEqual('5');
+    });
+
+    it('Max incidents are shown when set', async () => {
+      patchData({ incidents: 3, maxIncidents: 17 });
+
+      expect(await harness.getElementText('#incidents')).toEqual('3/17');
+    });
   });
 
   const setupMockClockSerivce = () => {
