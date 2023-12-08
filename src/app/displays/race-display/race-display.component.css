@@ -124,9 +124,81 @@
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: green;
+  background-color: orange;
   font-size: 62pt;
-  color: white;
+  color: black;
   padding: 5px 45px 5px 45px;
   border-radius: 15px;
+}
+
+.flag {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 33%;
+  height: 135px;
+  transform: translateX(-50%);
+  border-radius: 15px;
+}
+
+.flag.yellow {
+  background-color: yellow;
+}
+
+.flag.green {
+  background-color: green;
+}
+
+.flag.white {
+  background-color: white;
+}
+
+.flag.blue {
+  background-color: blue;
+}
+
+.flag.red {
+  background-color: red;
+}
+
+.flag.black {
+  background-color: black;
+  border: 1px solid white;
+}
+
+.flag.black-orange {
+  background-color: black;
+  border: 1px solid white;
+}
+
+.flag.black-orange::after {
+  content: '';
+  border-radius: 50%;
+  background-color: orange;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 75%;
+  aspect-ratio: 1;
+}
+
+.blink {
+  animation: blinker 2s linear infinite;
+}
+
+.blink-text {
+  animation: text-blinker 2s linear infinite;
+}
+
+@keyframes text-blinker {
+  50% {
+    color: transparent;
+  }
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
 }
