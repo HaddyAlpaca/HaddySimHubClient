@@ -185,16 +185,16 @@ describe('Race display component tests', () => {
       expect(await harness.elementHasClass('#deltaTime', 'text-green')).toBeTrue();
     });
 
-    it('Delta time is green when > 0', async () => {
+    it('Delta time is red when > 0', async () => {
       patchData({ deltaTime: 0.234 });
 
-      expect(await harness.elementHasClass('#deltaTime', 'text-green')).toBeTrue();
+      expect(await harness.elementHasClass('#deltaTime', 'text-red')).toBeTrue();
     });
 
     it('Delta time is green when < 0', async () => {
       patchData({ deltaTime: -0.234 });
 
-      expect(await harness.elementHasClass('#deltaTime', 'text-red')).toBeTrue();
+      expect(await harness.elementHasClass('#deltaTime', 'text-green')).toBeTrue();
     });
   });
 
@@ -297,20 +297,20 @@ describe('Race display component tests', () => {
   it('Clutch percentage is displayed', async () => {
     patchData({ clutchPct: 18 });
 
-      expect(await harness.getValue('#clutch')).toEqual('18');
+    expect(await harness.getValue('#clutch')).toEqual('18');
   });
 
 
   it('Throttle percentage is displayed', async () => {
     patchData({ throttlePct: 26 });
 
-      expect(await harness.getValue('#throttle')).toEqual('26');
+    expect(await harness.getValue('#throttle')).toEqual('26');
   });
 
   it('Brake percentage is displayed', async () => {
-      patchData({ brakePct: 43 });
+    patchData({ brakePct: 43 });
 
-      expect(await harness.getValue('#brake')).toEqual('43');
+    expect(await harness.getValue('#brake')).toEqual('43');
   });
 
   describe('Pit limiter', () => {
