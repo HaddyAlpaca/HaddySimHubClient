@@ -14,8 +14,8 @@ import { GameDataService } from 'src/app/services/game-data.service';
     imports: [CommonModule]
 })
 export class RawDataDisplayComponent implements OnInit {
-  private _data: {[key: string]: number | string | boolean } = {};
-  get data(): {[key: string]: number | string | boolean } {
+  private _data: {[key: string]: number | string | boolean | object } = {};
+  get data(): {[key: string]: number | string | boolean | object } {
     return this._data;
   }
 
@@ -24,7 +24,7 @@ export class RawDataDisplayComponent implements OnInit {
 
   ngOnInit(): void {
     this._gameDataSerivce.rawData$.pipe(
-      tap(data =>this._data = data! as {[key: string]: number | string | boolean }),
+      tap(data =>this._data = data! as {[key: string]: number | string | boolean | object }),
       untilDestroyed(this)
     ).subscribe();
   }
