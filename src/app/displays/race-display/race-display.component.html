@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="col-4">
-      <div class="delta-time" id="deltaTime" [ngClass]="{'text-green': data.deltaTime >= 0, 'text-red': data.deltaTime < 0}">{{data.deltaTime | deltatime}}</div>
+      <div class="delta-time" id="deltaTime" [ngClass]="{'text-green': data.deltaTime <= 0, 'text-red': data.deltaTime > 0}">{{data.deltaTime | deltatime}}</div>
     </div>
     <div class="col-4">
       <div class="opponent-delta border-radius-top-right group-border border-blue" id="driverAheadBlock" [ngClass]="{'hidden': !data.driverAhead}">
