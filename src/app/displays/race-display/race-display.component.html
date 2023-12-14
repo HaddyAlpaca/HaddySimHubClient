@@ -28,7 +28,7 @@
     <div class="col-4">
       <div class="group-border border-radius-bottom-left border-blue" [ngClass]="{'border-radius-top-left': !data.driverBehind}">
         <div class="label">Lap</div>
-        @if(data.isTimedSession) {
+        @if(data.isTimedSession || data.totalLaps === 0) {
           <div id="laps">{{data.currentLap}}</div>
         }
         @else {
