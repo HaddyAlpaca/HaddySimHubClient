@@ -297,20 +297,20 @@ describe('Race display component tests', () => {
   it('Clutch percentage is displayed', async () => {
     patchData({ clutchPct: 18 });
 
-    expect(await harness.getValue('#clutch')).toEqual('18');
+    expect(await harness.getProgressBarValue('#clutch')).toContain('18%');
   });
 
 
   it('Throttle percentage is displayed', async () => {
     patchData({ throttlePct: 26 });
 
-    expect(await harness.getValue('#throttle')).toEqual('26');
+    expect(await harness.getProgressBarValue('#throttle')).toContain('26%');
   });
 
   it('Brake percentage is displayed', async () => {
     patchData({ brakePct: 43 });
 
-    expect(await harness.getValue('#brake')).toEqual('43');
+    expect(await harness.getProgressBarValue('#brake')).toContain('43%');
   });
 
   describe('Pit limiter', () => {

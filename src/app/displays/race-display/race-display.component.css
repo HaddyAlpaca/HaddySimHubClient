@@ -93,18 +93,15 @@
 }
 
 #clutch {
-  width: 100%;
-  accent-color: royalblue;
+  background-color: royalblue;
 }
 
 #throttle {
-  width: 100%;
-  accent-color: green;
+  background-color: green;
 }
 
 #brake {
-  width: 100%;
-  accent-color: red;
+  background-color: red;
 }
 
 .text-red {
@@ -117,6 +114,12 @@
 
 .text-yellow {
   color: yellow;
+}
+
+.progress {
+  height: 25px;
+  margin-top: 18px;
+  margin-bottom: 18px;
 }
 
 .pit-limiter {
