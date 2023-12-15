@@ -23,4 +23,10 @@ export class ComponentHarnessBase extends ComponentHarness {
     const value = await elm.getAttribute('value');
     return value;
   }
+
+  public async getProgressBarValue(selector: string): Promise<string | null> {
+    const elm = await this.locatorFor(selector)();
+    const value = await elm.getAttribute('style');
+    return value;
+  }
 }

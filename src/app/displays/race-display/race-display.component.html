@@ -67,11 +67,17 @@
         <div class="label">Air/Track</div>
         <div id="temps">{{data.airTemp | number: '1.1-1'}}&deg;C/{{data.trackTemp | number: '1.1-1'}}&deg;C</div>
         <div class="label">Clutch</div>
-        <progress id="clutch" [value]="data.clutchPct" max="100"></progress>
+        <div class="progress">
+          <div id="clutch" class="progress-bar" [style.width.%]="data.clutchPct"></div>
+        </div>
         <div class="label">Throttle</div>
-        <progress id="throttle" [value]="data.throttlePct" max="100"></progress>
+        <div class="progress">
+          <div id="throttle" class="progress-bar" [style.width.%]="data.throttlePct"></div>
+        </div>
         <div class="label">Brake</div>
-        <progress id="brake" [value]="data.brakePct" max="100"></progress>
+        <div class="progress">
+          <div id="brake" class="progress-bar" [style.width.%]="data.brakePct"></div>
+        </div>
       </div>
     </div>
   </div>
