@@ -1,7 +1,7 @@
 .container {
   max-width: unset;
   color: white;
-  font-size: 32pt;
+  font-size: 3vw;
   text-align: right;
 }
 
@@ -11,7 +11,7 @@
 
 .label {
   text-transform: uppercase;
-  font-size: 16pt;
+  font-size: 1.5vw;
   text-align: right;
   color: gold;
 }
@@ -75,17 +75,17 @@
   border-color: yellow;
 }
 
-#rpm {
-  font-size: 5rem;
+#deltaTime {
+  font-size: 4vw;
 }
 
-#speed {
-  font-size: 5rem;
+#rpm, #speed {
+  font-size: 6vw;
 }
 
 .gear {
   text-align: center;
-  font-size: 180px;
+  font-size: 12vw;
 }
 
 .hidden {
