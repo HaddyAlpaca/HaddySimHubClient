@@ -141,7 +141,7 @@
   <div class="row">
     <div class="card col-12 dashboard-row">
       <div class="left-column col-4">
-        <img class="dashboard-light" id="low-beam" src="/assets/images/low-beam.svg" [ngClass]="{'filter-green': data.lowBeamOn || true}">
+        <img class="dashboard-light" id="low-beam" src="/assets/images/low-beam.svg" [ngClass]="{'filter-green': data.lowBeamOn}">
         <img class="dashboard-light" id="high-beam" src="/assets/images/high-beam.svg"  [ngClass]="{'filter-blue': data.highBeamOn}">
         <img class="dashboard-light" id="brake-warning" src="/assets/images/brake-warning.svg" [ngClass]="{'filter-red': data.parkingBrakeOn}">
         <img class="dashboard-light" id="battery-warning" src="/assets/images/battery.svg" [ngClass]="{'filter-red': data.batteryWarningOn}">

@@ -117,10 +117,16 @@ describe('Race display component tests', () => {
     });
   });
 
-  it('Air and track temp are displayed', async () => {
-    patchData({ airTemp: 25.3, trackTemp: 32 });
+  it('Air temp is displayed', async () => {
+    patchData({ airTemp: 25.3 });
 
-    expect(await harness.getElementText('#temps')).toEqual('25.3°C/32.0°C');
+    expect(await harness.getElementText('#air-temp')).toEqual('25.3°C');
+  });
+
+  it('Track temp are displayed', async () => {
+    patchData({ trackTemp: 32 });
+
+    expect(await harness.getElementText('#track-temp')).toEqual('32.0°C');
   });
 
   describe('Last laptime tests', () => {
@@ -172,29 +178,29 @@ describe('Race display component tests', () => {
     expect(await harness.getElementText('#sessionTimeRemaining')).toEqual('01:12:32');
   });
 
-  describe('Delta time', () => {
+  describe('Best lap delta time', () => {
     it('Delta time is displayed', async () => {
-      patchData({ deltaTime: 0.231 });
+      patchData({ bestLapTimeDelta: 0.231 });
 
-      expect(await harness.getElementText('#deltaTime')).toEqual('+0.231');
+      expect(await harness.getElementText('#bestLapTimeDelta')).toEqual('+0.231');
     });
 
     it('Delta time is green when 0', async () => {
-      patchData({ deltaTime: 0 });
+      patchData({ bestLapTimeDelta: 0 });
 
-      expect(await harness.elementHasClass('#deltaTime', 'text-green')).toBeTrue();
+      expect(await harness.elementHasClass('#bestLapTimeDelta', 'text-green')).toBeTrue();
     });
 
     it('Delta time is red when > 0', async () => {
-      patchData({ deltaTime: 0.234 });
+      patchData({ bestLapTimeDelta: 0.234 });
 
-      expect(await harness.elementHasClass('#deltaTime', 'text-red')).toBeTrue();
+      expect(await harness.elementHasClass('#bestLapTimeDelta', 'text-red')).toBeTrue();
     });
 
     it('Delta time is green when < 0', async () => {
-      patchData({ deltaTime: -0.234 });
+      patchData({ bestLapTimeDelta: -0.234 });
 
-      expect(await harness.elementHasClass('#deltaTime', 'text-green')).toBeTrue();
+      expect(await harness.elementHasClass('#bestLapTimeDelta', 'text-green')).toBeTrue();
     });
   });
 
@@ -292,25 +298,6 @@ describe('Race display component tests', () => {
       expect(await harness.elementHasClass('#gapAhead', 'text-green')).toBeFalse();
       expect(await harness.elementHasClass('#gapAhead', 'text-yellow')).toBeFalse();
     });
-  });
-
-  it('Clutch percentage is displayed', async () => {
-    patchData({ clutchPct: 18 });
-
-    expect(await harness.getProgressBarValue('#clutch')).toContain('18%');
-  });
-
-
-  it('Throttle percentage is displayed', async () => {
-    patchData({ throttlePct: 26 });
-
-    expect(await harness.getProgressBarValue('#throttle')).toContain('26%');
-  });
-
-  it('Brake percentage is displayed', async () => {
-    patchData({ brakePct: 43 });
-
-    expect(await harness.getProgressBarValue('#brake')).toContain('43%');
   });
 
   describe('Pit limiter', () => {

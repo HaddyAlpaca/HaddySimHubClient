@@ -9,46 +9,44 @@
   </div>
   <div class="row">
     <div class="col-4">
-      <div class="opponent-delta border-radius-top-left group-border border-blue" id="driverBehindBlock" [ngClass]="{'hidden': !data.driverBehind}">
-        <div class="delta-time" id="gapBehind" [ngClass]="{'text-green': gapBehindDelta > 0, 'text-yellow': gapBehindDelta < 0}">{{data.gapBehind | deltatime: false}}</div>
-        <div class="label driver-name" id="driverBehind">{{data.driverBehind}}</div>
-      </div>
-    </div>
-    <div class="col-4">
-      <div class="delta-time" id="deltaTime" [ngClass]="{'text-green': data.deltaTime <= 0, 'text-red': data.deltaTime > 0}">{{data.deltaTime | deltatime}}</div>
-    </div>
-    <div class="col-4">
-      <div class="opponent-delta border-radius-top-right group-border border-blue" id="driverAheadBlock" [ngClass]="{'hidden': !data.driverAhead}">
-        <div class="delta-time" id="gapAhead" [ngClass]="{'text-green': gapAheadDelta < 0, 'text-yellow': gapAheadDelta > 0}">{{data.gapAhead | deltatime: false}}</div>
-        <div class="label driver-name" id="driverAhead">{{data.driverAhead}}</div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-4">
-      <div class="group-border border-radius-bottom-left border-blue" [ngClass]="{'border-radius-top-left': !data.driverBehind}">
-        <div class="label">Lap</div>
-        @if(data.isTimedSession || data.totalLaps === 0) {
-          <div id="laps">{{data.currentLap}}</div>
-        }
-        @else {
-          <div id="laps">{{data.currentLap}}/{{data.totalLaps}}</div>
-        }
-        <div class="label">Time remaining</div>
-        <div id="sessionTimeRemaining">{{data.sessionTimeRemaining | timespan}}</div>
-        <div class="label">Position</div>
-        <div id="position">{{data.position}}</div>
-        <div class="label">Incidents</div>
-        @if (data.maxIncidents === 0) {
-          <div id="incidents">{{data.incidents}}</div>
-        }
-        @else {
-          <div id="incidents">{{data.incidents}}/{{data.maxIncidents}}</div>
-        }
-        <div class="label">Last laptime</div>
-        <div id="lastLapTime">{{data.lastLapTime | laptime}}</div>
-        <div class="label">Session best laptime</div>
-        <div class="best-laptime" id="bestLapTime">{{data.bestLapTime | laptime}}</div>
+      <div class="group-border border-blue">
+        <div class="row">
+          <div class="col-6">
+            <div class="label">Position</div>
+            <div id="position">{{data.position}}</div>
+          </div>
+          <div class="col-6">
+            <div class="label">Lap</div>
+            @if(data.totalLaps === 0) {
+              <div id="laps">{{data.currentLap}}</div>
+            }
+            @else {
+              <div id="laps">{{data.currentLap}}/{{data.totalLaps}}</div>
+            }
+          </div>
+        </div>
+        <div class="label">Current laptime</div>
+        <div id="currentLapTime">{{data.currentLapTime | laptime}}</div>
+        <div class="row">
+          <div class="col-6">
+            <div class="label">Last laptime</div>
+            <div id="lastLapTime">{{data.lastLapTime | laptime}}</div>
+          </div>
+          <div class="col-6">
+            <div class="label">Delta</div>
+            <div id="lastLapTimeDelta" [ngClass]="{'text-green': data.lastLapTimeDelta < 0, 'text-red': data.lastLapTimeDelta > 0}">{{data.lastLapTimeDelta | deltatime}}</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="label">Best laptime</div>
+            <div class="best-laptime" id="bestLapTime">{{data.bestLapTime | laptime}}</div>
+          </div>
+          <div class="col-6">
+            <div class="label">Delta</div>
+            <div id="bestLapTimeDelta" [ngClass]="{'text-green': data.bestLapTimeDelta < 0, 'text-red': data.bestLapTimeDelta > 0}">{{data.bestLapTimeDelta | deltatime}}</div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="col-4 group-border border-yellow">
@@ -58,26 +56,58 @@
       <div class="text-center" id="speed">{{data.speed}}</div>
       <div class="label text-center">Speed</div>
     </div>
-    <div class="col-4">
-      <div class="group-border border-radius-bottom-right border-blue" [ngClass]="{'border-radius-top-right': !data.driverAhead}">
+    <div class="col-4" style="height: 100%;">
+      <div class="group-border border-blue">
         <div class="label">Brake bias</div>
         <div id="brakeBias">{{data.brakeBias | number: '1.1-1'}}</div>
         <div class="label">Fuel remaining</div>
         <div id="fuelRemaining">{{data.fuelRemaining | number: '1.1-1'}} L</div>
-        <div class="label">Air/Track</div>
-        <div id="temps">{{data.airTemp | number: '1.1-1'}}&deg;C/{{data.trackTemp | number: '1.1-1'}}&deg;C</div>
-        <div class="label">Clutch</div>
-        <div class="progress">
-          <div id="clutch" class="progress-bar" [style.width.%]="data.clutchPct"></div>
-        </div>
-        <div class="label">Throttle</div>
-        <div class="progress">
-          <div id="throttle" class="progress-bar" [style.width.%]="data.throttlePct"></div>
-        </div>
-        <div class="label">Brake</div>
-        <div class="progress">
-          <div id="brake" class="progress-bar" [style.width.%]="data.brakePct"></div>
-        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="label">Air</div>
+            <div id="air-temp">{{data.airTemp | number: '1.1-1'}}&deg;C</div>
+          </div>
+          <div class="col-6">
+            <div class="label">Track</div>
+            <div id="track-temp">{{data.trackTemp | number: '1.1-1'}}&deg;C</div>
+          </div>
+        <div class="label">Incidents</div>
+        @if (data.maxIncidents) {
+          <div id="incidents">{{data.incidents}}/{{data.maxIncidents}}</div>
+        }
+        @else {
+          <div id="incidents">{{data.incidents}}</div>
+        }
+        <div class="label" [class.hidden]="!data.IsLimitedTime">Time remaining</div>
+        <div id="sessionTimeRemaining" [class.hidden]="!data.IsLimitedTime">{{data.sessionTimeRemaining | timespan}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="padding-right: 0;">
+    <div class="col-6">
+      <div class="opponent-delta group-border border-blue" id="driverBehindBlock">
+        <div class="label">Driver behind</div>
+        @if (data.driverBehindName) {
+          <div class="delta-time" id="gapBehind" [ngClass]="{'text-green': gapBehindDelta > 0, 'text-yellow': gapBehindDelta < 0}">{{data.gapBehind | deltatime: false}}</div>
+          <div class="label driver-name" id="driverBehind">{{data.driverBehindName}}<span class="driver-class">B 4.6</span><span class="driver-irating">1.7k</span></div>
+        }
+        @else {
+          <div class="delta-time" id="gapBehind">&nbsp;</div>
+          <div class="label driver-name" id="driverBehind">&nbsp;</div>
+        }
+      </div>
+    </div>
+    <div class="col-6" style="padding-right: 0;">
+      <div class="opponent-delta group-border border-blue" id="driverAheadBlock">
+        <div class="label">Driver ahead</div>
+        @if (data.driverAheadName) {
+          <div class="delta-time" id="gapAhead" [ngClass]="{'text-green': gapAheadDelta < 0, 'text-yellow': gapAheadDelta > 0}">{{data.gapAhead | deltatime: false}}</div>
+          <div class="label driver-name" id="driverAhead">{{data.driverAheadName}}<span class="driver-class">B 4.6</span><span class="driver-irating">1.7k</span></div>
+        }
+        @else {
+          <div class="delta-time" id="gapAhead">&nbsp;</div>
+          <div class="label driver-name" id="driverAhead">&nbsp;</div>
+        }
       </div>
     </div>
   </div>
@@ -94,3 +124,4 @@
 @else if (data.flag) {
   <div class="flag blink" [ngClass]="data.flag"></div>
 }
+

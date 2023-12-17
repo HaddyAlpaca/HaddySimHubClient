@@ -39,7 +39,22 @@
 
 .driver-name {
   color: yellowgreen;
-  text-align: center;
+  /* text-align: center; */
+}
+
+.driver-irating {
+  color: black;
+  background-color: white;
+  border-radius: 5px;
+  padding: 0px 5px 0px 5px;
+  margin-left: 10px;
+}
+
+.driver-class {
+  border-radius: 5px;
+  background-color: green;
+  padding: 0px 5px 0px 5px;
+  margin-left: 20px;
 }
 
 .opponent-delta {
@@ -49,22 +64,8 @@
 .group-border {
   border: white 4px solid;
   padding: 10px 20px 10px 20px;
-}
-
-.border-radius-top-right {
-  border-top-right-radius: 20px;
-}
-
-.border-radius-top-left {
-  border-top-left-radius: 20px;
-}
-
-.border-radius-bottom-right {
-  border-bottom-right-radius: 20px;
-}
-
-.border-radius-bottom-left {
-  border-bottom-left-radius: 20px;
+  border-radius: 20px;
+  height: 100%;
 }
 
 .border-blue {
@@ -80,12 +81,12 @@
 }
 
 #rpm, #speed {
-  font-size: 6vw;
+  font-size: 5vw;
 }
 
 .gear {
   text-align: center;
-  font-size: 12vw;
+  font-size: 10vw;
 }
 
 .hidden {
@@ -124,9 +125,9 @@
 
 .pit-limiter {
   position: absolute;
-  top: 10px;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   background-color: orange;
   font-size: 62pt;
   color: black;
@@ -136,9 +137,9 @@
 
 .flag {
   position: absolute;
-  top: 10px;
+  bottom: 10px;
   left: 50%;
-  width: 33%;
+  width: 100%;
   height: 135px;
   transform: translateX(-50%);
   border-radius: 15px;
@@ -192,6 +193,10 @@
 
 .blink-text {
   animation: text-blinker 2s linear infinite;
+}
+
+.opponent-delta .label {
+  text-align: center;
 }
 
 @keyframes text-blinker {

@@ -1,6 +1,7 @@
 export class RaceData {
   sessionType = '';
-  isTimedSession = false;
+  IsLimitedTime = false;
+  isLimitedSessionLaps = false;
   currentLap = 0;
   totalLaps = 0;
   sessionTimeRemaining = 0;
@@ -12,13 +13,15 @@ export class RaceData {
   airTemp = 0;
   fuelRemaining = 0;
   brakeBias = 0;
+  currentLapTime = 0;
   lastLapTime = 0;
+  lastLapTimeDelta = 0;
   bestLapTime = 0;
-  deltaTime = 0;
+  bestLapTimeDelta = 0;
   gapBehind = 0;
-  driverBehind = ''
+  driverBehindName = ''
   gapAhead = 0;
-  driverAhead = '';
+  driverAheadName = '';
   clutchPct = 0;
   throttlePct = 0;
   brakePct = 0;
