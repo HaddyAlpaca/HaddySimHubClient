@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { RaceData } from './race-data';
 import { ClockService } from 'src/app/services/clock.service';
@@ -20,7 +20,7 @@ import { tap } from 'rxjs';
   imports: [CommonModule, DeltaTimePipe, GearPipe, LapTimePipe, TimespanPipe, InputsTraceComponent]
 })
 export class RaceDisplayComponent implements OnInit {
-  @ViewChild(InputsTraceComponent) private _inputsTrace!: InputsTraceComponent;
+  // @ViewChild(InputsTraceComponent) private _inputsTrace!: InputsTraceComponent;
 
   private _lastGapBehind = 0;
   private _lastGapAhead = 0;
@@ -62,13 +62,13 @@ export class RaceDisplayComponent implements OnInit {
         this._lastGapAhead = data.gapAhead;
         this._data = data;
 
-        //Update inputs chart
-        if (this._inputsTrace) {
-          this._inputsTrace.addPoint({
-            brake: data.brakePct,
-            throttle: data.throttlePct
-          });
-        }
+        // Update inputs chart
+        // if (this._inputsTrace) {
+        //   this._inputsTrace.addPoint({
+        //     brake: data.brakePct,
+        //     throttle: data.throttlePct
+        //   });
+        // }
       }),
       untilDestroyed(this)
     ).subscribe();
