@@ -34,4 +34,7 @@ export class TruckData {
   parkingBrakeOn = false;
   batteryWarningOn = false;
   truckName = '';
+  hazardOn = false;
+  engineCoolantWarningOn = false;
+  oilTempWarningOn = false;
 }

@@ -145,9 +145,9 @@
         <img class="dashboard-light" id="high-beam" src="/assets/images/high-beam.svg"  [ngClass]="{'filter-blue': data.highBeamOn}">
         <img class="dashboard-light" id="brake-warning" src="/assets/images/brake-warning.svg" [ngClass]="{'filter-red': data.parkingBrakeOn}">
         <img class="dashboard-light" id="battery-warning" src="/assets/images/battery.svg" [ngClass]="{'filter-red': data.batteryWarningOn}">
-        <!-- <img class="dashboard-light" id="hazard" src="/assets/images/hazard.svg" [ngClass]="data.lowBeamOn ? 'filter-green' : 'transparent'"> -->
-        <!-- <img class="dashboard-light" id="engine-coolant" src="/assets/images/engine-coolant.svg" [ngClass]="data.lowBeamOn ? 'filter-green' : 'transparent'"> -->
-        <!-- <img class="dashboard-light" id="oil-temp" src="/assets/images/oil_temp.svg" [ngClass]="{'filter-red': data.lowBeamOn}"> -->
+        <img class="dashboard-light" id="hazard" src="/assets/images/hazard.svg" [ngClass]="data.hazardOn ? 'filter-green' : 'transparent'">
+        <img class="dashboard-light" id="engine-coolant" src="/assets/images/engine-coolant.svg" [ngClass]="data.engineCoolantWarningOn ? 'filter-green' : 'transparent'">
+        <img class="dashboard-light" id="oil-temp" src="/assets/images/oil_temp.svg" [ngClass]="{'filter-red': data.oilTempWarningOn}">
       </div>
 
       <div class="center-column col-4">
@@ -177,7 +177,7 @@
         <span id="truckName">{{data.truckName}}</span>
       }
       @else {
-        <span id="truckName">-</span>
+        <span id="truckName">&nbsp;</span>
       }
       <span class="clock">14:32 ({{currentTime | date: 'HH:mm'}})</span>
     </div>
