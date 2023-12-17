@@ -141,13 +141,13 @@
   <div class="row">
     <div class="card col-12 dashboard-row">
       <div class="left-column col-4">
-        <img class="dashboard-light" id="low-beam" src="/assets/images/low-beam.svg" [ngClass]="{'filter-green': data.lowBeamOn}">
+        <img class="dashboard-light" id="low-beam" src="/assets/images/low-beam.svg" [ngClass]="{'filter-green': data.lowBeamOn || true}">
         <img class="dashboard-light" id="high-beam" src="/assets/images/high-beam.svg"  [ngClass]="{'filter-blue': data.highBeamOn}">
         <img class="dashboard-light" id="brake-warning" src="/assets/images/brake-warning.svg" [ngClass]="{'filter-red': data.parkingBrakeOn}">
         <img class="dashboard-light" id="battery-warning" src="/assets/images/battery.svg" [ngClass]="{'filter-red': data.batteryWarningOn}">
-        <img class="dashboard-light" id="hazard" src="/assets/images/hazard.svg" [ngClass]="data.hazardOn ? 'filter-green' : 'transparent'">
-        <img class="dashboard-light" id="engine-coolant" src="/assets/images/engine-coolant.svg" [ngClass]="data.engineCoolantWarningOn ? 'filter-green' : 'transparent'">
-        <img class="dashboard-light" id="oil-temp" src="/assets/images/oil_temp.svg" [ngClass]="{'filter-red': data.oilTempWarningOn}">
+        <img class="dashboard-light" id="hazard-lights" src="/assets/images/hazard.svg" [ngClass]="{'filter-orange': data.hazardLightsOn}">
+        <img class="dashboard-light" id="engine-water-temp-warning" src="/assets/images/engine-coolant.svg" [ngClass]="{'filter-red': data.engineWaterTempWarningOn }">
+        <img class="dashboard-light" id="oil-pressure-warning" src="/assets/images/oil-can.svg" [ngClass]="{'filter-red': data.oilPressureWarningOn}">
       </div>
 
       <div class="center-column col-4">
@@ -160,7 +160,7 @@
       <div class="right-column col-4">
         <div class="speed-limit" [ngClass]="{'hidden': !data.speedLimit}">{{data.speedLimit}}</div>
         <div class="icon-text-control">
-          <img class="dashboard-light" src="/assets/images/fuel.svg">
+          <img class="dashboard-light filter-white" src="/assets/images/fuel.svg" [ngClass]="{'filter-orange': data.fuelWarningOn}">
           <div id="fuelDistance">{{data.fuelDistance}} km</div>
         </div>
         <div class="icon-text-control" [ngClass]="{'hidden': !data.cruiseControlOn}">
