@@ -38,4 +38,6 @@ export class TruckData {
   engineWaterTempWarningOn = false;
   oilPressureWarningOn = false;
   fuelWarningOn = false;
+  blinkerLeftOn = false;
+  blinkerRightOn = false;
 }
