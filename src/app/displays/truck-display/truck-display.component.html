@@ -146,6 +146,8 @@
         <img class="dashboard-light" id="brake-warning" src="/assets/images/brake-warning.svg" [ngClass]="{'filter-red': data.parkingBrakeOn}">
         <img class="dashboard-light" id="battery-warning" src="/assets/images/battery.svg" [ngClass]="{'filter-red': data.batteryWarningOn}">
         <img class="dashboard-light" id="hazard-lights" src="/assets/images/hazard.svg" [ngClass]="{'filter-orange': data.hazardLightsOn}">
+        <img class="dashboard-light" id="indicator-left" src="/assets/images/arrow-left.svg" [ngClass]="{'filter-green': data.blinkerLeftOn}">
+        <img class="dashboard-light" id="indicator-right" src="/assets/images/arrow-right.svg" [ngClass]="{'filter-green': data.blinkerRightOn}">
         <img class="dashboard-light" id="engine-water-temp-warning" src="/assets/images/engine-coolant.svg" [ngClass]="{'filter-red': data.engineWaterTempWarningOn }">
         <img class="dashboard-light" id="oil-pressure-warning" src="/assets/images/oil-can.svg" [ngClass]="{'filter-red': data.oilPressureWarningOn}">
       </div>
