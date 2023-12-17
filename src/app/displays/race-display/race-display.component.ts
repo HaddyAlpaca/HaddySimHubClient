@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { tap } from 'rxjs';
 import { RaceData } from './race-data';
 import { ClockService } from 'src/app/services/clock.service';
 import { GameDataService } from 'src/app/services/game-data.service';
@@ -9,6 +8,8 @@ import { DeltaTimePipe } from './pipes/delta-time/delta-time.pipe';
 import { GearPipe } from './pipes/gear/gear.pipe';
 import { LapTimePipe } from './pipes/laptime/laptime.pipe';
 import { TimespanPipe } from './pipes/timespan/timespan.pipe';
+import { InputsTraceComponent } from './inputs-trace.component';
+import { tap } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -16,9 +17,11 @@ import { TimespanPipe } from './pipes/timespan/timespan.pipe';
   templateUrl: 'race-display.component.html',
   styleUrls: ['race-display.component.css'],
   standalone: true,
-  imports: [CommonModule, DeltaTimePipe, GearPipe, LapTimePipe, TimespanPipe]
+  imports: [CommonModule, DeltaTimePipe, GearPipe, LapTimePipe, TimespanPipe, InputsTraceComponent]
 })
 export class RaceDisplayComponent implements OnInit {
+  @ViewChild(InputsTraceComponent) private _inputsTrace!: InputsTraceComponent;
+
   private _lastGapBehind = 0;
   private _lastGapAhead = 0;
 
@@ -50,7 +53,6 @@ export class RaceDisplayComponent implements OnInit {
       tap((time) => this._currentTime = time)
     ).subscribe();
   }
-
   ngOnInit(): void {
     this._gameDataService.raceData$.pipe(
       tap(data => {
@@ -59,6 +61,14 @@ export class RaceDisplayComponent implements OnInit {
         this._gapAheadDelta = data.gapAhead - this._lastGapAhead;
         this._lastGapAhead = data.gapAhead;
         this._data = data;
+
+        //Update inputs chart
+        if (this._inputsTrace) {
+          this._inputsTrace.addPoint({
+            brake: data.brakePct,
+            throttle: data.throttlePct
+          });
+        }
       }),
       untilDestroyed(this)
     ).subscribe();
