@@ -7,7 +7,7 @@
       <div class="label sessionType" id="sessionType">{{data.sessionType}}</div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" style="margin-top: 40px;">
     <div class="col-4">
       <div class="group-border border-blue">
         <div class="row">
@@ -25,8 +25,8 @@
             }
           </div>
         </div>
-        <div class="label">Current laptime</div>
-        <div id="currentLapTime">{{data.currentLapTime | laptime}}</div>
+        <div class="label">Last sector time</div>
+        <div id="currentLapTime">{{data.lastSectorTime | laptime}}</div>
         <div class="row">
           <div class="col-6">
             <div class="label">Last laptime</div>
@@ -83,36 +83,25 @@
       </div>
     </div>
   </div>
-  <div class="row" style="padding-right: 0;">
+  <div class="row" style="padding-right: 0; margin-top: 40px;">
     <div class="col-6">
-      <div class="opponent-delta group-border border-blue" id="driverBehindBlock">
+      <div class="opponent-delta group-border border-blue">
         <div class="label">Driver behind</div>
-        @if (data.driverBehindName) {
+        <div [class.hidden]="!data.driverBehindName" id="driverBehindInfo">
           <div class="delta-time" id="gapBehind" [ngClass]="{'text-green': gapBehindDelta > 0, 'text-yellow': gapBehindDelta < 0}">{{data.gapBehind | deltatime: false}}</div>
-          <div class="label driver-name" id="driverBehind">{{data.driverBehindName}}<span class="driver-class">B 4.6</span><span class="driver-irating">1.7k</span></div>
-        }
-        @else {
-          <div class="delta-time" id="gapBehind">&nbsp;</div>
-          <div class="label driver-name" id="driverBehind">&nbsp;</div>
-        }
+          <div class="label driver-name"><span id="driverBehind">{{data.driverBehindName}}</span><span class="driver-class">B 4.6</span><span class="driver-irating">1.7k</span></div>
+        </div>
       </div>
     </div>
     <div class="col-6" style="padding-right: 0;">
-      <div class="opponent-delta group-border border-blue" id="driverAheadBlock">
+      <div class="opponent-delta group-border border-blue">
         <div class="label">Driver ahead</div>
-        @if (data.driverAheadName) {
+        <div [class.hidden]="!data.driverAheadName" id="driverAheadInfo">
           <div class="delta-time" id="gapAhead" [ngClass]="{'text-green': gapAheadDelta < 0, 'text-yellow': gapAheadDelta > 0}">{{data.gapAhead | deltatime: false}}</div>
-          <div class="label driver-name" id="driverAhead">{{data.driverAheadName}}<span class="driver-class">B 4.6</span><span class="driver-irating">1.7k</span></div>
-        }
-        @else {
-          <div class="delta-time" id="gapAhead">&nbsp;</div>
-          <div class="label driver-name" id="driverAhead">&nbsp;</div>
-        }
+          <div class="label driver-name"><span id="driverAhead">{{data.driverAheadName}}</span><span class="driver-class">B 4.6</span><span class="driver-irating">1.7k</span></div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <!-- <app-inputs-trace [maxPoints]="500"></app-inputs-trace> -->
   </div>
 </div>
 
