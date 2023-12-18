@@ -185,10 +185,12 @@ describe('Race display component tests', () => {
       expect(await harness.getElementText('#bestLapTimeDelta')).toEqual('+0.231');
     });
 
-    it('Delta time is green when 0', async () => {
+    it('Delta time is not green and not red when 0', async () => {
       patchData({ bestLapTimeDelta: 0 });
 
-      expect(await harness.elementHasClass('#bestLapTimeDelta', 'text-green')).toBeTrue();
+      expect(await harness.elementHasClass('#bestLapTimeDelta', 'text-green')).toBeFalse();
+      expect(await harness.elementHasClass('#bestLapTimeDelta', 'text-red')).toBeFalse();
+
     });
 
     it('Delta time is red when > 0', async () => {
@@ -206,21 +208,21 @@ describe('Race display component tests', () => {
 
   describe('Driver behind', () => {
     it('Driver name and delta are displayed', async () => {
-      patchData({ driverBehind: 'David Coulthard' });
+      patchData({ driverBehindName: 'David Coulthard' });
 
       expect(await harness.getElementText('#driverBehind')).toEqual('David Coulthard');
     });
 
-    it('Block is displayed when driver name is available', async () => {
-      patchData({ driverBehind: 'David Coulthard' });
+    it('Info is displayed when driver name is available', async () => {
+      patchData({ driverBehindName: 'David Coulthard' });
 
-      expect(await harness.elementHasClass('#driverBehindBlock', 'hidden')).toBeFalse();
+      expect(await harness.elementHasClass('#driverBehindInfo', 'hidden')).toBeFalse();
     });
 
-    it('Block is displayed when driver name is available', async () => {
-      patchData({ driverAhead: '' });
+    it('Info is not displayed when driver name is not available', async () => {
+      patchData({ driverAheadName: '' });
 
-      expect(await harness.elementHasClass('#driverBehindBlock', 'hidden')).toBeTrue();
+      expect(await harness.elementHasClass('#driverBehindInfo', 'hidden')).toBeTrue();
     });
 
     it('Delta time is displayed', async () => {
@@ -254,21 +256,21 @@ describe('Race display component tests', () => {
 
   describe('Driver ahead', () => {
     it('Driver name and delta are displayed', async () => {
-      patchData({ driverAhead: 'Enrique Bernoldi' });
+      patchData({ driverAheadName: 'Enrique Bernoldi' });
 
       expect(await harness.getElementText('#driverAhead')).toEqual('Enrique Bernoldi');
     });
 
-    it('Block is displayed when driver name is available', async () => {
-      patchData({ driverAhead: 'Enrique Bernoldi' });
+    it('Info is displayed when driver name is available', async () => {
+      patchData({ driverAheadName: 'Enrique Bernoldi' });
 
-      expect(await harness.elementHasClass('#driverAheadBlock', 'hidden')).toBeFalse();
+      expect(await harness.elementHasClass('#driverAheadInfo', 'hidden')).toBeFalse();
     });
 
-    it('Block is displayed when driver name is available', async () => {
+    it('Info is not displayed when driver name is not available', async () => {
       patchData({ driverAhead: '' });
 
-      expect(await harness.elementHasClass('#driverAheadBlock', 'hidden')).toBeTrue();
+      expect(await harness.elementHasClass('#driverAheadInfo', 'hidden')).toBeTrue();
     });
 
     it('Delta time is displayed', async () => {

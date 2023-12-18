@@ -13,7 +13,7 @@ export class RaceData {
   airTemp = 0;
   fuelRemaining = 0;
   brakeBias = 0;
-  currentLapTime = 0;
+  lastSectorTime = 0;
   lastLapTime = 0;
   lastLapTimeDelta = 0;
   bestLapTime = 0;
