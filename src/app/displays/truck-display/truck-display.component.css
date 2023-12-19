@@ -5,10 +5,13 @@ app-truck-display {
 
   .card {
     background-color: #27293d;
+    border-radius: 20px;
+    margin-top: 10px;
+    height: 100%;
   }
 
   .card .container {
-    padding: 0;
+    /* padding: 0; */
   }
 
   .data-label {
