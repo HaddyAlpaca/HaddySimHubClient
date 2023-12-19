@@ -3,40 +3,37 @@ app-truck-display {
   font-family: Poppins, sans-serif;
   color: white;
 
+  .row {
+    margin-top: 15px;
+  }
+
   .card {
     background-color: #27293d;
     border-radius: 20px;
-    margin-top: 10px;
     height: 100%;
-  }
-
-  .card .container {
-    /* padding: 0; */
+    padding: 5px;
   }
 
   .data-label {
     color: gray;
-    font-size: 1rem;
+    font-size: .8vw;
   }
 
   .data-item {
-    font-size: 1.5rem;
+    font-size: 1vw;
   }
 
   .card-header {
     border: none;
+    padding-bottom: 0;
   }
 
   .card-title {
-    font-size: 2rem;
-  }
-
-  .card-body label {
-    font-size: 1.5rem;
+    font-size: 1.2vw;
   }
 
   .dashboard-row {
-    font-size: 1.5em;
+    font-size: 1.5vw;
     display: flex;
     flex-direction: row;
   }
@@ -74,13 +71,19 @@ app-truck-display {
     border-radius: 50%;
     background-color: white;
     color:black;
-    width: 4em;
+    font-size: 1vw;
+    font-weight: 600;
+    width: 5vw;
     aspect-ratio: 1;
     text-align: center;
-    padding-top: 22px;
+    padding-top: 1.3vw;
     position: relative;
     left: 50px;
     margin-top: 20px;
+  }
+
+  .over-speed-limit {
+    color: red;
   }
 
   .icon-text-control {
@@ -91,7 +94,7 @@ app-truck-display {
   }
 
   .current-speed {
-    font-size: 5em;
+    font-size: 6vw;
     text-align: center;
     margin-top: -20px;
   }
@@ -104,7 +107,7 @@ app-truck-display {
   }
 
   .current-gear {
-    font-size: 2.6em;
+    font-size: 2.6vw;
     text-align: center;
     margin-top: -20px;
   }
@@ -117,7 +120,7 @@ app-truck-display {
   }
 
   .footer-row {
-    font-size: 1.6em;
+    font-size: 1vw;
   }
 
   .footer-row .clock {

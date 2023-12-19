@@ -90,66 +90,71 @@
         </div>
       </div>
     </div>
-
-    <div class="card col-6">
-      <div class="card-header">
-        <h2 class="card-title">Opdracht</h2>
-      </div>
-      <div class="card-body">
-        <div class="data-row">
-          <div class="data-label">Deadline</div>
-          @if (data.jobTimeRemaining) {
-            <div class="data-item">{{data.jobTimeRemaining | timespan}} ({{data.jobTimeRemainingIrl | timespan}})</div>
-          }
-          @else {
-            <div class="data-item">-</div>
-          }
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Opdracht</h2>
         </div>
-        <div class="data-row">
-          <div class="data-label">Inkomen</div>
-          @if (data.jobIncome) {
-            <div class="data-item" id="jobIncome">&euro; {{data.jobIncome | numbernl}}</div>
-          }
-          @else {
-            <div class="data-item" id="jobIncome">-</div>
-          }
-        </div>
-        <div class="data-row">
-          <div class="data-label">Lading</div>
-          @if (data.jobCargoName) {
-            <div class="data-item" id="jobCargoName">{{data.jobCargoName}} ({{data.jobCargoMass}} kg)</div>
-          }
-          @else {
-            <div class="data-item" id="jobCargoName">-</div>
-          }
+        <div class="card-body">
+          <div class="data-row">
+            <div class="data-label">Deadline</div>
+            @if (data.jobTimeRemaining) {
+              <div class="data-item">{{data.jobTimeRemaining | timespan}} ({{data.jobTimeRemainingIrl | timespan}})</div>
+            }
+            @else {
+              <div class="data-item">-</div>
+            }
+          </div>
+          <div class="data-row">
+            <div class="data-label">Inkomen</div>
+            @if (data.jobIncome) {
+              <div class="data-item" id="jobIncome">&euro; {{data.jobIncome | numbernl}}</div>
+            }
+            @else {
+              <div class="data-item" id="jobIncome">-</div>
+            }
+          </div>
+          <div class="data-row">
+            <div class="data-label">Lading</div>
+            @if (data.jobCargoName) {
+              <div class="data-item" id="jobCargoName">{{data.jobCargoName}} ({{data.jobCargoMass}} kg)</div>
+            }
+            @else {
+              <div class="data-item" id="jobCargoName">-</div>
+            }
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="card col-6">
-      <div class="card-header">
-        <h2 class="card-title">Trailer schade</h2>
-      </div>
-      <div class="card-body" [class.hidden]="data.numberOfTrailersAttached > 0">
-        <div class="container">
-          <div class="row">
-            <div class="col-6">
-              <div class="data-label">Chassis</div>
-              <div class="data-item">{{data.damageTrailerChassis}} %</div>
+    <div class="col-6">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Trailer schade</h2>
+        </div>
+        <div class="card-body" [class.hidden]="data.numberOfTrailersAttached > 0">
+          <div class="container">
+            <div class="row">
+              <div class="col-6">
+                <div class="data-label">Chassis</div>
+                <div class="data-item">{{data.damageTrailerChassis}} %</div>
+              </div>
+              <div class="col-6">
+                <div class="data-label">Opbouw</div>
+                <div class="data-item">{{data.damageTrailerBody}} %</div>
+              </div>
             </div>
-            <div class="col-6">
-              <div class="data-label">Opbouw</div>
-              <div class="data-item">{{data.damageTrailerBody}} %</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6">
-              <div class="data-label">Wielen</div>
-              <div class="data-item">{{data.damageTrailerWheels}} %</div>
-            </div>
-            <div class="col-6">
-              <div class="data-label">Lading</div>
-              <div class="data-item">{{data.damageTrailerCargo}} %</div>
+            <div class="row">
+              <div class="col-6">
+                <div class="data-label">Wielen</div>
+                <div class="data-item">{{data.damageTrailerWheels}} %</div>
+              </div>
+              <div class="col-6">
+                <div class="data-label">Lading</div>
+                <div class="data-item">{{data.damageTrailerCargo}} %</div>
+              </div>
             </div>
           </div>
         </div>
@@ -179,7 +184,7 @@
       </div>
 
       <div class="right-column col-4">
-        <div class="speed-limit" [ngClass]="{'hidden': !data.speedLimit}">{{data.speedLimit}}</div>
+        <div class="speed-limit" [ngClass]="{'hidden': !data.speedLimit, 'over-speed-limit': data.speed > data.speedLimit}">{{data.speedLimit}}</div>
         <div class="icon-text-control">
           <img class="dashboard-light filter-white" src="/assets/images/fuel.svg" [ngClass]="{'filter-orange': data.fuelWarningOn}">
           <div id="fuelDistance">{{data.fuelDistance}} km</div>
