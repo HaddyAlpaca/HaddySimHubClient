@@ -44,4 +44,5 @@ export class TruckData {
   fuelWarningOn = false;
   blinkerLeftOn = false;
   blinkerRightOn = false;
+  gameTime = new Date();
 }

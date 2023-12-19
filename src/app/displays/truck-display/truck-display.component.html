@@ -205,7 +205,7 @@
       @else {
         <span id="truckName">&nbsp;</span>
       }
-      <span class="clock">14:32 ({{currentTime | date: 'HH:mm'}})</span>
+      <span class="clock">{{data.gameTime | date: 'HH:mm'}} ({{currentTime | date: 'HH:mm'}})</span>
     </div>
   </div>
 </div>
