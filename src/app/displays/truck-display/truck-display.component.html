@@ -55,35 +55,35 @@
     <div class="col-6">
       <div class="card">
         <div class="card-header">
-          <h2 class="card-title">Schade Truck</h2>
+          <h2 class="card-title">Truck schade</h2>
         </div>
         <div class="card-body">
           <div class="container">
             <div class="row">
               <div class="col-6">
                 <div class="data-label">Motor</div>
-                <div class="data-item">{{data.damageEngine}} %</div>
+                <div class="data-item">{{data.damageTruckEngine}} %</div>
               </div>
               <div class="col-6">
                 <div class="data-label">Transmissie</div>
-                <div class="data-item">{{data.damageTransmission}} %</div>
+                <div class="data-item">{{data.damageTruckTransmission}} %</div>
               </div>
             </div>
             <div class="row">
               <div class="col-6">
                 <div class="data-label">Cabine</div>
-                <div class="data-item">{{data.damageCabin}} %</div>
+                <div class="data-item">{{data.damageTruckCabin}} %</div>
               </div>
               <div class="col-6">
                 <div class="data-label">Chassis</div>
-                <div class="data-item">{{data.damageChassis}} %</div>
+                <div class="data-item">{{data.damageTruckChassis}} %</div>
               </div>
             </div>
 
             <div class="row">
               <div class="col-6">
                 <div class="data-label">Wielen</div>
-                <div class="data-item">{{data.damageWheels}} %</div>
+                <div class="data-item">{{data.damageTruckWheels}} %</div>
               </div>
             </div>
           </div>
@@ -123,32 +123,33 @@
             <div class="data-item" id="jobCargoName">-</div>
           }
         </div>
-        <!-- <div class="data-row">
-          <div class="data-label">Schade lading</div>
-          @if (data.jobCargoName) {
-            <div class="data-item" id="jobCargoDamage">{{data.jobCargoDamage}} %</div>
-          }
-          @else {
-            <div class="data-item" id="jobCargoDamage">-</div>
-          }
-        </div> -->
       </div>
     </div>
 
     <div class="card col-6">
       <div class="card-header">
-        <h2 class="card-title">Schade Trailer</h2>
+        <h2 class="card-title">Trailer schade</h2>
       </div>
-      <div class="card-body">
+      <div class="card-body" [class.hidden]="data.numberOfTrailersAttached > 0">
         <div class="container">
           <div class="row">
             <div class="col-6">
               <div class="data-label">Chassis</div>
-              <div class="data-item">{{data.damageChassis}} %</div>
+              <div class="data-item">{{data.damageTrailerChassis}} %</div>
             </div>
             <div class="col-6">
+              <div class="data-label">Opbouw</div>
+              <div class="data-item">{{data.damageTrailerBody}} %</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
               <div class="data-label">Wielen</div>
-              <div class="data-item">{{data.damageWheels}} %</div>
+              <div class="data-item">{{data.damageTrailerWheels}} %</div>
+            </div>
+            <div class="col-6">
+              <div class="data-label">Lading</div>
+              <div class="data-item">{{data.damageTrailerCargo}} %</div>
             </div>
           </div>
         </div>
@@ -161,11 +162,11 @@
       <div class="left-column col-4">
         <img class="dashboard-light" id="low-beam" src="/assets/images/low-beam.svg" [ngClass]="{'filter-green': data.lowBeamOn}">
         <img class="dashboard-light" id="high-beam" src="/assets/images/high-beam.svg"  [ngClass]="{'filter-blue': data.highBeamOn}">
+        <img class="dashboard-light" id="indicator-left" src="/assets/images/arrow-left.svg" [ngClass]="{'filter-green': data.blinkerLeftOn}">
+        <img class="dashboard-light" id="hazard-lights" src="/assets/images/hazard.svg" [ngClass]="{'filter-orange': data.hazardLightsOn}">
+        <img class="dashboard-light" id="indicator-right" src="/assets/images/arrow-right.svg" [ngClass]="{'filter-green': data.blinkerRightOn}">
         <img class="dashboard-light" id="brake-warning" src="/assets/images/brake-warning.svg" [ngClass]="{'filter-red': data.parkingBrakeOn}">
         <img class="dashboard-light" id="battery-warning" src="/assets/images/battery.svg" [ngClass]="{'filter-red': data.batteryWarningOn}">
-        <img class="dashboard-light" id="hazard-lights" src="/assets/images/hazard.svg" [ngClass]="{'filter-orange': data.hazardLightsOn}">
-        <img class="dashboard-light" id="indicator-left" src="/assets/images/arrow-left.svg" [ngClass]="{'filter-green': data.blinkerLeftOn}">
-        <img class="dashboard-light" id="indicator-right" src="/assets/images/arrow-right.svg" [ngClass]="{'filter-green': data.blinkerRightOn}">
         <img class="dashboard-light" id="engine-water-temp-warning" src="/assets/images/engine-coolant.svg" [ngClass]="{'filter-red': data.engineWaterTempWarningOn }">
         <img class="dashboard-light" id="oil-pressure-warning" src="/assets/images/oil-can.svg" [ngClass]="{'filter-red': data.oilPressureWarningOn}">
       </div>
