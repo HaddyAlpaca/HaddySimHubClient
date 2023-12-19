@@ -33,7 +33,6 @@ describe('App component tests', () => {
 
       expect(await harness.isRaceDisplayVisible()).toBeFalse();
       expect(await harness.isTruckDisplayVisible()).toBeFalse();
-      expect(await harness.isRawDataDisplayVisible()).toBeFalse();
       expect(await harness.isConnectionStatusVisible()).toBeTrue();
     });
 
@@ -65,17 +64,6 @@ describe('App component tests', () => {
       expect(await harness.getConnectionStatusText()).toEqual('Connected, waiting for game...');
     });
   });
-
-  // describe('Game data type tests', () => {
-  //   it('Race display is shown', async () => {
-  //     gameDataTypeSubject.next(GameDataType.RaceData);
-
-  //     expect(await harness.isRaceDisplayVisible()).toBeTrue();
-  //     expect(await harness.isTruckDisplayVisible()).toBeFalse();
-  //     expect(await harness.isRawDataDisplayVisible()).toBeFalse();
-  //     expect(await harness.isConnectionStatusVisible()).toBeFalse();
-  //   });
-  // });
 
   const setupMockGameDataService = () => {
     const service = jasmine.createSpyObj<GameDataService>('gameDataService', ['connectionStatus$', 'gameDataType$', 'raceData$']);
