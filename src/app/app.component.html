@@ -1,7 +1,4 @@
-@if (gameDataType === GameDataType.RawData) {
-  <app-raw-data-display></app-raw-data-display>
-}
-@else if(gameDataType === GameDataType.TruckData) {
+@if(gameDataType === GameDataType.TruckData) {
   <app-truck-display></app-truck-display>
 }
 @else if(gameDataType === GameDataType.RaceData) {

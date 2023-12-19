@@ -1,56 +1,97 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="card col-4">
-      <div class="card-header">
-        <h2 class="card-title">Route</h2>
-      </div>
-      <div class="card-body">
-        <div class="data-row">
-          <div class="data-label">Vertrekpunt</div>
-          @if (!data.sourceCity && !data.sourceCompany) {
-            <div class="data-item" id="departure">-</div>
-          }
-          @if (data.sourceCity && !data.sourceCompany) {
-            <div class="data-item" id="departure">{{data.sourceCity}}</div>
-          }
-          @if (data.sourceCity && data.sourceCompany) {
-            <div class="data-item" id="departure">{{data.sourceCity}} ({{data.sourceCompany}})</div>
-          }
+    <div class="col-6">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Route</h2>
         </div>
-        <div class="data-row">
-          <div class="data-label">Bestemming</div>
-          @if (!data.destinationCity && !data.destinationCompany) {
-            <div class="data-item" id="destination">-</div>
-          }
-          @if (data.destinationCity && !data.destinationCompany) {
-            <div class="data-item" id="destination">{{data.destinationCity}}</div>
-          }
-          @if (data.destinationCity && data.destinationCompany) {
-            <div class="data-item" id="destination">{{data.destinationCity}} ({{data.destinationCompany}})</div>
-          }
-        </div>
-        <div class="data-row">
-          <div class="data-label">Resterend</div>
-          @if (data.timeRemaining) {
-            <div class="data-item"><span>{{data.timeRemaining | timespan}}</span> / <span>{{data.distanceRemaining}} km </span>({{data.timeRemainingIrl | timespan}})</div>
-          }
-          @else {
-            <div class="data-item">-</div>
-          }
-        </div>
-        <div class="data-row">
-          <div class="data-label">Volgend rustmoment</div>
-          @if (data.restTimeRemaining) {
-            <div class="data-item">{{data.restTimeRemaining | timespan}} ({{data.restTimeRemainingIrl | timespan}})</div>
-          }
-          @else {
-            <div class="data-item">-</div>
-          }
+        <div class="card-body">
+          <div class="data-row">
+            <div class="data-label">Vertrekpunt</div>
+            @if (!data.sourceCity && !data.sourceCompany) {
+              <div class="data-item" id="departure">-</div>
+            }
+            @if (data.sourceCity && !data.sourceCompany) {
+              <div class="data-item" id="departure">{{data.sourceCity}}</div>
+            }
+            @if (data.sourceCity && data.sourceCompany) {
+              <div class="data-item" id="departure">{{data.sourceCity}} ({{data.sourceCompany}})</div>
+            }
+          </div>
+          <div class="data-row">
+            <div class="data-label">Bestemming</div>
+            @if (!data.destinationCity && !data.destinationCompany) {
+              <div class="data-item" id="destination">-</div>
+            }
+            @if (data.destinationCity && !data.destinationCompany) {
+              <div class="data-item" id="destination">{{data.destinationCity}}</div>
+            }
+            @if (data.destinationCity && data.destinationCompany) {
+              <div class="data-item" id="destination">{{data.destinationCity}} ({{data.destinationCompany}})</div>
+            }
+          </div>
+          <div class="data-row">
+            <div class="data-label">Resterend</div>
+            @if (data.timeRemaining) {
+              <div class="data-item"><span>{{data.timeRemaining | timespan}}</span> / <span>{{data.distanceRemaining}} km </span>({{data.timeRemainingIrl | timespan}})</div>
+            }
+            @else {
+              <div class="data-item">-</div>
+            }
+          </div>
+          <div class="data-row">
+            <div class="data-label">Volgend rustmoment</div>
+            @if (data.restTimeRemaining) {
+              <div class="data-item">{{data.restTimeRemaining | timespan}} ({{data.restTimeRemainingIrl | timespan}})</div>
+            }
+            @else {
+              <div class="data-item">-</div>
+            }
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="card col-4">
+    <div class="col-6">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Schade Truck</h2>
+        </div>
+        <div class="card-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-6">
+                <div class="data-label">Motor</div>
+                <div class="data-item">{{data.damageEngine}} %</div>
+              </div>
+              <div class="col-6">
+                <div class="data-label">Transmissie</div>
+                <div class="data-item">{{data.damageTransmission}} %</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <div class="data-label">Cabine</div>
+                <div class="data-item">{{data.damageCabin}} %</div>
+              </div>
+              <div class="col-6">
+                <div class="data-label">Chassis</div>
+                <div class="data-item">{{data.damageChassis}} %</div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-6">
+                <div class="data-label">Wielen</div>
+                <div class="data-item">{{data.damageWheels}} %</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card col-6">
       <div class="card-header">
         <h2 class="card-title">Opdracht</h2>
       </div>
@@ -82,7 +123,7 @@
             <div class="data-item" id="jobCargoName">-</div>
           }
         </div>
-        <div class="data-row">
+        <!-- <div class="data-row">
           <div class="data-label">Schade lading</div>
           @if (data.jobCargoName) {
             <div class="data-item" id="jobCargoDamage">{{data.jobCargoDamage}} %</div>
@@ -90,52 +131,29 @@
           @else {
             <div class="data-item" id="jobCargoDamage">-</div>
           }
-        </div>
+        </div> -->
       </div>
     </div>
 
-    <div class="card col-4">
+    <div class="card col-6">
       <div class="card-header">
-        <h2 class="card-title">Schade</h2>
+        <h2 class="card-title">Schade Trailer</h2>
       </div>
       <div class="card-body">
         <div class="container">
           <div class="row">
             <div class="col-6">
-              <div class="data-label">Motor</div>
-              <div class="data-item">{{data.damageEngine}} %</div>
-            </div>
-            <div class="col-6">
-              <div class="data-label">Transmissie</div>
-              <div class="data-item">{{data.damageTransmission}} %</div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-6">
-              <div class="data-label">Cabine</div>
-              <div class="data-item">{{data.damageCabin}} %</div>
-            </div>
-            <div class="col-6">
               <div class="data-label">Chassis</div>
               <div class="data-item">{{data.damageChassis}} %</div>
             </div>
-          </div>
-
-          <div class="row">
             <div class="col-6">
               <div class="data-label">Wielen</div>
               <div class="data-item">{{data.damageWheels}} %</div>
-            </div>
-            <div class="col-6" [ngClass]="{'hidden': !data.trailerAttached}">
-              <div class="data-label">Trailer</div>
-              <div class="data-item">{{data.damageTrailer}} %</div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 
   <div class="row">

@@ -13,14 +13,12 @@ export enum ConnectionStatus {
 
 export enum GameDataType {
   None,
-  RawData,
   TruckData,
   RaceData
 }
 
 export interface GameDataState {
   connectionStatus: ConnectionStatus;
-  rawData: object | null;
   truckData: TruckData | null;
   raceData: RaceData | null;
 }
@@ -36,9 +34,6 @@ export class GameDataService {
 
   private _gameDataTypeSubject = new BehaviorSubject<GameDataType>(GameDataType.None);
   public gameDataType$ = this._gameDataTypeSubject.asObservable();
-
-  private _rawDataSubject = new Subject<object>();
-  public rawData$ = this._rawDataSubject.asObservable();
 
   private _truckDataSubject = new Subject<TruckData>();
   public truckData$ = this._truckDataSubject.asObservable();
@@ -65,10 +60,6 @@ export class GameDataService {
 
     //Monitor emmited data
     this._hubConnection.on('gameDataIdle', () => this._gameDataTypeSubject.next(GameDataType.None));
-    this._hubConnection.on('rawData', (data) => {
-      this._gameDataTypeSubject.next(GameDataType.RawData);
-      this._rawDataSubject.next(data);
-    });
 
     this._hubConnection.on('truckData', (data) => {
       this._gameDataTypeSubject.next(GameDataType.TruckData);

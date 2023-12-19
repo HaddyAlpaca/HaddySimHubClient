@@ -13,11 +13,6 @@ export class AppComponentHarness extends ComponentHarness {
     return !!elm;
   }
 
-  public async isRawDataDisplayVisible(): Promise<boolean> {
-    const elm = await this.locatorForOptional('app-raw-data-display')();
-    return !!elm;
-  }
-
   public async isConnectionStatusVisible(): Promise<boolean> {
     const elm = await this.locatorForOptional('.connection-state')();
     return !!elm;
