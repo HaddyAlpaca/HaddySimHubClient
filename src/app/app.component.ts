@@ -10,7 +10,7 @@ import { ConnectionStatus, GameDataService, GameDataType } from './services/game
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrl: './app.component.css',
+    styleUrl: './app.component.scss',
     standalone: true,
     imports: [CommonModule, TruckDisplayComponent, RaceDisplayComponent]
 })

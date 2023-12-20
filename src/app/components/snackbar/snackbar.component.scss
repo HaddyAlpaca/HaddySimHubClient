@@ -1,0 +1,21 @@
+app-snackbar {
+  visibility: hidden;
+  position: absolute;
+  z-index: 100;
+  transform: translateX(-50%);
+  bottom: 2vw;
+  padding: 16px;
+  color: white;
+  background-color: gray;
+  border-radius: 5px;
+  min-width: 200px;
+
+  .snackbar-text {
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+app-snackbar.show {
+  visibility: visible;
+}

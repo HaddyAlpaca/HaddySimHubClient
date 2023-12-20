@@ -13,7 +13,7 @@ import { ClockService } from 'src/app/services/clock.service';
 @Component({
     selector: 'app-truck-display',
     templateUrl: 'truck-display.component.html',
-    styleUrl: 'truck-display.component.css',
+    styleUrl: 'truck-display.component.scss',
     encapsulation: ViewEncapsulation.None,
     standalone: true,
     imports: [NgClass, DecimalPipe, GearPipe, TimespanPipe, NumberNlPipe, CommonModule]

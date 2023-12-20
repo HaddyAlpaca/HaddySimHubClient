@@ -15,7 +15,7 @@ import { tap } from 'rxjs';
 @Component({
   selector: 'app-race-display',
   templateUrl: 'race-display.component.html',
-  styleUrls: ['race-display.component.css'],
+  styleUrl: 'race-display.component.scss',
   standalone: true,
   imports: [CommonModule, DeltaTimePipe, GearPipe, LapTimePipe, TimespanPipe, InputsTraceComponent]
 })

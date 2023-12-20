@@ -41,6 +41,9 @@ export class GameDataService {
   private _raceDataSubject = new Subject<RaceData>();
   public raceData$ = this._raceDataSubject.asObservable();
 
+  private _notificationSubject = new Subject<string>();
+  public notification$ = this._notificationSubject.asObservable();
+
   constructor() {
     this._hubConnection = new signalR.HubConnectionBuilder()
       .withUrl('game-data')
@@ -69,6 +72,10 @@ export class GameDataService {
     this._hubConnection.on('raceData', (data) => {
       this._gameDataTypeSubject.next(GameDataType.RaceData);
       this._raceDataSubject.next(data);
+    });
+
+    this._hubConnection.on('notification', (data) => {
+      this._notificationSubject.next(data);
     });
   }
 }
