@@ -5,6 +5,7 @@ import { TruckDisplayComponent } from './displays/truck-display/truck-display.co
 import { RaceDisplayComponent } from './displays/race-display/race-display.component';
 import { tap } from 'rxjs';
 import { ConnectionStatus, GameDataService, GameDataType } from './services/game-data.service';
+import { SnackBarComponent } from './components/snackbar/snackbar.component';
 
 @UntilDestroy()
 @Component({
@@ -12,7 +13,7 @@ import { ConnectionStatus, GameDataService, GameDataType } from './services/game
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
     standalone: true,
-    imports: [CommonModule, TruckDisplayComponent, RaceDisplayComponent]
+    imports: [CommonModule, TruckDisplayComponent, RaceDisplayComponent, SnackBarComponent]
 })
 export class AppComponent {
   public GameDataType = GameDataType;

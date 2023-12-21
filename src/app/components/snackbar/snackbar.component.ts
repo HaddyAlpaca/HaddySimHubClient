@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer2 } from "@angular/core";
+import { Component, ElementRef, Renderer2, ViewEncapsulation } from "@angular/core";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { debounceTime, filter, switchMap, tap, timer } from "rxjs";
 import { GameDataService } from "src/app/services/game-data.service";
@@ -7,7 +7,9 @@ import { GameDataService } from "src/app/services/game-data.service";
 @Component({
   selector: 'app-snackbar',
   templateUrl: './snackbar.component.html',
-  styleUrl: 'snackbar.component.scss'
+  styleUrl: 'snackbar.component.scss',
+  encapsulation: ViewEncapsulation.None,
+  standalone: true
 })
 export class SnackBarComponent {
   private readonly _debounceTime = 250;
@@ -36,7 +38,7 @@ export class SnackBarComponent {
       switchMap(() => timer(this._timeout)),
       tap(() => this.setVisible(false)),
       untilDestroyed(this)
-    )
+    ).subscribe();
   }
 
   private setVisible(value: boolean): void {

@@ -2,15 +2,17 @@ app-snackbar {
   visibility: hidden;
   position: absolute;
   z-index: 100;
+  left: 50%;
   transform: translateX(-50%);
   bottom: 2vw;
   padding: 16px;
   color: white;
   background-color: gray;
   border-radius: 5px;
-  min-width: 200px;
+  min-width: 500px;
 
   .snackbar-text {
+    font-size: 1.5vw;
     overflow-x: hidden;
     text-overflow: ellipsis;
   }
