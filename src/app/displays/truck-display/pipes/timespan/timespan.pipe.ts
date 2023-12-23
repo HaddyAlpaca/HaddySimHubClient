@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
     name: 'timespan',
-    standalone: true
+    standalone: true,
 })
 export class TimespanPipe implements PipeTransform {
   transform(value: number): string {

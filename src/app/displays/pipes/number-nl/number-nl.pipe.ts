@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
     name: 'numbernl',
-    standalone: true
+    standalone: true,
 })
 export class NumberNlPipe implements PipeTransform {
   private readonly _numberFormat = new Intl.NumberFormat('en-US');

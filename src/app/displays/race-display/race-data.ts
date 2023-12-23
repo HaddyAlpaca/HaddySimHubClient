@@ -20,8 +20,12 @@ export class RaceData {
   bestLapTimeDelta = 0;
   gapBehind = 0;
   driverBehindName = ''
+  driverBehindLicense = ''
+  driverBehindIRating = 0;
   gapAhead = 0;
   driverAheadName = '';
+  driverAheadLicense = '';
+  driverAheadIRating = 0;
   clutchPct = 0;
   throttlePct = 0;
   brakePct = 0;

@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
     name: 'gear',
-    standalone: true
+    standalone: true,
 })
 export class GearPipe implements PipeTransform {
   private readonly _numberFormat = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 });

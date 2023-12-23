@@ -33,8 +33,8 @@ describe('TruckDisplayComponent', () => {
         TimespanPipe],
       providers: [
         { provide: ClockService, useValue: mockClockService },
-        { provide: GameDataService, useValue: mockGameDataService }
-      ]
+        { provide: GameDataService, useValue: mockGameDataService },
+      ],
     })
     .compileComponents();
 
@@ -153,7 +153,7 @@ describe('TruckDisplayComponent', () => {
   const patchData = (value: { [key: string]: unknown; }) => {
     const newData = {
       ...data,
-      ...value
+      ...value,
     };
 
     truckDataSubject.next(newData);

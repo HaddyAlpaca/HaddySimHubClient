@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, interval, map } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ClockService {
   getCurrentTime(): Observable<Date> {
@@ -10,7 +10,7 @@ export class ClockService {
       map(() => {
         const currentTime = new Date();
         return currentTime;
-      })
+      }),
     );
   }
 }

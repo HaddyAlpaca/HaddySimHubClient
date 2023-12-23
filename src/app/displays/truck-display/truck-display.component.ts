@@ -16,7 +16,7 @@ import { ClockService } from 'src/app/services/clock.service';
     styleUrl: 'truck-display.component.scss',
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [NgClass, DecimalPipe, GearPipe, TimespanPipe, NumberNlPipe, CommonModule]
+    imports: [NgClass, DecimalPipe, GearPipe, TimespanPipe, NumberNlPipe, CommonModule],
 })
 export class TruckDisplayComponent implements OnInit {
   private _data: TruckData = new TruckData();
@@ -31,17 +31,17 @@ export class TruckDisplayComponent implements OnInit {
 
   constructor(
     private _gameDataService: GameDataService,
-    private _clockService: ClockService
+    private _clockService: ClockService,
   ) {
     this._clockService.getCurrentTime().pipe(
-      tap((time) => this._currentTime = time)
+      tap((time) => this._currentTime = time),
     ).subscribe();
   }
 
   ngOnInit(): void {
     this._gameDataService.truckData$.pipe(
       tap(data => this._data = data),
-      untilDestroyed(this)
+      untilDestroyed(this),
     ).subscribe();
   }
 }

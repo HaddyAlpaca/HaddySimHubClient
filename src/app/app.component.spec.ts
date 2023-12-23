@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { AppComponent } from "./app.component";
-import { ConnectionStatus, GameDataService, GameDataType } from "./services/game-data.service";
-import { TestbedHarnessEnvironment } from "@angular/cdk/testing/testbed";
-import { AppComponentHarness } from "./app.component.harness";
-import { Subject, of } from "rxjs";
-import { RaceData } from "./displays/race-display/race-data";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AppComponent } from './app.component';
+import { ConnectionStatus, GameDataService, GameDataType } from './services/game-data.service';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { AppComponentHarness } from './app.component.harness';
+import { Subject, of } from 'rxjs';
+import { RaceData } from './displays/race-display/race-data';
 
 describe('App component tests', () => {
   let fixture: ComponentFixture<AppComponent>;
@@ -19,7 +19,7 @@ describe('App component tests', () => {
     await TestBed.configureTestingModule({
       declarations: [],
       providers: [
-        { provide: GameDataService, useValue: mockGameDataService }
+        { provide: GameDataService, useValue: mockGameDataService },
       ],
     }).compileComponents();
 
@@ -66,7 +66,12 @@ describe('App component tests', () => {
   });
 
   const setupMockGameDataService = () => {
-    const service = jasmine.createSpyObj<GameDataService>('gameDataService', ['connectionStatus$', 'gameDataType$', 'raceData$']);
+    const service = jasmine.createSpyObj<GameDataService>('gameDataService', [
+      'connectionStatus$',
+      'gameDataType$',
+      'raceData$',
+      'notification$',
+    ]);
     connectionStatusSubject = new Subject<ConnectionStatus>();
     service.connectionStatus$ = connectionStatusSubject.asObservable();
     gameDataTypeSubject = new Subject<GameDataType>();

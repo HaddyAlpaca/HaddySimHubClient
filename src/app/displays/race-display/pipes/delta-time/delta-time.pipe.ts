@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
     name: 'deltatime',
-    standalone: true
+    standalone: true,
 })
 export class DeltaTimePipe implements PipeTransform {
   private readonly _numberFormat = new Intl.NumberFormat('en-US', { minimumFractionDigits: 3 });

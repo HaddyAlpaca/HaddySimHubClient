@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
-import { Chart } from "chart.js/auto";
+import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Chart } from 'chart.js/auto';
 
 export interface Point {
   brake: number;
@@ -9,7 +9,7 @@ export interface Point {
 @Component({
   selector: 'app-inputs-trace',
   templateUrl: './inputs-trace.component.html',
-  standalone: true
+  standalone: true,
 })
 export class InputsTraceComponent implements AfterViewInit {
   @ViewChild('lineGraphCanvas') private _lineGraphCanvas!: ElementRef<HTMLCanvasElement>;
@@ -64,7 +64,7 @@ export class InputsTraceComponent implements AfterViewInit {
           borderWidth: 5,
           fill: false,
           pointStyle: false,
-          tension: .3
+          tension: .3,
         }, {
           label: 'Throttle trace',
           data: Array.from({ length: this._maxPoints }, () => 0),
@@ -72,27 +72,27 @@ export class InputsTraceComponent implements AfterViewInit {
           borderWidth: 5,
           fill: false,
           pointStyle: false,
-          tension: .3
-        }]
+          tension: .3,
+        }],
       },
       options: {
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: false
-          }
+            display: false,
+          },
         },
         scales: {
             y: {
                 display: true,
                 min: 0,
-                max: 100
+                max: 100,
             },
             x: {
-                display: false
-            }
-        }
-      }
+                display: false,
+            },
+        },
+      },
     });
   }
 }

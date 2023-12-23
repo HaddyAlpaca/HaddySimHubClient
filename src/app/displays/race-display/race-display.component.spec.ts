@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { RaceDisplayComponent } from "./race-display.component";
-import { ClockService } from "src/app/services/clock.service";
-import { GameDataService } from "src/app/services/game-data.service";
-import { BehaviorSubject, Subject, of } from "rxjs";
-import { TestbedHarnessEnvironment } from "@angular/cdk/testing/testbed";
-import { RaceDisplayComponentHarness } from "./race-display.component.harness";
-import { RaceData } from "./race-data";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RaceDisplayComponent } from './race-display.component';
+import { ClockService } from 'src/app/services/clock.service';
+import { GameDataService } from 'src/app/services/game-data.service';
+import { BehaviorSubject, Subject, of } from 'rxjs';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { RaceDisplayComponentHarness } from './race-display.component.harness';
+import { RaceData } from './race-data';
 
 describe('Race display component tests', () => {
   let fixture: ComponentFixture<RaceDisplayComponent>;
@@ -24,7 +24,7 @@ describe('Race display component tests', () => {
       declarations: [],
       providers: [
         { provide: ClockService, useValue: mockClockService },
-        { provide: GameDataService, useValue: mockGameDataService }
+        { provide: GameDataService, useValue: mockGameDataService },
       ],
     }).compileComponents();
 
@@ -36,7 +36,7 @@ describe('Race display component tests', () => {
     it('When session is a timed session, display only laps completed', async () => {
       patchData({
         isTimedSession: true,
-        currentLap: 2
+        currentLap: 2,
       });
 
       expect(await harness.getElementText('#laps')).toEqual('2');
@@ -46,7 +46,7 @@ describe('Race display component tests', () => {
       patchData({
         isTimeSession: false,
         currentLap: 2,
-        totalLaps: 10
+        totalLaps: 10,
       });
 
       expect(await harness.getElementText('#laps')).toEqual('2/10');
@@ -363,7 +363,7 @@ describe('Race display component tests', () => {
   const patchData = (value: { [key: string]: unknown; }) => {
     const data = {
       ...raceData,
-      ...value
+      ...value,
     };
 
     raceDataSubject.next(data);

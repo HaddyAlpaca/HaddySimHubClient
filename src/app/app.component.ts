@@ -13,7 +13,12 @@ import { SnackBarComponent } from './components/snackbar/snackbar.component';
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
     standalone: true,
-    imports: [CommonModule, TruckDisplayComponent, RaceDisplayComponent, SnackBarComponent]
+    imports: [
+      CommonModule,
+      TruckDisplayComponent,
+      RaceDisplayComponent,
+      SnackBarComponent,
+    ],
 })
 export class AppComponent {
   public GameDataType = GameDataType;
@@ -51,13 +56,13 @@ export class AppComponent {
     //Monitor connection status
     this._gameDataService.connectionStatus$.pipe(
       tap((status) => this._connectionStatus = status),
-      untilDestroyed(this)
+      untilDestroyed(this),
     ).subscribe();
 
     //Monitor game data type
     this._gameDataService.gameDataType$.pipe(
       tap((type) => this._gameDataType = type),
-      untilDestroyed(this)
+      untilDestroyed(this),
     ).subscribe();
   }
 }

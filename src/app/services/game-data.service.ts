@@ -8,13 +8,13 @@ export enum ConnectionStatus {
   Disconnected,
   Connecting,
   ConnectionError,
-  Connected
+  Connected,
 }
 
 export enum GameDataType {
   None,
   TruckData,
-  RaceData
+  RaceData,
 }
 
 export interface GameDataState {
@@ -24,7 +24,7 @@ export interface GameDataState {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GameDataService {
   private _hubConnection: signalR.HubConnection;

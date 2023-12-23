@@ -1,7 +1,7 @@
-import { Component, ElementRef, Renderer2, ViewEncapsulation } from "@angular/core";
-import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
-import { debounceTime, filter, switchMap, tap, timer } from "rxjs";
-import { GameDataService } from "src/app/services/game-data.service";
+import { Component, ElementRef, Renderer2, ViewEncapsulation } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { debounceTime, filter, switchMap, tap, timer } from 'rxjs';
+import { GameDataService } from 'src/app/services/game-data.service';
 
 @UntilDestroy()
 @Component({
@@ -9,7 +9,7 @@ import { GameDataService } from "src/app/services/game-data.service";
   templateUrl: './snackbar.component.html',
   styleUrl: 'snackbar.component.scss',
   encapsulation: ViewEncapsulation.None,
-  standalone: true
+  standalone: true,
 })
 export class SnackBarComponent {
   private readonly _debounceTime = 250;
@@ -24,7 +24,7 @@ export class SnackBarComponent {
   constructor(
     elementRef: ElementRef,
     gameDataService: GameDataService,
-    private _renderer: Renderer2
+    private _renderer: Renderer2,
   ) {
     this._element = elementRef.nativeElement;
 
@@ -37,7 +37,7 @@ export class SnackBarComponent {
       }),
       switchMap(() => timer(this._timeout)),
       tap(() => this.setVisible(false)),
-      untilDestroyed(this)
+      untilDestroyed(this),
     ).subscribe();
   }
 

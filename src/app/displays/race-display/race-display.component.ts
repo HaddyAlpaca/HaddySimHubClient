@@ -10,6 +10,7 @@ import { LapTimePipe } from './pipes/laptime/laptime.pipe';
 import { TimespanPipe } from './pipes/timespan/timespan.pipe';
 import { InputsTraceComponent } from './inputs-trace.component';
 import { tap } from 'rxjs';
+import { IRatingPipe } from './pipes/irating/irating.pipe';
 
 @UntilDestroy()
 @Component({
@@ -17,7 +18,15 @@ import { tap } from 'rxjs';
   templateUrl: 'race-display.component.html',
   styleUrl: 'race-display.component.scss',
   standalone: true,
-  imports: [CommonModule, DeltaTimePipe, GearPipe, LapTimePipe, TimespanPipe, InputsTraceComponent]
+  imports: [
+    CommonModule,
+    DeltaTimePipe,
+    GearPipe,
+    LapTimePipe,
+    TimespanPipe,
+    InputsTraceComponent,
+    IRatingPipe,
+  ],
 })
 export class RaceDisplayComponent implements OnInit {
   // @ViewChild(InputsTraceComponent) private _inputsTrace!: InputsTraceComponent;
@@ -47,10 +56,10 @@ export class RaceDisplayComponent implements OnInit {
 
   constructor(
     private _gameDataService: GameDataService,
-    private _clockService: ClockService
+    private _clockService: ClockService,
   ) {
     this._clockService.getCurrentTime().pipe(
-      tap((time) => this._currentTime = time)
+      tap((time) => this._currentTime = time),
     ).subscribe();
   }
   ngOnInit(): void {
@@ -70,7 +79,7 @@ export class RaceDisplayComponent implements OnInit {
         //   });
         // }
       }),
-      untilDestroyed(this)
+      untilDestroyed(this),
     ).subscribe();
   }
 }

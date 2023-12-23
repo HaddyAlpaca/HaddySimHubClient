@@ -1,4 +1,4 @@
-import { GearPipe } from "./gear.pipe";
+import { GearPipe } from './gear.pipe';
 
 describe('GearPipe', () => {
   it('0 should return N', () => {

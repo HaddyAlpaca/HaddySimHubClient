@@ -14,6 +14,6 @@ bootstrapApplication(AppComponent, {
     providers: [
         importProvidersFrom(BrowserModule),
         provideHttpClient(withInterceptorsFromDi()),
-    ]
+    ],
 })
   .catch(err => console.error(err));
