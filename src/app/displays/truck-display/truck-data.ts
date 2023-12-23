@@ -45,4 +45,5 @@ export class TruckData {
   blinkerLeftOn = false;
   blinkerRightOn = false;
   gameTime = new Date();
+  wipersOn = false;
 }

@@ -134,8 +134,9 @@
         <div class="card-header">
           <h2 class="card-title">Trailer schade</h2>
         </div>
-        <div class="card-body" [class.hidden]="data.numberOfTrailersAttached <= 0">
-          <div class="container">
+        <div class="card-body">
+          <div *ngIf="data.numberOfTrailersAttached <= 0">Geen trailer gekoppeld</div>
+          <div class="container" [class.hidden]="data.numberOfTrailersAttached <= 0">
             <div class="row">
               <div class="col-6">
                 <div class="data-label">Chassis</div>
@@ -174,6 +175,7 @@
         <img class="dashboard-light" id="battery-warning" src="/assets/images/battery.svg" [ngClass]="{'filter-red': data.batteryWarningOn}">
         <img class="dashboard-light" id="engine-water-temp-warning" src="/assets/images/engine-coolant.svg" [ngClass]="{'filter-red': data.engineWaterTempWarningOn }">
         <img class="dashboard-light" id="oil-pressure-warning" src="/assets/images/oil-can.svg" [ngClass]="{'filter-red': data.oilPressureWarningOn}">
+        <img class="dashboard-light" id="wipers" src="/assets/images/wipers.svg" [ngClass]="{'filter-blue': data.wipersOn}">
       </div>
 
       <div class="center-column col-4">
