@@ -16,11 +16,11 @@ app-truck-display {
 
   .data-label {
     color: gray;
-    font-size: .8vw;
+    font-size: 1vw;
   }
 
   .data-item {
-    font-size: 1vw;
+    font-size: 1.2vw;
   }
 
   .card-header {
@@ -29,7 +29,7 @@ app-truck-display {
   }
 
   .card-title {
-    font-size: 1.2vw;
+    font-size: 1.4vw;
   }
 
   .dashboard-row {
@@ -71,10 +71,10 @@ app-truck-display {
     border-radius: 50%;
     background-color: white;
     color:black;
-    font-size: 1vw;
+    font-size: 1.4vw;
     font-weight: 600;
     width: 5vw;
-    aspect-ratio: 1;
+    height: 5vw;
     text-align: center;
     padding-top: 1.3vw;
     position: relative;
