@@ -12,6 +12,7 @@ describe('App component tests', () => {
   let mockGameDataService: jasmine.SpyObj<GameDataService>;
   let connectionStatusSubject: Subject<ConnectionStatus>;
   let gameDataTypeSubject: Subject<GameDataType>;
+  let notificationSubject: Subject<string>;
 
   beforeEach(async () => {
     mockGameDataService = setupMockGameDataService();
@@ -65,6 +66,23 @@ describe('App component tests', () => {
     });
   });
 
+  describe('Snackbar tests', () => {
+    it('Snackbar is not visible by default', async () => {
+      const snackbarHarness = await harness.getSnackBarHarness();
+
+      expect(await snackbarHarness.isVisible()).toBeFalse();
+    });
+
+    it('When a notification emits a snackbar is shown', async () => {
+      notificationSubject.next('Some message');
+
+      const snackbarHarness = await harness.getSnackBarHarness();
+
+      expect(await snackbarHarness.isVisible()).toBeTrue();
+      expect(await snackbarHarness.getMessage()).toEqual('Some message');
+    });
+  });
+
   const setupMockGameDataService = () => {
     const service = jasmine.createSpyObj<GameDataService>('gameDataService', [
       'connectionStatus$',
@@ -77,6 +95,8 @@ describe('App component tests', () => {
     gameDataTypeSubject = new Subject<GameDataType>();
     service.gameDataType$ = gameDataTypeSubject.asObservable();
     service.raceData$ = of(new RaceData());
+    notificationSubject = new Subject<string>;
+    service.notification$ = notificationSubject.asObservable();
 
     return service;
   };

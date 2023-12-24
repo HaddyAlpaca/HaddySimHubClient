@@ -1,6 +1,6 @@
 import { Component, ElementRef, Renderer2, ViewEncapsulation } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { debounceTime, filter, switchMap, tap, timer } from 'rxjs';
+import { filter, switchMap, tap, timer } from 'rxjs';
 import { GameDataService } from 'src/app/services/game-data.service';
 
 @UntilDestroy()
@@ -29,7 +29,6 @@ export class SnackBarComponent {
     this._element = elementRef.nativeElement;
 
     gameDataService.notification$.pipe(
-      debounceTime(this._debounceTime),
       filter(message => !!message),
       tap(message => {
         this._message = message;

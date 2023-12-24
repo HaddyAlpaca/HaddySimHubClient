@@ -1,4 +1,5 @@
 import { ComponentHarness } from '@angular/cdk/testing';
+import { SnackBarComponentHarness } from './components/snackbar/snackbar.component.harness';
 
 export class AppComponentHarness extends ComponentHarness {
   static hostSelector: 'app-root';
@@ -22,5 +23,10 @@ export class AppComponentHarness extends ComponentHarness {
     const elm = await this.locatorFor('.connection-state')();
     const text = await elm.text();
     return text;
+  }
+
+  public async getSnackBarHarness(): Promise<SnackBarComponentHarness> {
+    const harness = this.locatorFor(SnackBarComponentHarness)();
+    return harness;
   }
 }
