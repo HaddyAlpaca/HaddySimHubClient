@@ -21,10 +21,12 @@ export class RaceData {
   gapBehind = 0;
   driverBehindName = ''
   driverBehindLicense = ''
+  driverBehindLicenseColor = '';
   driverBehindIRating = 0;
   gapAhead = 0;
   driverAheadName = '';
   driverAheadLicense = '';
+  driverAheadLicenseColor = '';
   driverAheadIRating = 0;
   clutchPct = 0;
   throttlePct = 0;
