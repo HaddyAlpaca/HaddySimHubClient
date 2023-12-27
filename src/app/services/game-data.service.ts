@@ -55,6 +55,7 @@ export class GameDataService {
       this._connectionStatusSubject.next(ConnectionStatus.Connected);
     }).catch(() => {
       this._connectionStatusSubject.next(ConnectionStatus.ConnectionError);
+      window.location.reload();
     });
 
     this._hubConnection.onreconnecting(() => this._connectionStatusSubject.next(ConnectionStatus.Connecting));
