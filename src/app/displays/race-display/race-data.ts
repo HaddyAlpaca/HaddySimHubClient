@@ -14,6 +14,8 @@ export class RaceData {
   fuelRemaining = 0;
   brakeBias = 0;
   strengthOfField = 0;
+  lastSectorNum = 0;
+  lastSectorTime = 0;
   lastLapTime = 0;
   lastLapTimeDelta = 0;
   bestLapTime = 0;

@@ -1,9 +1,12 @@
 <div class="container">
   <div class="row">
-    <div class="col-6">
+    <div class="col-4">
       <div class="label clock">{{currentTime | date: 'HH:mm'}}</div>
     </div>
-    <div class="col-6">
+    <div class="col-4">
+      <div class="label sof" [style.hidden]="!data.strengthOfField">SOF: {{data.strengthOfField}}</div>
+    </div>
+    <div class="col-4">
       <div class="label sessionType" id="sessionType">{{data.sessionType}}</div>
     </div>
   </div>
@@ -25,8 +28,8 @@
             }
           </div>
         </div>
-        <div class="label">SOF</div>
-        <div id="currentLapTime">{{data.strengthOfField}}</div>
+        <div class="label">Last sector</div>
+        <div id="lastSector">{{data.lastSectorNum <= 0 ? '-' : data.lastSectorNum}}: {{data.lastSectorTime | laptime}}</div>
         <div class="row">
           <div class="col-6">
             <div class="label">Last laptime</div>
@@ -71,6 +74,7 @@
             <div class="label">Track</div>
             <div id="track-temp">{{data.trackTemp | number: '1.1-1'}}&deg;C</div>
           </div>
+        </div>
         <div class="label">Incidents</div>
         @if (data.maxIncidents) {
           <div id="incidents">{{data.incidents}}/{{data.maxIncidents}}</div>
