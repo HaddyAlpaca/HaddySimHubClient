@@ -1,3 +1,5 @@
+import { TrackPosition } from './track-positions.component';
+
 export class RaceData {
   sessionType = '';
   IsLimitedTime = false;
@@ -37,4 +39,5 @@ export class RaceData {
   incidents = 0;
   maxIncidents = 0;
   flag: '' | 'yellow' | 'green' | 'blue' | 'white' | 'finish' | 'black' | 'black-orange' | 'red' = '';
+  trackPositions: TrackPosition[] = [];
 }

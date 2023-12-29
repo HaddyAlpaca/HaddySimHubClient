@@ -11,6 +11,7 @@ import { TimespanPipe } from './pipes/timespan/timespan.pipe';
 import { InputsTraceComponent } from './inputs-trace.component';
 import { tap } from 'rxjs';
 import { IRatingPipe } from './pipes/irating/irating.pipe';
+import { TrackPositionsComponent } from './track-positions.component';
 
 @UntilDestroy()
 @Component({
@@ -26,6 +27,7 @@ import { IRatingPipe } from './pipes/irating/irating.pipe';
     TimespanPipe,
     InputsTraceComponent,
     IRatingPipe,
+    TrackPositionsComponent,
   ],
 })
 export class RaceDisplayComponent implements OnInit {

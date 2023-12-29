@@ -1,0 +1,7 @@
+<div class="tracker">
+  <div class="center-line"></div>
+
+  @for(position of positions; track position.lapDistPct) {
+    <div class="track-item" [style.left.%]="position.lapDistPct" [style.background-color]="position.color"></div>
+  }
+</div>
