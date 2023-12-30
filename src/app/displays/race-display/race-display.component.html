@@ -76,7 +76,7 @@
           </div>
         </div>
         <div class="label">Incidents</div>
-        @if (data.maxIncidents) {
+        @if (data.maxIncidents != 999) {
           <div id="incidents">{{data.incidents}}/{{data.maxIncidents}}</div>
         }
         @else {

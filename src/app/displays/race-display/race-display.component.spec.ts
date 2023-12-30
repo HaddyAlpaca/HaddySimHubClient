@@ -318,7 +318,7 @@ describe('Race display component tests', () => {
 
   describe('Incidents', () => {
     it('Without max incidents only incidents are shown', async () => {
-      patchData({ incidents: 5 });
+      patchData({ incidents: 5, maxIncidents: 999 });
 
       expect(await harness.getElementText('#incidents')).toEqual('5');
     });
