@@ -32,9 +32,6 @@ export class RaceData {
   driverAheadLicense = '';
   driverAheadLicenseColor = '';
   driverAheadIRating = 0;
-  clutchPct = 0;
-  throttlePct = 0;
-  brakePct = 0;
   pitLimiterOn = false;
   incidents = 0;
   maxIncidents = 0;
