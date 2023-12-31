@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 export enum TrackPositionStatus {
-  Unknown,
+  IsPlayer,
+  IsPaceCar,
   SameLap,
-  LapDown,
-  LapUp,
-  OffTrack,
+  LapAhead,
+  LapBehind,
+  InPits,
 }
 
 export interface TrackPosition {
