@@ -92,7 +92,7 @@
       <div class="opponent-delta group-border border-blue">
         <div class="label">Driver behind</div>
         <div [class.hidden]="!data.driverBehindName" id="driverBehindInfo">
-          <div class="delta-time" id="gapBehind" [ngClass]="{'text-green': gapBehindDelta > 0, 'text-yellow': gapBehindDelta < 0}">{{data.gapBehind | deltatime: false}}</div>
+          <div class="delta-time" id="gapBehind" [ngClass]="{'text-green': gapBehindDelta > 0, 'text-yellow': gapBehindDelta < 0}">{{data.driverBehindDelta | deltatime: false}}</div>
           <div class="label driver-name">
             <span id="driverBehind">{{data.driverBehindName}}</span>
             <span class="driver-class" *ngIf="data.driverBehindLicense" [style.background-color]="data.driverBehindLicenseColor">{{data.driverBehindLicense}}</span>
@@ -105,7 +105,7 @@
       <div class="opponent-delta group-border border-blue">
         <div class="label">Driver ahead</div>
         <div [class.hidden]="!data.driverAheadName" id="driverAheadInfo">
-          <div class="delta-time" id="gapAhead" [ngClass]="{'text-green': gapAheadDelta < 0, 'text-yellow': gapAheadDelta > 0}">{{data.gapAhead | deltatime: false}}</div>
+          <div class="delta-time" id="gapAhead" [ngClass]="{'text-green': gapAheadDelta < 0, 'text-yellow': gapAheadDelta > 0}">{{data.driverAheadDelta| deltatime: false}}</div>
           <div class="label driver-name">
             <span id="driverAhead">{{data.driverAheadName}}</span>
             <span class="driver-class" *ngIf="data.driverAheadLicense" [style.background-color]="data.driverAheadLicenseColor">{{data.driverAheadLicense}}</span>

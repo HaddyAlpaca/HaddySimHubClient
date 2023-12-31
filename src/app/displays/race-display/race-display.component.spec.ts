@@ -226,28 +226,28 @@ describe('Race display component tests', () => {
     });
 
     it('Delta time is displayed', async () => {
-      patchData({ gapBehind: 1.2 });
+      patchData({ driverBehindDelta: 1.2 });
 
       expect(await harness.getElementText('#gapBehind')).toEqual('1.200');
     });
 
     it('Delta time is yellow when it is decreased', async () => {
-      patchData({ gapBehind: 1.2 });
-      patchData({ gapBehind: 1.1 });
+      patchData({ driverBehindDelta: 1.2 });
+      patchData({ driverBehindDelta: 1.1 });
 
       expect(await harness.elementHasClass('#gapBehind', 'text-yellow')).toBeTrue();
     });
 
     it('Delta time is green when it is increased', async () => {
-      patchData({ gapBehind: 1.1 });
-      patchData({ gapBehind: 1.3 });
+      patchData({ driverBehindDelta: 1.1 });
+      patchData({ driverBehindDelta: 1.3 });
 
       expect(await harness.elementHasClass('#gapBehind', 'text-green')).toBeTrue();
     });
 
     it('Delta time has no extra formatting when it has not changed', async () => {
-      patchData({ gapBehind: 1.7 });
-      patchData({ gapBehind: 1.7 });
+      patchData({ driverBehindDelta: 1.7 });
+      patchData({ driverBehindDelta: 1.7 });
 
       expect(await harness.elementHasClass('#gapBehind', 'text-green')).toBeFalse();
       expect(await harness.elementHasClass('#gapBehind', 'text-yellow')).toBeFalse();
@@ -274,28 +274,28 @@ describe('Race display component tests', () => {
     });
 
     it('Delta time is displayed', async () => {
-      patchData({ gapAhead: 1.2 });
+      patchData({ driverAheadDelta: 1.2 });
 
       expect(await harness.getElementText('#gapAhead')).toEqual('1.200');
     });
 
     it('Delta time is green when it is decreased', async () => {
-      patchData({ gapAhead: 1.2 });
-      patchData({ gapAhead: 1.1 });
+      patchData({ driverAheadDelta: 1.2 });
+      patchData({ driverAheadDelta: 1.1 });
 
       expect(await harness.elementHasClass('#gapAhead', 'text-green')).toBeTrue();
     });
 
     it('Delta time is yellow when it is increased', async () => {
-      patchData({ gapAhead: 1.1 });
-      patchData({ gapAhead: 1.3 });
+      patchData({ driverAheadDelta: 1.1 });
+      patchData({ driverAheadDelta: 1.3 });
 
       expect(await harness.elementHasClass('#gapAhead', 'text-yellow')).toBeTrue();
     });
 
     it('Delta time has no extra formatting when it has not changed', async () => {
-      patchData({ gapAhead: 1.7 });
-      patchData({ gapAhead: 1.7 });
+      patchData({ driverAheadDelta: 1.7 });
+      patchData({ driverAheadDelta: 1.7 });
 
       expect(await harness.elementHasClass('#gapAhead', 'text-green')).toBeFalse();
       expect(await harness.elementHasClass('#gapAhead', 'text-yellow')).toBeFalse();

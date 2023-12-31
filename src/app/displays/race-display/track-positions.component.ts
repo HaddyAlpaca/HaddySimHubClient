@@ -1,9 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
+export enum TrackPositionStatus {
+  Unknown,
+  SameLap,
+  LapDown,
+  LapUp,
+  OffTrack,
+}
+
 export interface TrackPosition {
   lapDistPct: number;
-  color: string;
+  status: TrackPositionStatus;
 }
 
 @Component({
@@ -16,4 +24,6 @@ export interface TrackPosition {
 export class TrackPositionsComponent {
   @Input()
   public positions: TrackPosition[] = [];
+
+  public readonly TrackPositionStatus = TrackPositionStatus;
 }

@@ -67,19 +67,11 @@ export class RaceDisplayComponent implements OnInit {
   ngOnInit(): void {
     this._gameDataService.raceData$.pipe(
       tap(data => {
-        this._gapBehindDelta = data.gapBehind - this._lastGapBehind;
-        this._lastGapBehind = data.gapBehind;
-        this._gapAheadDelta = data.gapAhead - this._lastGapAhead;
-        this._lastGapAhead = data.gapAhead;
+        this._gapBehindDelta = data.driverBehindDelta - this._lastGapBehind;
+        this._lastGapBehind = data.driverBehindDelta;
+        this._gapAheadDelta = data.driverAheadDelta - this._lastGapAhead;
+        this._lastGapAhead = data.driverAheadDelta;
         this._data = data;
-
-        // Update inputs chart
-        // if (this._inputsTrace) {
-        //   this._inputsTrace.addPoint({
-        //     brake: data.brakePct,
-        //     throttle: data.throttlePct
-        //   });
-        // }
       }),
       untilDestroyed(this),
     ).subscribe();
