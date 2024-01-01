@@ -4,7 +4,16 @@ app-truck-display {
   color: white;
 
   .row {
-    margin-top: 15px;
+    margin-top: .75rem;
+
+    > *:not(:last-child) {
+      padding-right: 0;
+    }
+
+    > .dashboard-row {
+      margin-left: .75rem;
+      margin-right: .75rem;
+    }
   }
 
   .card {
@@ -36,96 +45,99 @@ app-truck-display {
     font-size: 1.5vw;
     display: flex;
     flex-direction: row;
-  }
 
-  .center-column {
-    border-radius: 50px;
-    background-color: darkgray;
-  }
+    .center-column {
+      border-radius: 50px;
+      background-color: darkgray;
+    }
 
-  .left-column {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 40px;
-    padding: 50px;
-  }
+    .left-column {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 40px;
+      padding: 50px;
+    }
 
-  .right-column {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: left;
-    gap: 40px;
-  }
+    .right-column {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-items: left;
+      gap: 40px;
+    }
 
-  .dashboard-light {
-    width: 2em;
-    height: auto;
-  }
+    .dashboard-light {
+      width: 2em;
+      height: auto;
+    }
 
-  .speed-limit {
-    display: inline-block;
-    border:.5rem solid red;
-    border-radius: 50%;
-    background-color: white;
-    color:black;
-    font-size: 1.8vw;
-    font-weight: 600;
-    width: 5vw;
-    height: 5vw;
-    text-align: center;
-    padding-top: .9vw;
-    position: relative;
-    left: 50px;
-    margin-top: 20px;
-  }
+    .speed-limit {
+      display: inline-block;
+      border:.5rem solid red;
+      border-radius: 50%;
+      background-color: white;
+      color:black;
+      font-size: 1.8vw;
+      font-weight: 600;
+      width: 5vw;
+      height: 5vw;
+      text-align: center;
+      padding-top: .9vw;
+      position: relative;
+      left: 50px;
+      margin-top: 20px;
+    }
 
-  .over-speed-limit {
-    color: red;
-  }
+    .over-speed-limit {
+      color: red;
+    }
 
-  .icon-text-control {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding-left: 30px;
-  }
+    .icon-text-control {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-left: 30px;
+    }
 
-  .current-speed {
-    font-size: 6vw;
-    text-align: center;
-    margin-top: -20px;
-  }
+    .current-speed {
+      font-size: 6vw;
+      text-align: center;
+      margin-top: -20px;
+    }
 
-  .speed-unit {
-    font-size: 1em;
-    text-align: center;
-    position: relative;
-    top: -40px;
-  }
+    .speed-unit {
+      font-size: 1em;
+      text-align: center;
+      position: relative;
+      top: -40px;
+    }
 
-  .current-gear {
-    font-size: 2.6vw;
-    text-align: center;
-    margin-top: -20px;
-  }
+    .current-gear {
+      font-size: 2.6vw;
+      text-align: center;
+      margin-top: -20px;
+    }
 
-  #rpm {
-    width: calc(100% - 40px);
-    height: 80px;
-    margin-top: 20px;
-    margin-left: 20px;
+    #rpm {
+      width: calc(100% - 40px);
+      height: 80px;
+      margin-top: 20px;
+      margin-left: 20px;
+    }
   }
 
   .footer-row {
-    font-size: 1.3vw;
-  }
+    min-height: 1.5vw;
+    font-size: 1.5vw;
+    margin-left: 0;
+    margin-right: 0;
 
-  .footer-row .clock {
-    position: absolute;
-    right: 6px;;
+    .clock {
+      position: absolute;
+      right: 6px;;
+    }
   }
 
   .filter-white{
