@@ -119,7 +119,7 @@
           <div class="data-row">
             <div class="data-label">Lading</div>
             @if (data.jobCargoName) {
-              <div class="data-item" id="jobCargoName">{{data.jobCargoName}} ({{data.jobCargoMass}} kg)</div>
+              <div class="data-item" id="jobCargoName">{{data.jobCargoName}} ({{data.jobCargoMass | numbernl}} kg)</div>
             }
             @else {
               <div class="data-item" id="jobCargoName">-</div>
