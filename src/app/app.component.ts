@@ -3,7 +3,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CommonModule } from '@angular/common';
 import { TruckDisplayComponent } from './displays/truck-display/truck-display.component';
 import { RaceDisplayComponent } from './displays/race-display/race-display.component';
-import { tap } from 'rxjs';
+import { distinctUntilChanged, tap } from 'rxjs';
 import { ConnectionStatus, GameDataService, GameDataType } from './services/game-data.service';
 import { SnackBarComponent } from './components/snackbar/snackbar.component';
 
@@ -61,6 +61,7 @@ export class AppComponent {
 
     //Monitor game data type
     this._gameDataService.gameDataType$.pipe(
+      distinctUntilChanged(),
       tap((type) => this._gameDataType = type),
       untilDestroyed(this),
     ).subscribe();
