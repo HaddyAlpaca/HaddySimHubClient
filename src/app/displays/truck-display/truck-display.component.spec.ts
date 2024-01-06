@@ -132,7 +132,7 @@ describe('TruckDisplayComponent', () => {
     it('Cargo name is shown', async () => {
       patchData({ jobCargoName: 'Helicopter', jobCargoMass: 2500 });
 
-      expect(await harness.getElementText('#jobCargoName')).toEqual('Helicopter (2500 kg)');
+      expect(await harness.getElementText('#jobCargoName')).toEqual('Helicopter (2.500 kg)');
     });
   });
 

@@ -10,7 +10,6 @@ describe('App component tests', () => {
   let fixture: ComponentFixture<AppComponent>;
   let harness: AppComponentHarness;
   let mockGameDataService: jasmine.SpyObj<GameDataService>;
-  let connectionStatusSubject: Subject<ConnectionStatus>;
   let gameDataTypeSubject: Subject<GameDataType>;
   let notificationSubject: Subject<string>;
 
@@ -28,42 +27,12 @@ describe('App component tests', () => {
     harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, AppComponentHarness);
   });
 
-  describe('Connection state tests', () => {
-    it('Connection state is displayed when no game data type is set', async () => {
-      gameDataTypeSubject.next(GameDataType.None);
+  it('Connection state is displayed when no game data type is set', async () => {
+    gameDataTypeSubject.next(GameDataType.None);
 
-      expect(await harness.isRaceDisplayVisible()).toBeFalse();
-      expect(await harness.isTruckDisplayVisible()).toBeFalse();
-      expect(await harness.isConnectionStatusVisible()).toBeTrue();
-    });
-
-    it('Disconnected state is displayed', async () => {
-      gameDataTypeSubject.next(GameDataType.None);
-      connectionStatusSubject.next(ConnectionStatus.Disconnected);
-
-      expect(await harness.getConnectionStatusText()).toEqual('Disconnected');
-    });
-
-    it('Connecting state is displayed', async () => {
-      gameDataTypeSubject.next(GameDataType.None);
-      connectionStatusSubject.next(ConnectionStatus.Connecting);
-
-      expect(await harness.getConnectionStatusText()).toEqual('Connecting...');
-    });
-
-    it('Connection error state is displayed', async () => {
-      gameDataTypeSubject.next(GameDataType.None);
-      connectionStatusSubject.next(ConnectionStatus.ConnectionError);
-
-      expect(await harness.getConnectionStatusText()).toEqual('Error connecting');
-    });
-
-    it('Connected state is displayed', async () => {
-      gameDataTypeSubject.next(GameDataType.None);
-      connectionStatusSubject.next(ConnectionStatus.Connected);
-
-      expect(await harness.getConnectionStatusText()).toEqual('Connected, waiting for game...');
-    });
+    expect(await harness.isRaceDisplayVisible()).toBeFalse();
+    expect(await harness.isTruckDisplayVisible()).toBeFalse();
+    expect(await harness.isConnectionStatusVisible()).toBeTrue();
   });
 
   describe('Snackbar tests', () => {
@@ -85,18 +54,17 @@ describe('App component tests', () => {
 
   const setupMockGameDataService = () => {
     const service = jasmine.createSpyObj<GameDataService>('gameDataService', [
-      'connectionStatus$',
       'gameDataType$',
       'raceData$',
       'notification$',
+      'connectionStatus',
     ]);
-    connectionStatusSubject = new Subject<ConnectionStatus>();
-    service.connectionStatus$ = connectionStatusSubject.asObservable();
     gameDataTypeSubject = new Subject<GameDataType>();
     service.gameDataType$ = gameDataTypeSubject.asObservable();
     service.raceData$ = of(new RaceData());
     notificationSubject = new Subject<string>;
     service.notification$ = notificationSubject.asObservable();
+    service.connectionStatus.and.returnValue(ConnectionStatus.Connected);
 
     return service;
   };

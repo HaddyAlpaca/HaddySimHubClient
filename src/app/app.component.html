@@ -1,11 +1,13 @@
-@if(gameDataType === GameDataType.TruckData) {
-  <app-truck-display></app-truck-display>
-}
-@else if(gameDataType === GameDataType.RaceData) {
-  <app-race-display></app-race-display>
-}
-@else {
-  <div class="connection-state">{{ connectionStatusDescription }}</div>
+@switch (gameDataType) {
+  @case (GameDataType.TruckData) {
+    <app-truck-display></app-truck-display>
+  }
+  @case (GameDataType.RaceData) {
+    <app-race-display></app-race-display>
+  }
+  @default {
+    <app-connection-status></app-connection-status>
+  }
 }
 
 <app-snackbar></app-snackbar>

@@ -4,20 +4,21 @@ import { CommonModule } from '@angular/common';
 import { TruckDisplayComponent } from './displays/truck-display/truck-display.component';
 import { RaceDisplayComponent } from './displays/race-display/race-display.component';
 import { distinctUntilChanged, tap } from 'rxjs';
-import { ConnectionStatus, GameDataService, GameDataType } from './services/game-data.service';
+import { GameDataService, GameDataType } from './services/game-data.service';
 import { SnackBarComponent } from './components/snackbar/snackbar.component';
+import { ConnectionStatusComponent } from './components/connection-status/connection-status.component';
 
 @UntilDestroy()
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrl: './app.component.scss',
     standalone: true,
     imports: [
       CommonModule,
       TruckDisplayComponent,
       RaceDisplayComponent,
       SnackBarComponent,
+      ConnectionStatusComponent,
     ],
 })
 export class AppComponent {
@@ -28,37 +29,7 @@ export class AppComponent {
     return this._gameDataType;
   }
 
-  private _connectionStatus = ConnectionStatus.Disconnected;
-  public get connectionStatusDescription(): string {
-    let description = '';
-    switch(this._connectionStatus) {
-      case ConnectionStatus.Disconnected:
-        description = 'Disconnected';
-        break;
-
-      case ConnectionStatus.Connecting:
-        description = 'Connecting...';
-        break;
-
-      case ConnectionStatus.ConnectionError:
-        description = 'Error connecting';
-        break;
-
-      case ConnectionStatus.Connected:
-        description = 'Connected, waiting for game...';
-        break;
-    }
-
-    return description;
-  }
-
   constructor(private _gameDataService: GameDataService) {
-    //Monitor connection status
-    this._gameDataService.connectionStatus$.pipe(
-      tap((status) => this._connectionStatus = status),
-      untilDestroyed(this),
-    ).subscribe();
-
     //Monitor game data type
     this._gameDataService.gameDataType$.pipe(
       distinctUntilChanged(),
