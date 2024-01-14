@@ -3,7 +3,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CommonModule } from '@angular/common';
 import { TruckDisplayComponent } from './displays/truck-display/truck-display.component';
 import { RaceDisplayComponent } from './displays/race-display/race-display.component';
-import { distinctUntilChanged, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import { GameDataService, GameDataType } from './services/game-data.service';
 import { SnackBarComponent } from './components/snackbar/snackbar.component';
 import { ConnectionStatusComponent } from './components/connection-status/connection-status.component';

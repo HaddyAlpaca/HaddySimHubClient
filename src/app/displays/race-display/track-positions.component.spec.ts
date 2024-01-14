@@ -17,7 +17,7 @@ describe('TrackPositionsComponent tests', () => {
   });
 
   it('locates the track position elements correctly', async () => {
-    const items = await harness.getTrackItems();
+    // const items = await harness.getTrackItems();
 
   });
 });
