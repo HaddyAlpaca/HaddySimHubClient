@@ -64,7 +64,7 @@ describe('App component tests', () => {
     service.raceData$ = of(new RaceData());
     notificationSubject = new Subject<string>;
     service.notification$ = notificationSubject.asObservable();
-    service.connectionStatus.and.returnValue(ConnectionStatus.Connected);
+    service.connectionStatus.and.returnValue({ status: ConnectionStatus.Connected });
 
     return service;
   };

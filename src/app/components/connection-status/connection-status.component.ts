@@ -18,6 +18,10 @@ export class ConnectionStatusComponent {
       [ConnectionStatus.Connected]: 'Connected, waiting for game...',
     };
 
-    return statusDescriptions[this._gameDataService.connectionStatus()] || 'Unknown';
+    return statusDescriptions[this._gameDataService.connectionStatus().status] || 'Unknown';
   });
+
+  public connectionMessage = computed(() => this._gameDataService.connectionStatus().message)
+
+  public reloadSeconds = computed(() => this._gameDataService.connectionStatus().reloadSeconds);
 }
