@@ -32,7 +32,6 @@ export class AppComponent {
   constructor(private _gameDataService: GameDataService) {
     //Monitor game data type
     this._gameDataService.gameDataType$.pipe(
-      distinctUntilChanged(),
       tap((type) => this._gameDataType = type),
       untilDestroyed(this),
     ).subscribe();
