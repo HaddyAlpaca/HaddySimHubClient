@@ -76,7 +76,6 @@ export class GameDataService {
         tap(() => {
           this.connectionStatus.update((value) => ({ ...value, reloadSeconds: countDownSeconds }));
           countDownSeconds--;
-          console.log('Countdown: ' + countDownSeconds);
         }),
         filter(() => countDownSeconds <= 0),
         tap(() => window.location.reload()),
