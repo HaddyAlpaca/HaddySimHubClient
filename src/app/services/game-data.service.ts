@@ -68,23 +68,16 @@ export class GameDataService {
     this._hubConnection.start().then(() => {
       this.connectionStatus.set({ status: ConnectionStatus.Connected });
     }).catch((error) => {
-      let countDownSeconds = 10;
-      this.connectionStatus.set({ status: ConnectionStatus.ConnectionError, message: error, reloadSeconds: countDownSeconds });
-
-      interval(1000).pipe(
-        take(countDownSeconds + 1),
-        tap(() => {
-          this.connectionStatus.update((value) => ({ ...value, reloadSeconds: countDownSeconds }));
-          countDownSeconds--;
-        }),
-        filter(() => countDownSeconds <= 0),
-        tap(() => window.location.reload()),
-      ).subscribe();
+      this.connectionStatus.set({ status: ConnectionStatus.ConnectionError, message: error });
+      this.startReloadSequence();
     });
 
     this._hubConnection.onreconnecting((error) => this.connectionStatus.set({ status: ConnectionStatus.Connecting, message: error?.message }));
     this._hubConnection.onreconnected(() => this.connectionStatus.set({ status: ConnectionStatus.Connected }));
-    this._hubConnection.onclose((error) => this.connectionStatus.set({ status: ConnectionStatus.Disconnected, message: error?.message }));
+    this._hubConnection.onclose((error) => {
+      this.connectionStatus.set({ status: ConnectionStatus.Disconnected, message: error?.message })
+      this.startReloadSequence();
+    });
 
     //Monitor emmited data
     this._hubConnection.on('gameDataIdle', () => this._gameDataTypeSubject.next(GameDataType.None));
@@ -102,5 +95,19 @@ export class GameDataService {
     this._hubConnection.on('notification', (data) => {
       this._notificationSubject.next(data);
     });
+  }
+
+  private startReloadSequence(): void {
+    let countDownSeconds = 10;
+    this.connectionStatus.update((value) => ({ ...value, reloadSeconds: countDownSeconds}))
+    interval(1000).pipe(
+      take(countDownSeconds + 1),
+      tap(() => {
+        this.connectionStatus.update((value) => ({ ...value, reloadSeconds: countDownSeconds }));
+        countDownSeconds--;
+      }),
+      filter(() => countDownSeconds <= 0),
+      tap(() => window.location.reload()),
+    ).subscribe();
   }
 }
