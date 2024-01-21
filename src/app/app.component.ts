@@ -20,7 +20,7 @@ import { ConnectionStatusComponent } from './components/connection-status/connec
 })
 export class AppComponent {
   private _gameDataService = inject(GameDataService);
-  private _gameDataType = this._gameDataService.gameDataType;
 
   public readonly GameDataType = GameDataType;
+  public gameDataType = this._gameDataService.gameDataType;
 }
