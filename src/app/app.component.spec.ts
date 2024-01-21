@@ -10,7 +10,6 @@ describe('App component tests', () => {
   let fixture: ComponentFixture<AppComponent>;
   let harness: AppComponentHarness;
   let mockGameDataService: jasmine.SpyObj<GameDataService>;
-  let gameDataTypeSubject: Subject<GameDataType>;
   let notificationSubject: Subject<string>;
 
   beforeEach(async () => {
@@ -28,7 +27,7 @@ describe('App component tests', () => {
   });
 
   it('Connection state is displayed when no game data type is set', async () => {
-    gameDataTypeSubject.next(GameDataType.None);
+    mockGameDataService.gameDataType.and.returnValue(GameDataType.None);
 
     expect(await harness.isRaceDisplayVisible()).toBeFalse();
     expect(await harness.isTruckDisplayVisible()).toBeFalse();
@@ -54,13 +53,11 @@ describe('App component tests', () => {
 
   const setupMockGameDataService = () => {
     const service = jasmine.createSpyObj<GameDataService>('gameDataService', [
-      'gameDataType$',
+      'gameDataType',
       'raceData$',
       'notification$',
       'connectionStatus',
     ]);
-    gameDataTypeSubject = new Subject<GameDataType>();
-    service.gameDataType$ = gameDataTypeSubject.asObservable();
     service.raceData$ = of(new RaceData());
     notificationSubject = new Subject<string>;
     service.notification$ = notificationSubject.asObservable();

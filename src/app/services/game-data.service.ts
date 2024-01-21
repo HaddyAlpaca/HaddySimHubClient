@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
-import { BehaviorSubject, Subject, filter, interval, take, tap } from 'rxjs';
+import { Subject, filter, interval, take, tap } from 'rxjs';
 import { TruckData } from '../displays/truck-display/truck-data';
 import { RaceData } from '../displays/race-display/race-data';
 import { HttpTransportType, HubConnectionBuilder, IHttpConnectionOptions, LogLevel } from '@microsoft/signalr';
@@ -38,8 +38,8 @@ export class GameDataService {
 
   public connectionStatus = signal<ConnectionInfo>({ status: ConnectionStatus.Disconnected });
 
-  private _gameDataTypeSubject = new BehaviorSubject<GameDataType>(GameDataType.None);
-  public gameDataType$ = this._gameDataTypeSubject.asObservable();
+  private _gameDataType = signal(GameDataType.None);
+  public gameDataType = this._gameDataType.asReadonly();
 
   private _truckDataSubject = new Subject<TruckData>();
   public truckData$ = this._truckDataSubject.asObservable();
@@ -80,15 +80,15 @@ export class GameDataService {
     });
 
     //Monitor emmited data
-    this._hubConnection.on('gameDataIdle', () => this._gameDataTypeSubject.next(GameDataType.None));
+    this._hubConnection.on('gameDataIdle', () => this._gameDataType.set(GameDataType.None));
 
     this._hubConnection.on('truckData', (data) => {
-      this._gameDataTypeSubject.next(GameDataType.TruckData);
+      this._gameDataType.set(GameDataType.TruckData);
       this._truckDataSubject.next(data);
     });
 
     this._hubConnection.on('raceData', (data) => {
-      this._gameDataTypeSubject.next(GameDataType.RaceData);
+      this._gameDataType.set(GameDataType.RaceData);
       this._raceDataSubject.next(data);
     });
 
