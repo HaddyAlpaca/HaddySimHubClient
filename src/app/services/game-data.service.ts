@@ -18,10 +18,11 @@ export enum ConnectionStatus {
   Connected,
 }
 
-export enum GameDataType {
+export enum DisplayType {
   None,
-  TruckData,
-  RaceData,
+  TruckDashboard,
+  RaceDashboard,
+  RaceTimingOverview,
 }
 
 export interface GameDataState {
@@ -38,8 +39,8 @@ export class GameDataService {
 
   public connectionStatus = signal<ConnectionInfo>({ status: ConnectionStatus.Disconnected });
 
-  private _gameDataType = signal(GameDataType.None);
-  public gameDataType = this._gameDataType.asReadonly();
+  private _displayType = signal(DisplayType.None);
+  public displayType = this._displayType.asReadonly();
 
   private _truckDataSubject = new Subject<TruckData>();
   public truckData$ = this._truckDataSubject.asObservable();
@@ -80,21 +81,10 @@ export class GameDataService {
     });
 
     //Monitor emmited data
-    this._hubConnection.on('gameDataIdle', () => this._gameDataType.set(GameDataType.None));
-
-    this._hubConnection.on('truckData', (data) => {
-      this._gameDataType.set(GameDataType.TruckData);
-      this._truckDataSubject.next(data);
-    });
-
-    this._hubConnection.on('raceData', (data) => {
-      this._gameDataType.set(GameDataType.RaceData);
-      this._raceDataSubject.next(data);
-    });
-
-    this._hubConnection.on('notification', (data) => {
-      this._notificationSubject.next(data);
-    });
+    this._hubConnection.on('displayType', (type: DisplayType) => this._displayType.set(type));
+    this._hubConnection.on('truckData', (data) => this._truckDataSubject.next(data));
+    this._hubConnection.on('raceData', (data) => this._raceDataSubject.next(data));
+    this._hubConnection.on('notification', (data) => this._notificationSubject.next(data));
   }
 
   private startReloadSequence(): void {

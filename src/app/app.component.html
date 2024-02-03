@@ -1,8 +1,8 @@
-@switch (gameDataType()) {
-  @case (GameDataType.TruckData) {
+@switch (displayType()) {
+  @case (DisplayType.TruckDashboard) {
     <app-truck-display></app-truck-display>
   }
-  @case (GameDataType.RaceData) {
+  @case (DisplayType.RaceDashboard) {
     <app-race-display></app-race-display>
   }
   @default {

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { ConnectionStatus, GameDataService, GameDataType } from './services/game-data.service';
+import { ConnectionStatus, DisplayType, GameDataService } from './services/game-data.service';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { AppComponentHarness } from './app.component.harness';
 import { Subject, of } from 'rxjs';
@@ -26,8 +26,8 @@ describe('App component tests', () => {
     harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, AppComponentHarness);
   });
 
-  it('Connection state is displayed when no game data type is set', async () => {
-    mockGameDataService.gameDataType.and.returnValue(GameDataType.None);
+  it('Connection state is displayed when no display type is set', async () => {
+    mockGameDataService.displayType.and.returnValue(DisplayType.None);
 
     expect(await harness.isRaceDisplayVisible()).toBeFalse();
     expect(await harness.isTruckDisplayVisible()).toBeFalse();
@@ -53,7 +53,7 @@ describe('App component tests', () => {
 
   const setupMockGameDataService = () => {
     const service = jasmine.createSpyObj<GameDataService>('gameDataService', [
-      'gameDataType',
+      'displayType',
       'raceData$',
       'notification$',
       'connectionStatus',

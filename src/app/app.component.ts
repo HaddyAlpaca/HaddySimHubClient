@@ -1,8 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, Signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TruckDisplayComponent } from './displays/truck-display/truck-display.component';
 import { RaceDisplayComponent } from './displays/race-display/race-display.component';
-import { GameDataService, GameDataType } from './services/game-data.service';
+import { DisplayType, GameDataService } from './services/game-data.service';
 import { SnackBarComponent } from './components/snackbar/snackbar.component';
 import { ConnectionStatusComponent } from './components/connection-status/connection-status.component';
 
@@ -21,6 +21,8 @@ import { ConnectionStatusComponent } from './components/connection-status/connec
 export class AppComponent {
   private _gameDataService = inject(GameDataService);
 
-  public readonly GameDataType = GameDataType;
-  public gameDataType = this._gameDataService.gameDataType;
+  public readonly DisplayType = DisplayType;
+  public get displayType(): Signal<DisplayType> {
+    return this._gameDataService.displayType;
+  }
 }
