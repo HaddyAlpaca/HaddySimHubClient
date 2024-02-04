@@ -16,8 +16,8 @@ app-snackbar {
     overflow-x: hidden;
     text-overflow: ellipsis;
   }
-}
 
-app-snackbar.show {
-  visibility: visible;
+  &.show {
+    visibility: visible;
+  }
 }
