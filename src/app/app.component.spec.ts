@@ -3,14 +3,11 @@ import { AppComponent } from './app.component';
 import { ConnectionStatus, DisplayType, GameDataService } from './services/game-data.service';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { AppComponentHarness } from './app.component.harness';
-import { Subject, of } from 'rxjs';
-import { RaceData } from './displays/race-display/race-data';
 
 describe('App component tests', () => {
   let fixture: ComponentFixture<AppComponent>;
   let harness: AppComponentHarness;
   let mockGameDataService: jasmine.SpyObj<GameDataService>;
-  let notificationSubject: Subject<string>;
 
   beforeEach(async () => {
     mockGameDataService = setupMockGameDataService();
@@ -27,7 +24,7 @@ describe('App component tests', () => {
   });
 
   it('Connection state is displayed when no display type is set', async () => {
-    mockGameDataService.displayType.and.returnValue(DisplayType.None);
+    mockGameDataService.displayUpdate.and.returnValue({ type: DisplayType.None });
 
     expect(await harness.isRaceDisplayVisible()).toBeFalse();
     expect(await harness.isTruckDisplayVisible()).toBeFalse();
@@ -42,7 +39,7 @@ describe('App component tests', () => {
     });
 
     it('When a notification emits a snackbar is shown', async () => {
-      notificationSubject.next('Some message');
+      mockGameDataService.notification.and.returnValue('Some message');
 
       const snackbarHarness = await harness.getSnackBarHarness();
 
@@ -53,14 +50,12 @@ describe('App component tests', () => {
 
   const setupMockGameDataService = () => {
     const service = jasmine.createSpyObj<GameDataService>('gameDataService', [
-      'displayType',
-      'raceData$',
-      'notification$',
+      'notification',
+      'displayUpdate',
       'connectionStatus',
     ]);
-    service.raceData$ = of(new RaceData());
-    notificationSubject = new Subject<string>;
-    service.notification$ = notificationSubject.asObservable();
+    service.notification.and.returnValue('');
+    service.displayUpdate.and.returnValue({ type: DisplayType.None });
     service.connectionStatus.and.returnValue({ status: ConnectionStatus.Connected });
 
     return service;

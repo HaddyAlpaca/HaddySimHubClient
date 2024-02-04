@@ -1,47 +1,19 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { tap } from 'rxjs';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { TruckData } from './truck-data';
 import { TimespanPipe } from './pipes/timespan/timespan.pipe';
 import { GearPipe } from './pipes/gear/gear.pipe';
 import { NgClass, DecimalPipe, CommonModule } from '@angular/common';
-import { GameDataService } from 'src/app/services/game-data.service';
 import { NumberNlPipe } from '../pipes/number-nl/number-nl.pipe';
-import { ClockService } from 'src/app/services/clock.service';
+import { DisplayComponent } from '../display.component';
 
-@UntilDestroy()
 @Component({
     selector: 'app-truck-display',
     templateUrl: 'truck-display.component.html',
     styleUrl: 'truck-display.component.scss',
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [NgClass, DecimalPipe, GearPipe, TimespanPipe, NumberNlPipe, CommonModule],
 })
-export class TruckDisplayComponent implements OnInit {
-  private _data: TruckData = new TruckData();
-  get data(): TruckData{
-    return this._data;
-  }
-
-  private _currentTime = new Date();
-  public get currentTime(): Date {
-    return this._currentTime;
-  }
-
-  constructor(
-    private _gameDataService: GameDataService,
-    private _clockService: ClockService,
-  ) {
-    this._clockService.getCurrentTime().pipe(
-      tap((time) => this._currentTime = time),
-    ).subscribe();
-  }
-
-  ngOnInit(): void {
-    this._gameDataService.truckData$.pipe(
-      tap(data => this._data = data),
-      untilDestroyed(this),
-    ).subscribe();
-  }
+export class TruckDisplayComponent extends DisplayComponent<TruckData> {
 }

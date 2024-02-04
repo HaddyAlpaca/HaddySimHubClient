@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RaceDisplayComponent } from './race-display.component';
 import { ClockService } from 'src/app/services/clock.service';
-import { GameDataService } from 'src/app/services/game-data.service';
-import { BehaviorSubject, Subject, of } from 'rxjs';
+import { DisplayType, GameDataService } from 'src/app/services/game-data.service';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { RaceDisplayComponentHarness } from './race-display.component.harness';
 import { RaceData } from './race-data';
@@ -12,7 +11,6 @@ describe('Race display component tests', () => {
   let harness: RaceDisplayComponentHarness;
   let mockClockService: jasmine.SpyObj<ClockService>;
   let mockGameDataService: jasmine.SpyObj<GameDataService>;
-  let raceDataSubject: Subject<RaceData>;
   let raceData: RaceData;
 
   beforeEach(async () => {
@@ -345,17 +343,15 @@ describe('Race display component tests', () => {
   });
 
   const setupMockClockSerivce = () => {
-    const service = jasmine.createSpyObj<ClockService>('clockService', ['getCurrentTime']);
-    service.getCurrentTime.and.returnValue(of(new Date()));
+    const service = jasmine.createSpyObj<ClockService>('clockService', ['time']);
+    service.time.and.returnValue(new Date());
 
     return service;
   }
 
   const setupMockGameDataService = () => {
-    const service = jasmine.createSpyObj<GameDataService>('gameDataService', ['raceData$']);
-    raceData = new RaceData();
-    raceDataSubject = new BehaviorSubject<RaceData>(raceData);
-    service.raceData$ = raceDataSubject.asObservable();
+    const service = jasmine.createSpyObj<GameDataService>('gameDataService', ['displayUpdate']);
+    service.displayUpdate.and.returnValue({ type: DisplayType.RaceDashboard, data: new RaceData() });
 
     return service;
   }
@@ -366,6 +362,6 @@ describe('Race display component tests', () => {
       ...value,
     };
 
-    raceDataSubject.next(data);
+    mockGameDataService.displayUpdate.and.returnValue({ type: DisplayType.RaceDashboard, data });
   }
 });

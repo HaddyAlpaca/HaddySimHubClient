@@ -1,6 +1,6 @@
-import { Component, ElementRef, Renderer2, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewEncapsulation, effect, inject } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { filter, switchMap, tap, timer } from 'rxjs';
+import { take, tap, timer } from 'rxjs';
 import { GameDataService } from 'src/app/services/game-data.service';
 
 @UntilDestroy()
@@ -12,9 +12,10 @@ import { GameDataService } from 'src/app/services/game-data.service';
   standalone: true,
 })
 export class SnackBarComponent {
-  private readonly _debounceTime = 250;
   private readonly _timeout = 5000;
   private readonly _element: HTMLElement;
+  private _gameDataService = inject(GameDataService);
+  private _renderer = inject(Renderer2);
 
   private _message = '';
   public get message(): string {
@@ -23,21 +24,23 @@ export class SnackBarComponent {
 
   constructor(
     elementRef: ElementRef,
-    gameDataService: GameDataService,
-    private _renderer: Renderer2,
   ) {
     this._element = elementRef.nativeElement;
 
-    gameDataService.notification$.pipe(
-      filter(message => !!message),
-      tap(message => {
-        this._message = message;
+    effect(() => {
+      const message = this._gameDataService.notification();
+
+      if (message) {
         this.setVisible(true);
-      }),
-      switchMap(() => timer(this._timeout)),
-      tap(() => this.setVisible(false)),
-      untilDestroyed(this),
-    ).subscribe();
+        timer(this._timeout).pipe(
+          take(1),
+          tap(() => this.setVisible(false)),
+          untilDestroyed(this),
+        ).subscribe();
+      } else {
+        this.setVisible(false);
+      }
+    });
   }
 
   private setVisible(value: boolean): void {

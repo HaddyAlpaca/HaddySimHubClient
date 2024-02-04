@@ -1,8 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
-import { Subject, filter, interval, take, tap } from 'rxjs';
-import { TruckData } from '../displays/truck-display/truck-data';
-import { RaceData } from '../displays/race-display/race-data';
+import { filter, interval, take, tap } from 'rxjs';
 import { HttpTransportType, HubConnectionBuilder, IHttpConnectionOptions, LogLevel } from '@microsoft/signalr';
 
 export interface ConnectionInfo {
@@ -25,10 +23,9 @@ export enum DisplayType {
   RaceTimingOverview,
 }
 
-export interface GameDataState {
-  connectionStatus: ConnectionStatus;
-  truckData: TruckData | null;
-  raceData: RaceData | null;
+export interface DisplayUpdate {
+  type: DisplayType;
+  data?: unknown;
 }
 
 @Injectable({
@@ -39,17 +36,11 @@ export class GameDataService {
 
   public connectionStatus = signal<ConnectionInfo>({ status: ConnectionStatus.Disconnected });
 
-  private _displayType = signal(DisplayType.None);
-  public displayType = this._displayType.asReadonly();
+  private _displayUpdate = signal<DisplayUpdate>({ type: DisplayType.None });
+  public readonly displayUpdate = this._displayUpdate.asReadonly();
 
-  private _truckDataSubject = new Subject<TruckData>();
-  public truckData$ = this._truckDataSubject.asObservable();
-
-  private _raceDataSubject = new Subject<RaceData>();
-  public raceData$ = this._raceDataSubject.asObservable();
-
-  private _notificationSubject = new Subject<string>();
-  public notification$ = this._notificationSubject.asObservable();
+  private _notification = signal('');
+  public notification = this._notification.asReadonly();
 
   constructor() {
     const connectionOptions: IHttpConnectionOptions = {
@@ -58,7 +49,7 @@ export class GameDataService {
       logMessageContent: false,
     };
 
-    const notificationUrl = 'game-data';
+    const notificationUrl = 'display-data';
     this._hubConnection = new HubConnectionBuilder()
       .withUrl(notificationUrl, connectionOptions)
       .configureLogging(LogLevel.Error) // Warning => then if the frontend receives messages but isn't subscribed to a topic shows a warning.
@@ -81,10 +72,8 @@ export class GameDataService {
     });
 
     //Monitor emmited data
-    this._hubConnection.on('displayType', (type: DisplayType) => this._displayType.set(type));
-    this._hubConnection.on('truckData', (data) => this._truckDataSubject.next(data));
-    this._hubConnection.on('raceData', (data) => this._raceDataSubject.next(data));
-    this._hubConnection.on('notification', (data) => this._notificationSubject.next(data));
+    this._hubConnection.on('displayUpdate', (update: DisplayUpdate) => this._displayUpdate.set(update));
+    this._hubConnection.on('notification', (message: string) => this._notification.set(message));
   }
 
   private startReloadSequence(): void {

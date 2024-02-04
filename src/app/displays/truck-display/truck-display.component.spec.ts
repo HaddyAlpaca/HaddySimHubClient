@@ -6,8 +6,7 @@ import { TruckDashComponentHarness } from './truck-display.component.harness';
 import { TruckData } from './truck-data';
 import { GearPipe } from './pipes/gear/gear.pipe';
 import { TimespanPipe } from './pipes/timespan/timespan.pipe';
-import { GameDataService } from 'src/app/services/game-data.service';
-import { Subject, of } from 'rxjs';
+import { DisplayType, GameDataService } from 'src/app/services/game-data.service';
 import { ClockService } from 'src/app/services/clock.service';
 
 describe('TruckDisplayComponent', () => {
@@ -15,7 +14,6 @@ describe('TruckDisplayComponent', () => {
   let data: TruckData;
   let mockGameDataService: jasmine.SpyObj<GameDataService>;
   let mockClockService: jasmine.SpyObj<ClockService>;
-  let truckDataSubject: Subject<TruckData>;
   let harness: TruckDashComponentHarness;
 
   beforeEach(async () => {
@@ -137,16 +135,16 @@ describe('TruckDisplayComponent', () => {
   });
 
   const setupMockClockSerivce = () => {
-    const service = jasmine.createSpyObj<ClockService>('clockService', ['getCurrentTime']);
-    service.getCurrentTime.and.returnValue(of(new Date()));
+    const service = jasmine.createSpyObj<ClockService>('clockService', ['time']);
+    service.time.and.returnValue(new Date());
 
     return service;
   }
 
   const setupMockGameDataService = () => {
-    const service = jasmine.createSpyObj('gameDataService', ['truckData$']);
-    truckDataSubject = new Subject<TruckData>();
-    service.truckData$ = truckDataSubject.asObservable();
+    const service = jasmine.createSpyObj('gameDataService', ['displayUpdate']);
+    service.displayUpdate.and.returnValue({ type: DisplayType.TruckDashboard, data: new TruckData() });
+
     return service;
   }
 
@@ -156,6 +154,6 @@ describe('TruckDisplayComponent', () => {
       ...value,
     };
 
-    truckDataSubject.next(newData);
+    mockGameDataService.displayUpdate.and.returnValue({ type: DisplayType.TruckDashboard, data: newData });
   }
 });

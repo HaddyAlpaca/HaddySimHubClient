@@ -1,4 +1,4 @@
-import { Component, Signal, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TruckDisplayComponent } from './displays/truck-display/truck-display.component';
 import { RaceDisplayComponent } from './displays/race-display/race-display.component';
@@ -22,7 +22,5 @@ export class AppComponent {
   private _gameDataService = inject(GameDataService);
 
   public readonly DisplayType = DisplayType;
-  public get displayType(): Signal<DisplayType> {
-    return this._gameDataService.displayType;
-  }
+  public displayUpdate = this._gameDataService.displayUpdate;
 }

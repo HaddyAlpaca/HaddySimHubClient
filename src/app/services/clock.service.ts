@@ -1,16 +1,18 @@
-import { Injectable } from '@angular/core';
-import { Observable, interval, map } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
+import { UntilDestroy } from '@ngneat/until-destroy';
+import { tap, timer } from 'rxjs';
 
+@UntilDestroy()
 @Injectable({
   providedIn: 'root',
 })
 export class ClockService {
-  getCurrentTime(): Observable<Date> {
-    return interval(1000).pipe(
-      map(() => {
-        const currentTime = new Date();
-        return currentTime;
-      }),
-    );
+  private readonly _time = signal(new Date());
+  public readonly time = this._time.asReadonly();
+
+  constructor() {
+    timer(0, 1000).pipe(
+      tap(() => this._time.set(new Date())),
+    ).subscribe();
   }
 }

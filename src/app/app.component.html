@@ -1,13 +1,13 @@
-@switch (displayType()) {
+@switch (displayUpdate().type) {
   @case (DisplayType.TruckDashboard) {
-    <app-truck-display></app-truck-display>
+    <app-truck-display [dataSource]="displayUpdate().data" />
   }
   @case (DisplayType.RaceDashboard) {
-    <app-race-display></app-race-display>
+    <app-race-display [dataSource]="displayUpdate().data" />
   }
   @default {
-    <app-connection-status></app-connection-status>
+    <app-connection-status />
   }
 }
 
-<app-snackbar></app-snackbar>
+<app-snackbar />
