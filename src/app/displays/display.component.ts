@@ -1,18 +1,18 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { ClockService } from '../services/clock.service';
-import { GameDataService } from '../services/game-data.service';
 
 @Component({
   template: '',
 })
 export abstract class DisplayComponent<T> {
   private _clockService = inject(ClockService);
-  private _gameDataService = inject(GameDataService);
+
+  public dataSource = input.required<unknown>({});
 
   public readonly currentTime = this._clockService.time;
 
   public data = computed(() => {
-    const data = this._gameDataService.displayUpdate().data;
+    const data = this.dataSource();
 
     if (!data) {
       return this.createDefaultData();

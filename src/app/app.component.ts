@@ -24,6 +24,7 @@ export class AppComponent {
 
   public readonly DisplayType = DisplayType;
   public displayUpdate = this._gameDataService.displayUpdate;
+  public connectionStatus = this._gameDataService.connectionStatus;
 
   constructor() {
     effect(() => {

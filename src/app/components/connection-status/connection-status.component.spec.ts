@@ -1,49 +1,46 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ConnectionStatus, GameDataService } from 'src/app/services/game-data.service';
+import { ConnectionStatus } from 'src/app/services/game-data.service';
 import { ConnectionStatusComponent } from './connection-status.component';
 import { ConnectionStatusComponentHarness } from './connection-status.component.harness';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { Component } from '@angular/core';
 
 describe('ConnectionStatusComponent tests', () => {
-  let fixture: ComponentFixture<ConnectionStatusComponent>;
-  let mockGameDataService: jasmine.SpyObj<GameDataService>;
+  let fixture: ComponentFixture<ConnectionStatusTestComponent>;
+  let component: ConnectionStatusTestComponent;
 
   beforeEach(async () => {
-    mockGameDataService = jasmine.createSpyObj<GameDataService>('gameDataService', ['connectionStatus']);
-
     await TestBed.configureTestingModule({
       declarations: [],
-      providers: [
-        { provide: GameDataService, useValue: mockGameDataService },
-      ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ConnectionStatusComponent);
+    fixture = TestBed.createComponent(ConnectionStatusTestComponent);
+    component = fixture.componentInstance;
   });
 
   it('Disconnected state is displayed', async () => {
-    mockGameDataService.connectionStatus.and.returnValue({ status: ConnectionStatus.Disconnected });
+    component.status = { status: ConnectionStatus.Disconnected };
     const harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, ConnectionStatusComponentHarness);
 
     expect(await harness.getConnectionStatusText()).toEqual('Disconnected');
   });
 
   it('Connecting state is displayed', async () => {
-    mockGameDataService.connectionStatus.and.returnValue({ status: ConnectionStatus.Connecting });
+    component.status = { status: ConnectionStatus.Connecting };
     const harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, ConnectionStatusComponentHarness);
 
     expect(await harness.getConnectionStatusText()).toEqual('Connecting...');
   });
 
   it('Connection error state is displayed', async () => {
-    mockGameDataService.connectionStatus.and.returnValue({ status: ConnectionStatus.ConnectionError });
+    component.status = { status: ConnectionStatus.ConnectionError };
     const harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, ConnectionStatusComponentHarness);
 
     expect(await harness.getConnectionStatusText()).toEqual('Error connecting');
   });
 
   it('Connected state is displayed', async () => {
-    mockGameDataService.connectionStatus.and.returnValue({ status: ConnectionStatus.Connected });
+    component.status = { status: ConnectionStatus.Connected };
     const harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, ConnectionStatusComponentHarness);
 
     expect(await harness.getConnectionStatusText()).toEqual('Connected, waiting for game...');
@@ -51,3 +48,12 @@ describe('ConnectionStatusComponent tests', () => {
 
 
 });
+
+@Component({
+  template: '<app-connection-status [status]="status" />',
+  standalone: true,
+  imports: [ConnectionStatusComponent],
+})
+export class ConnectionStatusTestComponent {
+  public status = { status: ConnectionStatus.Disconnected };
+}

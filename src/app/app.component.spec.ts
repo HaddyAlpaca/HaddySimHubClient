@@ -10,7 +10,6 @@ describe('App component tests', () => {
   let harness: AppComponentHarness;
   let mockGameDataService: jasmine.SpyObj<GameDataService>;
   let displayUpdate: WritableSignal<DisplayUpdate>;
-  let notification: WritableSignal<string>;
 
   beforeEach(async () => {
     mockGameDataService = setupMockGameDataService();
@@ -36,14 +35,11 @@ describe('App component tests', () => {
 
   const setupMockGameDataService = () => {
     const service = jasmine.createSpyObj<GameDataService>('gameDataService', [
-      'notification',
       'displayUpdate',
       'connectionStatus',
     ]);
     displayUpdate = signal<DisplayUpdate>({ type: DisplayType.None });
     service.displayUpdate.and.callFake(displayUpdate);
-    notification = signal('');
-    service.notification.and.callFake(notification);
     service.connectionStatus.and.returnValue({ status: ConnectionStatus.Connected });
 
     return service;

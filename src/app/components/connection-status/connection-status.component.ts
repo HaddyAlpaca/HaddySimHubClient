@@ -1,5 +1,5 @@
-import { Component, computed, inject } from '@angular/core';
-import { ConnectionStatus, GameDataService } from 'src/app/services/game-data.service';
+import { Component, computed, input } from '@angular/core';
+import { ConnectionInfo, ConnectionStatus } from 'src/app/services/game-data.service';
 
 @Component({
   selector: 'app-connection-status',
@@ -8,7 +8,7 @@ import { ConnectionStatus, GameDataService } from 'src/app/services/game-data.se
   standalone: true,
 })
 export class ConnectionStatusComponent {
-  private _gameDataService = inject(GameDataService);
+  public status = input<ConnectionInfo>({ status: ConnectionStatus.Disconnected });
 
   public connectionStatusDescription = computed(() => {
     const statusDescriptions: { [key in ConnectionStatus]: string } = {
@@ -18,10 +18,10 @@ export class ConnectionStatusComponent {
       [ConnectionStatus.Connected]: 'Connected, waiting for game...',
     };
 
-    return statusDescriptions[this._gameDataService.connectionStatus().status] || 'Unknown';
+    return statusDescriptions[this.status().status] || 'Unknown';
   });
 
-  public connectionMessage = computed(() => this._gameDataService.connectionStatus().message)
+  public connectionMessage = computed(() => this.status().message)
 
-  public reloadSeconds = computed(() => this._gameDataService.connectionStatus().reloadSeconds);
+  public reloadSeconds = computed(() => this.status().reloadSeconds);
 }

@@ -6,24 +6,21 @@ import { TruckDashComponentHarness } from './truck-display.component.harness';
 import { TruckData } from './truck-data';
 import { GearPipe } from './pipes/gear/gear.pipe';
 import { TimespanPipe } from './pipes/timespan/timespan.pipe';
-import { DisplayType, DisplayUpdate, GameDataService } from 'src/app/services/game-data.service';
 import { ClockService } from 'src/app/services/clock.service';
-import { WritableSignal, signal } from '@angular/core';
+import { Component } from '@angular/core';
 
 describe('TruckDisplayComponent', () => {
-  let fixture: ComponentFixture<TruckDisplayComponent>;
+  let fixture: ComponentFixture<TruckDisplayTestComponent>;
+  let component: TruckDisplayTestComponent;
   let data: TruckData;
-  let mockGameDataService: jasmine.SpyObj<GameDataService>;
   let mockClockService: jasmine.SpyObj<ClockService>;
   let harness: TruckDashComponentHarness;
-  let displayUpdate: WritableSignal<DisplayUpdate>;
 
   beforeEach(async () => {
     //Set default values for the truck data
     data = new TruckData();
 
     //Setup mocking services
-    mockGameDataService = setupMockGameDataService();
     mockClockService = setupMockClockSerivce();
 
     await TestBed.configureTestingModule({
@@ -33,12 +30,12 @@ describe('TruckDisplayComponent', () => {
         TimespanPipe],
       providers: [
         { provide: ClockService, useValue: mockClockService },
-        { provide: GameDataService, useValue: mockGameDataService },
       ],
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TruckDisplayComponent);
+    fixture = TestBed.createComponent(TruckDisplayTestComponent);
+    component = fixture.componentInstance;
     harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, TruckDashComponentHarness);
   });
 
@@ -143,20 +140,21 @@ describe('TruckDisplayComponent', () => {
     return service;
   }
 
-  const setupMockGameDataService = () => {
-    const service = jasmine.createSpyObj('gameDataService', ['displayUpdate']);
-    displayUpdate = signal<DisplayUpdate>({ type: DisplayType.TruckDashboard, data: new TruckData() });
-    service.displayUpdate.and.callFake(displayUpdate);
-
-    return service;
-  }
-
   const patchData = (value: { [key: string]: unknown; }) => {
     const newData = {
       ...data,
       ...value,
     };
 
-    displayUpdate.set({ type: DisplayType.TruckDashboard, data: newData });
+    component.dataSource = newData;
   }
 });
+
+@Component({
+  template: '<app-truck-display [dataSource]="dataSource" />',
+  standalone: true,
+  imports: [TruckDisplayComponent],
+})
+export class TruckDisplayTestComponent {
+  public dataSource = new TruckData();
+}

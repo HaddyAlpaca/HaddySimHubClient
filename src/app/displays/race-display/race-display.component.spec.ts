@@ -1,34 +1,31 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RaceDisplayComponent } from './race-display.component';
 import { ClockService } from 'src/app/services/clock.service';
-import { DisplayType, DisplayUpdate, GameDataService } from 'src/app/services/game-data.service';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { RaceDisplayComponentHarness } from './race-display.component.harness';
 import { RaceData } from './race-data';
-import { WritableSignal, signal } from '@angular/core';
+import { Component } from '@angular/core';
 
 describe('Race display component tests', () => {
-  let fixture: ComponentFixture<RaceDisplayComponent>;
+  let fixture: ComponentFixture<RaceDisplayTestComponent>;
+  let component: RaceDisplayTestComponent;
   let harness: RaceDisplayComponentHarness;
   let mockClockService: jasmine.SpyObj<ClockService>;
-  let mockGameDataService: jasmine.SpyObj<GameDataService>;
   let raceData: RaceData;
-  let displayUpdate: WritableSignal<DisplayUpdate>;
 
   beforeEach(async () => {
     //Setup mocks
     mockClockService = setupMockClockSerivce();
-    mockGameDataService = setupMockGameDataService();
 
     await TestBed.configureTestingModule({
       declarations: [],
       providers: [
         { provide: ClockService, useValue: mockClockService },
-        { provide: GameDataService, useValue: mockGameDataService },
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(RaceDisplayComponent);
+    fixture = TestBed.createComponent(RaceDisplayTestComponent);
+    component = fixture.componentInstance;
     harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, RaceDisplayComponentHarness);
   })
 
@@ -307,20 +304,21 @@ describe('Race display component tests', () => {
     return service;
   }
 
-  const setupMockGameDataService = () => {
-    const service = jasmine.createSpyObj('gameDataService', ['displayUpdate']);
-    displayUpdate = signal<DisplayUpdate>({ type: DisplayType.RaceDashboard, data: new RaceData() });
-    service.displayUpdate.and.callFake(displayUpdate);
-
-    return service;
-  }
-
   const patchData = (value: { [key: string]: unknown; }) => {
     const data = {
       ...raceData,
       ...value,
     };
 
-    displayUpdate.set({ type: DisplayType.RaceDashboard, data });
+    component.dataSource = data;
   }
 });
+
+@Component({
+  template: '<app-race-display [dataSource]="dataSource" />',
+  standalone: true,
+  imports: [RaceDisplayComponent],
+})
+export class RaceDisplayTestComponent {
+    public dataSource =  new RaceData();
+}
