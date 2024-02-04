@@ -1,9 +1,9 @@
 @switch (displayUpdate().type) {
   @case (DisplayType.TruckDashboard) {
-    <app-truck-display [dataSource]="displayUpdate().data" />
+    <app-truck-display />
   }
   @case (DisplayType.RaceDashboard) {
-    <app-race-display [dataSource]="displayUpdate().data" />
+    <app-race-display />
   }
   @default {
     <app-connection-status />

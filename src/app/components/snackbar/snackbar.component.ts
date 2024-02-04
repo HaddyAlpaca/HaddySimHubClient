@@ -1,7 +1,8 @@
-import { Component, ElementRef, Renderer2, ViewEncapsulation, effect, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Renderer2, ViewEncapsulation, effect, inject } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { take, tap, timer } from 'rxjs';
+import { filter, switchMap, tap, timer } from 'rxjs';
 import { GameDataService } from 'src/app/services/game-data.service';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @UntilDestroy()
 @Component({
@@ -10,37 +11,37 @@ import { GameDataService } from 'src/app/services/game-data.service';
   styleUrl: 'snackbar.component.scss',
   encapsulation: ViewEncapsulation.None,
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SnackBarComponent {
   private readonly _timeout = 5000;
   private readonly _element: HTMLElement;
   private _gameDataService = inject(GameDataService);
   private _renderer = inject(Renderer2);
+  private _cdr = inject(ChangeDetectorRef);
 
   private _message = '';
   public get message(): string {
     return this._message;
   }
 
+  private _notification$ = toObservable(this._gameDataService.notification);
+
   constructor(
     elementRef: ElementRef,
   ) {
     this._element = elementRef.nativeElement;
 
-    effect(() => {
-      const message = this._gameDataService.notification();
-
-      if (message) {
+    this._notification$.pipe(
+      filter(message => !!message),
+      tap(message => {
+        this._message = message;
         this.setVisible(true);
-        timer(this._timeout).pipe(
-          take(1),
-          tap(() => this.setVisible(false)),
-          untilDestroyed(this),
-        ).subscribe();
-      } else {
-        this.setVisible(false);
-      }
-    });
+      }),
+      switchMap(() => timer(this._timeout)),
+      tap(() => this.setVisible(false)),
+      untilDestroyed(this),
+    );
   }
 
   private setVisible(value: boolean): void {
@@ -49,5 +50,7 @@ export class SnackBarComponent {
     } else {
       this._renderer.removeClass(this._element, 'show');
     }
+
+    this._cdr.detectChanges();
   }
 }

@@ -6,8 +6,9 @@ import { TruckDashComponentHarness } from './truck-display.component.harness';
 import { TruckData } from './truck-data';
 import { GearPipe } from './pipes/gear/gear.pipe';
 import { TimespanPipe } from './pipes/timespan/timespan.pipe';
-import { DisplayType, GameDataService } from 'src/app/services/game-data.service';
+import { DisplayType, DisplayUpdate, GameDataService } from 'src/app/services/game-data.service';
 import { ClockService } from 'src/app/services/clock.service';
+import { WritableSignal, signal } from '@angular/core';
 
 describe('TruckDisplayComponent', () => {
   let fixture: ComponentFixture<TruckDisplayComponent>;
@@ -15,6 +16,7 @@ describe('TruckDisplayComponent', () => {
   let mockGameDataService: jasmine.SpyObj<GameDataService>;
   let mockClockService: jasmine.SpyObj<ClockService>;
   let harness: TruckDashComponentHarness;
+  let displayUpdate: WritableSignal<DisplayUpdate>;
 
   beforeEach(async () => {
     //Set default values for the truck data
@@ -143,7 +145,8 @@ describe('TruckDisplayComponent', () => {
 
   const setupMockGameDataService = () => {
     const service = jasmine.createSpyObj('gameDataService', ['displayUpdate']);
-    service.displayUpdate.and.returnValue({ type: DisplayType.TruckDashboard, data: new TruckData() });
+    displayUpdate = signal<DisplayUpdate>({ type: DisplayType.TruckDashboard, data: new TruckData() });
+    service.displayUpdate.and.callFake(displayUpdate);
 
     return service;
   }
@@ -154,6 +157,6 @@ describe('TruckDisplayComponent', () => {
       ...value,
     };
 
-    mockGameDataService.displayUpdate.and.returnValue({ type: DisplayType.TruckDashboard, data: newData });
+    displayUpdate.set({ type: DisplayType.TruckDashboard, data: newData });
   }
 });

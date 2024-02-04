@@ -37,7 +37,7 @@ export class GameDataService {
   public connectionStatus = signal<ConnectionInfo>({ status: ConnectionStatus.Disconnected });
 
   private _displayUpdate = signal<DisplayUpdate>({ type: DisplayType.None });
-  public readonly displayUpdate = this._displayUpdate.asReadonly();
+  public displayUpdate = this._displayUpdate.asReadonly();
 
   private _notification = signal('');
   public notification = this._notification.asReadonly();

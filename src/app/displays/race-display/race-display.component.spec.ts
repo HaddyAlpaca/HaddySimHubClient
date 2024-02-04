@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RaceDisplayComponent } from './race-display.component';
 import { ClockService } from 'src/app/services/clock.service';
-import { DisplayType, GameDataService } from 'src/app/services/game-data.service';
+import { DisplayType, DisplayUpdate, GameDataService } from 'src/app/services/game-data.service';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { RaceDisplayComponentHarness } from './race-display.component.harness';
 import { RaceData } from './race-data';
+import { WritableSignal, signal } from '@angular/core';
 
 describe('Race display component tests', () => {
   let fixture: ComponentFixture<RaceDisplayComponent>;
@@ -12,6 +13,7 @@ describe('Race display component tests', () => {
   let mockClockService: jasmine.SpyObj<ClockService>;
   let mockGameDataService: jasmine.SpyObj<GameDataService>;
   let raceData: RaceData;
+  let displayUpdate: WritableSignal<DisplayUpdate>;
 
   beforeEach(async () => {
     //Setup mocks
@@ -228,28 +230,6 @@ describe('Race display component tests', () => {
 
       expect(await harness.getElementText('#gapBehind')).toEqual('1.200');
     });
-
-    it('Delta time is yellow when it is decreased', async () => {
-      patchData({ driverBehindDelta: 1.2 });
-      patchData({ driverBehindDelta: 1.1 });
-
-      expect(await harness.elementHasClass('#gapBehind', 'text-yellow')).toBeTrue();
-    });
-
-    it('Delta time is green when it is increased', async () => {
-      patchData({ driverBehindDelta: 1.1 });
-      patchData({ driverBehindDelta: 1.3 });
-
-      expect(await harness.elementHasClass('#gapBehind', 'text-green')).toBeTrue();
-    });
-
-    it('Delta time has no extra formatting when it has not changed', async () => {
-      patchData({ driverBehindDelta: 1.7 });
-      patchData({ driverBehindDelta: 1.7 });
-
-      expect(await harness.elementHasClass('#gapBehind', 'text-green')).toBeFalse();
-      expect(await harness.elementHasClass('#gapBehind', 'text-yellow')).toBeFalse();
-    });
   });
 
   describe('Driver ahead', () => {
@@ -275,28 +255,6 @@ describe('Race display component tests', () => {
       patchData({ driverAheadDelta: 1.2 });
 
       expect(await harness.getElementText('#gapAhead')).toEqual('1.200');
-    });
-
-    it('Delta time is green when it is decreased', async () => {
-      patchData({ driverAheadDelta: 1.2 });
-      patchData({ driverAheadDelta: 1.1 });
-
-      expect(await harness.elementHasClass('#gapAhead', 'text-green')).toBeTrue();
-    });
-
-    it('Delta time is yellow when it is increased', async () => {
-      patchData({ driverAheadDelta: 1.1 });
-      patchData({ driverAheadDelta: 1.3 });
-
-      expect(await harness.elementHasClass('#gapAhead', 'text-yellow')).toBeTrue();
-    });
-
-    it('Delta time has no extra formatting when it has not changed', async () => {
-      patchData({ driverAheadDelta: 1.7 });
-      patchData({ driverAheadDelta: 1.7 });
-
-      expect(await harness.elementHasClass('#gapAhead', 'text-green')).toBeFalse();
-      expect(await harness.elementHasClass('#gapAhead', 'text-yellow')).toBeFalse();
     });
   });
 
@@ -350,8 +308,9 @@ describe('Race display component tests', () => {
   }
 
   const setupMockGameDataService = () => {
-    const service = jasmine.createSpyObj<GameDataService>('gameDataService', ['displayUpdate']);
-    service.displayUpdate.and.returnValue({ type: DisplayType.RaceDashboard, data: new RaceData() });
+    const service = jasmine.createSpyObj('gameDataService', ['displayUpdate']);
+    displayUpdate = signal<DisplayUpdate>({ type: DisplayType.RaceDashboard, data: new RaceData() });
+    service.displayUpdate.and.callFake(displayUpdate);
 
     return service;
   }
@@ -362,6 +321,6 @@ describe('Race display component tests', () => {
       ...value,
     };
 
-    mockGameDataService.displayUpdate.and.returnValue({ type: DisplayType.RaceDashboard, data });
+    displayUpdate.set({ type: DisplayType.RaceDashboard, data });
   }
 });

@@ -28,6 +28,13 @@ import { DisplayComponent } from '../display.component';
   ],
 })
 export class RaceDisplayComponent extends DisplayComponent<RaceData> {
+  protected override checkDataType(data: unknown): boolean {
+    return (data as RaceData).gear !== undefined;
+  }
+
+  protected override createDefaultData(): RaceData {
+    return new RaceData();
+  }
   private _lastGapBehind = 0;
   private _lastGapAhead = 0;
 
