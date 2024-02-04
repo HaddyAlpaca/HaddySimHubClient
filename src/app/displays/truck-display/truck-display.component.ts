@@ -16,6 +16,8 @@ import { DisplayComponent } from '../display.component';
     imports: [NgClass, DecimalPipe, GearPipe, TimespanPipe, NumberNlPipe, CommonModule],
 })
 export class TruckDisplayComponent extends DisplayComponent<TruckData> {
+
+
   protected override checkDataType(data: unknown): boolean {
     return (data as TruckData).sourceCity !== undefined;
   }

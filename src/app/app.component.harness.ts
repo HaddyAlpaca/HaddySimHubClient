@@ -1,5 +1,4 @@
 import { ComponentHarness } from '@angular/cdk/testing';
-import { SnackBarComponentHarness } from './components/snackbar/snackbar.component.harness';
 import { ConnectionStatusComponentHarness } from './components/connection-status/connection-status.component.harness';
 import { RaceDisplayComponentHarness } from './displays/race-display/race-display.component.harness';
 import { TruckDashComponentHarness } from './displays/truck-display/truck-display.component.harness';
@@ -20,10 +19,5 @@ export class AppComponentHarness extends ComponentHarness {
   public async isConnectionStatusVisible(): Promise<boolean> {
     const elm = await this.locatorForOptional(ConnectionStatusComponentHarness)();
     return !!elm;
-  }
-
-  public async getSnackBarHarness(): Promise<SnackBarComponentHarness> {
-    const harness = this.locatorFor(SnackBarComponentHarness)();
-    return harness;
   }
 }

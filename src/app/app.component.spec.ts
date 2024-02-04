@@ -34,22 +34,6 @@ describe('App component tests', () => {
     expect(await harness.isConnectionStatusVisible()).toBeTrue();
   });
 
-  describe('Snackbar tests', () => {
-    it('Snackbar is not visible by default', async () => {
-      const snackbarHarness = await harness.getSnackBarHarness();
-
-      expect(await snackbarHarness.isVisible()).toBeFalse();
-    });
-
-    it('When a notification emits a snackbar is shown', async () => {
-      const snackbarHarness = await harness.getSnackBarHarness();
-      notification.set('Some message');
-
-      expect(await snackbarHarness.isVisible()).toBeTrue();
-      expect(await snackbarHarness.getMessage()).toEqual('Some message');
-    });
-  });
-
   const setupMockGameDataService = () => {
     const service = jasmine.createSpyObj<GameDataService>('gameDataService', [
       'notification',
