@@ -57,12 +57,6 @@
           "error",
           "always-multiline"
         ],
-        "no-console": [
-          "error",
-          {
-            "allow": ["error"]
-          }
-        ],
         "no-undef": "error",
         "no-var": "error",
         "eol-last": "error",

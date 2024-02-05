@@ -72,8 +72,14 @@ export class GameDataService {
     });
 
     //Monitor emmited data
-    this._hubConnection.on('displayUpdate', (update: DisplayUpdate) => this._displayUpdate.set(update));
-    this._hubConnection.on('notification', (message: string) => this._notification.set(message));
+    this._hubConnection.on('displayUpdate', (update: DisplayUpdate) => {
+      console.log('Display update', JSON.stringify(update));
+      this._displayUpdate.set(update);
+    });
+    this._hubConnection.on('notification', (message: string) => {
+      console.log('Notification', message);
+      this._notification.set(message);
+    });
   }
 
   private startReloadSequence(): void {

@@ -5,6 +5,7 @@ import { RaceDisplayComponent } from './displays/race-display/race-display.compo
 import { DisplayType, GameDataService } from './services/game-data.service';
 import { ConnectionStatusComponent } from './components/connection-status/connection-status.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { NgWebConsoleComponent } from 'ng-web-console';
 
 @Component({
     selector: 'app-root',
@@ -16,6 +17,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
       RaceDisplayComponent,
       ConnectionStatusComponent,
       MatSnackBarModule,
+      NgWebConsoleComponent,
     ],
 })
 export class AppComponent {
