@@ -29,7 +29,6 @@
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.2",
     "chart.js": "^4.4.1",
-    "ng-web-console": "^1.2.0",
     "ngx-signalr-websocket": "^0.4.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

@@ -5,7 +5,6 @@ import { RaceDisplayComponent } from './displays/race-display/race-display.compo
 import { DisplayType, GameDataService } from './services/game-data.service';
 import { ConnectionStatusComponent } from './components/connection-status/connection-status.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { NgWebConsoleComponent } from 'ng-web-console';
 
 @Component({
     selector: 'app-root',
@@ -17,7 +16,6 @@ import { NgWebConsoleComponent } from 'ng-web-console';
       RaceDisplayComponent,
       ConnectionStatusComponent,
       MatSnackBarModule,
-      NgWebConsoleComponent,
     ],
 })
 export class AppComponent {
@@ -27,6 +25,8 @@ export class AppComponent {
   public readonly DisplayType = DisplayType;
   public displayUpdate = this._gameDataService.displayUpdate;
   public connectionStatus = this._gameDataService.connectionStatus;
+
+  public debugMessage = this._gameDataService.debugInfo;
 
   constructor() {
     effect(() => {
