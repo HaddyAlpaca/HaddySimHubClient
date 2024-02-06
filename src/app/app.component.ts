@@ -26,7 +26,7 @@ export class AppComponent {
   public displayUpdate = this._gameDataService.displayUpdate;
   public connectionStatus = this._gameDataService.connectionStatus;
 
-  public debugMessage = this._gameDataService.debugInfo;
+  public debugInfo = this._gameDataService.debugInfo;
 
   constructor() {
     effect(() => {
