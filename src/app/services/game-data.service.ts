@@ -42,9 +42,6 @@ export class GameDataService {
   private _notification = signal('');
   public notification = this._notification.asReadonly();
 
-  private _debugInfo = signal('');
-  public debugInfo = this._debugInfo.asReadonly();
-
   constructor() {
     const connectionOptions: IHttpConnectionOptions = {
       transport: HttpTransportType.WebSockets,
@@ -76,12 +73,9 @@ export class GameDataService {
 
     //Monitor emmited data
     this._hubConnection.on('displayUpdate', (update: DisplayUpdate) => {
-      this._debugInfo.set(`Display update: ${JSON.stringify(update)}`);
-
       this._displayUpdate.set(update);
     });
     this._hubConnection.on('notification', (message: string) => {
-      this._debugInfo.set(`Notification: ${message}`);
       this._notification.set(message);
     });
   }
