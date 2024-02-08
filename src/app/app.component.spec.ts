@@ -37,10 +37,12 @@ describe('App component tests', () => {
     const service = jasmine.createSpyObj<GameDataService>('gameDataService', [
       'displayUpdate',
       'connectionStatus',
+      'notification',
     ]);
     displayUpdate = signal<DisplayUpdate>({ type: DisplayType.None });
     service.displayUpdate.and.callFake(displayUpdate);
     service.connectionStatus.and.returnValue({ status: ConnectionStatus.Connected });
+    service.notification.and.returnValue('');
 
     return service;
   };
