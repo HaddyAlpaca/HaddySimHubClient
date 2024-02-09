@@ -36,7 +36,7 @@ jobs:
 
     - name: Zip build result
       run: |
-        cd dist/browser/haddy-sim-hub-client
+        cd dist/haddy-sim-hub-client/browser
         zip -r haddy-simhub-client *
 
     - name: Create release
