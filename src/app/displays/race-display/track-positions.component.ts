@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 export enum TrackPositionStatus {
   IsPlayer,
@@ -23,8 +23,7 @@ export interface TrackPosition {
   imports: [CommonModule],
 })
 export class TrackPositionsComponent {
-  @Input()
-  public positions: TrackPosition[] = [];
+  public positions = input<TrackPosition[]>([]);
 
   public readonly TrackPositionStatus = TrackPositionStatus;
 }
