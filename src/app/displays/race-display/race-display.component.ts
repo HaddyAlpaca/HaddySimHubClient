@@ -5,7 +5,6 @@ import { DeltaTimePipe } from './pipes/delta-time/delta-time.pipe';
 import { GearPipe } from './pipes/gear/gear.pipe';
 import { LapTimePipe } from './pipes/laptime/laptime.pipe';
 import { TimespanPipe } from './pipes/timespan/timespan.pipe';
-import { InputsTraceComponent } from './inputs-trace.component';
 import { IRatingPipe } from './pipes/irating/irating.pipe';
 import { TrackPositionsComponent } from './track-positions.component';
 import { DisplayComponent } from '../display.component';
@@ -22,7 +21,6 @@ import { DisplayComponent } from '../display.component';
     GearPipe,
     LapTimePipe,
     TimespanPipe,
-    InputsTraceComponent,
     IRatingPipe,
     TrackPositionsComponent,
   ],
