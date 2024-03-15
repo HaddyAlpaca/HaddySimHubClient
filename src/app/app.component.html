@@ -5,6 +5,9 @@
   @case (DisplayType.RaceDashboard) {
     <app-race-display [dataSource]="displayUpdate().data" />
   }
+  @case (DisplayType.RaceLeaderboard) {
+    <app-race-leaderboard [dataSource]="displayUpdate().data" />
+  }
   @default {
     <app-connection-status [status]="connectionStatus()" />
   }

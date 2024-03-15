@@ -1,23 +1,46 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TrackPositionsComponent } from './track-positions.component';
+import { TrackPosition, TrackPositionStatus, TrackPositionsComponent } from './track-positions.component';
 import { TrackPositionsComponentHarness } from './track-positions.component.harness';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { Component } from '@angular/core';
 
 describe('TrackPositionsComponent tests', () => {
-  let fixture: ComponentFixture<TrackPositionsComponent>;
-  let harness: TrackPositionsComponentHarness;
+  let fixture: ComponentFixture<TrackPositionsTestHostComponent>;
+  let component: TrackPositionsTestHostComponent;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TrackPositionsComponent);
-    harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, TrackPositionsComponentHarness);
+    fixture = TestBed.createComponent(TrackPositionsTestHostComponent);
+    component = fixture.componentInstance;
   });
 
   it('locates the track position elements correctly', async () => {
-    // const items = await harness.getTrackItems();
+    component.positions = [
+      {
+        lapDistPct: 0,
+        status: TrackPositionStatus.InPits,
+      },
+      {
+        lapDistPct: 10,
+        status: TrackPositionStatus.IsPlayer,
+      },
+    ]
 
+    const harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, TrackPositionsComponentHarness);
+    const items = await harness.getTrackItems();
+
+    expect(items).toEqual([{ style: 'left: 0%;' }, { style: 'left: 10%;' }]);
   });
 });
+
+@Component({
+  template: '<app-track-positions [positions]="positions" />',
+  standalone: true,
+  imports: [TrackPositionsComponent],
+})
+class TrackPositionsTestHostComponent {
+  public positions: TrackPosition[] = [];
+}

@@ -1,7 +1,6 @@
 import { Injectable, signal } from '@angular/core';
-import * as signalR from '@microsoft/signalr';
 import { filter, interval, take, tap } from 'rxjs';
-import { HttpTransportType, HubConnectionBuilder, IHttpConnectionOptions, LogLevel } from '@microsoft/signalr';
+import { HttpTransportType, HubConnection, HubConnectionBuilder, IHttpConnectionOptions, LogLevel } from '@microsoft/signalr';
 
 export interface ConnectionInfo {
   status: ConnectionStatus;
@@ -20,7 +19,7 @@ export enum DisplayType {
   None,
   TruckDashboard,
   RaceDashboard,
-  RaceTimingOverview,
+  RaceLeaderboard,
 }
 
 export interface DisplayUpdate {
@@ -32,7 +31,7 @@ export interface DisplayUpdate {
   providedIn: 'root',
 })
 export class GameDataService {
-  private _hubConnection: signalR.HubConnection;
+  private _hubConnection: HubConnection;
 
   public connectionStatus = signal<ConnectionInfo>({ status: ConnectionStatus.Disconnected });
 

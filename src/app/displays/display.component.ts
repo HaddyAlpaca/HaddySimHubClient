@@ -7,20 +7,15 @@ import { ClockService } from '../services/clock.service';
 export abstract class DisplayComponent<T> {
   private _clockService = inject(ClockService);
 
-  public dataSource = input.required<unknown>({});
+  protected abstract checkDataType(data: unknown): boolean;
+  protected abstract createDefaultData(): T;
 
   public readonly currentTime = this._clockService.time;
+  public dataSource = input.required<unknown>({});
 
   public data = computed(() => {
     const data = this.dataSource();
 
-    if (!data) {
-      return this.createDefaultData();
-    }
-
-    return data as T;
+    return data ? data as T : this.createDefaultData();
   });
-
-  protected abstract checkDataType(data: unknown): boolean;
-  protected abstract createDefaultData(): T;
 }
