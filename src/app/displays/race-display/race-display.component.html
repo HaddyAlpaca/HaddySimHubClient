@@ -1,9 +1,6 @@
 <div class="container">
   <div class="row">
     <div class="col-4">
-      <div class="label clock">{{currentTime() | date: 'HH:mm'}}</div>
-    </div>
-    <div class="col-4">
       <div class="label sof" [style.hidden]="!data().strengthOfField">SOF: {{data().strengthOfField}}</div>
     </div>
     <div class="col-4">

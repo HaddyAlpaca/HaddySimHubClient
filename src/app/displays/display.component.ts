@@ -1,16 +1,12 @@
-import { Component, computed, inject, input } from '@angular/core';
-import { ClockService } from '../services/clock.service';
+import { Component, computed, input } from '@angular/core';
 
 @Component({
   template: '',
 })
 export abstract class DisplayComponent<T> {
-  private _clockService = inject(ClockService);
-
   protected abstract checkDataType(data: unknown): boolean;
   protected abstract createDefaultData(): T;
 
-  public readonly currentTime = this._clockService.time;
   public dataSource = input.required<unknown>({});
 
   public data = computed(() => {

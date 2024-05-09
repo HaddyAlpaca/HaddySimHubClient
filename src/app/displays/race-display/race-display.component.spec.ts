@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RaceDisplayComponent } from './race-display.component';
-import { ClockService } from 'src/app/services/clock.service';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { RaceDisplayComponentHarness } from './race-display.component.harness';
 import { RaceData } from './race-data';
@@ -10,18 +9,11 @@ describe('Race display component tests', () => {
   let fixture: ComponentFixture<RaceDisplayTestComponent>;
   let component: RaceDisplayTestComponent;
   let harness: RaceDisplayComponentHarness;
-  let mockClockService: jasmine.SpyObj<ClockService>;
   let raceData: RaceData;
 
   beforeEach(async () => {
-    //Setup mocks
-    mockClockService = setupMockClockSerivce();
-
     await TestBed.configureTestingModule({
       declarations: [],
-      providers: [
-        { provide: ClockService, useValue: mockClockService },
-      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(RaceDisplayTestComponent);
@@ -296,13 +288,6 @@ describe('Race display component tests', () => {
       expect(await harness.hasElement('.flag')).toBeTrue();
     });
   });
-
-  const setupMockClockSerivce = () => {
-    const service = jasmine.createSpyObj<ClockService>('clockService', ['time']);
-    service.time.and.returnValue(new Date());
-
-    return service;
-  }
 
   const patchData = (value: { [key: string]: unknown; }) => {
     const data = {

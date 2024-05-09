@@ -20,6 +20,7 @@ export enum DisplayType {
   TruckDashboard,
   RaceDashboard,
   RaceLeaderboard,
+  RallyDashboard,
 }
 
 export interface DisplayUpdate {

@@ -7,12 +7,12 @@ import { tap, timer } from 'rxjs';
   providedIn: 'root',
 })
 export class ClockService {
-  private readonly _time = signal(new Date());
-  public readonly time = this._time.asReadonly();
+  private readonly _currentTime = signal(new Date());
+  public readonly currentTime = this._currentTime.asReadonly();
 
   constructor() {
     timer(0, 1000).pipe(
-      tap(() => this._time.set(new Date())),
+      tap(() => this._currentTime.set(new Date())),
       untilDestroyed(this),
     ).subscribe();
   }

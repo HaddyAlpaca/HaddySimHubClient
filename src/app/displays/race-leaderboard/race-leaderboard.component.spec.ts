@@ -3,23 +3,15 @@ import { RaceLeaderboardData } from './race-leaderboard.data';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { RaceLeaderboardComponent } from './race-leaderboard.component';
-import { ClockService } from 'src/app/services/clock.service';
 import { RaceLeaderboardComponentHarness } from './race-leaderboard.component.harness';
 
 describe('RaceLeaderboardComponent tests', () => {
   let fixture: ComponentFixture<RaceLeaderboardTestComponent>;
   let component: RaceLeaderboardTestComponent;
-  let mockClockService: jasmine.SpyObj<ClockService>;
 
   beforeEach(async () => {
-    //Setup mocks
-    mockClockService = setupMockClockSerivce();
-
     await TestBed.configureTestingModule({
       declarations: [],
-      providers: [
-        { provide: ClockService, useValue: mockClockService },
-      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(RaceLeaderboardTestComponent);
@@ -45,13 +37,6 @@ describe('RaceLeaderboardComponent tests', () => {
 
     expect(await harness.getRowData()).toEqual([]);
   });
-
-  const setupMockClockSerivce = () => {
-    const service = jasmine.createSpyObj<ClockService>('clockService', ['time']);
-    service.time.and.returnValue(new Date());
-
-    return service;
-  }
 });
 
 @Component({

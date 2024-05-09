@@ -6,31 +6,23 @@ import { TruckDashComponentHarness } from './truck-display.component.harness';
 import { TruckData } from './truck-data';
 import { GearPipe } from './pipes/gear/gear.pipe';
 import { TimespanPipe } from './pipes/timespan/timespan.pipe';
-import { ClockService } from 'src/app/services/clock.service';
 import { Component } from '@angular/core';
 
 describe('TruckDisplayComponent', () => {
   let fixture: ComponentFixture<TruckDisplayTestComponent>;
   let component: TruckDisplayTestComponent;
   let data: TruckData;
-  let mockClockService: jasmine.SpyObj<ClockService>;
   let harness: TruckDashComponentHarness;
 
   beforeEach(async () => {
     //Set default values for the truck data
     data = new TruckData();
 
-    //Setup mocking services
-    mockClockService = setupMockClockSerivce();
-
     await TestBed.configureTestingModule({
       imports: [
         TruckDisplayComponent,
         GearPipe,
         TimespanPipe],
-      providers: [
-        { provide: ClockService, useValue: mockClockService },
-      ],
     })
     .compileComponents();
 
@@ -132,13 +124,6 @@ describe('TruckDisplayComponent', () => {
       expect(await harness.getElementText('#jobCargoName')).toEqual('Helicopter (2.500 kg)');
     });
   });
-
-  const setupMockClockSerivce = () => {
-    const service = jasmine.createSpyObj<ClockService>('clockService', ['time']);
-    service.time.and.returnValue(new Date());
-
-    return service;
-  }
 
   const patchData = (value: { [key: string]: unknown; }) => {
     const newData = {

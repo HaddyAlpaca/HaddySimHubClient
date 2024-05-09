@@ -6,18 +6,23 @@ import { DisplayType, GameDataService } from './services/game-data.service';
 import { ConnectionStatusComponent } from './components/connection-status/connection-status.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { RaceLeaderboardComponent } from './displays/race-leaderboard/race-leaderboard.component';
+import { ClockComponent } from './components/clock/clock.component';
+import { RallyDisplayComponent } from './displays/rally-display/rally-display.component';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
+    styleUrl: './app.component.scss',
     standalone: true,
     imports: [
       CommonModule,
       TruckDisplayComponent,
       RaceDisplayComponent,
       RaceLeaderboardComponent,
+      RallyDisplayComponent,
       ConnectionStatusComponent,
       MatSnackBarModule,
+      ClockComponent,
     ],
 })
 export class AppComponent {
