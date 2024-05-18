@@ -1,0 +1,32 @@
+app-rally-display {
+  app-data-element {
+    label {
+      text-transform: uppercase;
+      font-size: 1.5vw;
+      text-align: right;
+      color: gold;
+    }
+  }
+
+  .container {
+    max-width: unset;
+    color: white;
+    font-size: 3vw;
+    text-align: right;
+  }
+
+  .group-border {
+    border: white 4px solid;
+    padding: 10px 20px 10px 20px;
+    border-radius: 20px;
+    height: 100%;
+  }
+
+  .border-blue {
+    border-color: rgba(0, 0, 255, 0.555);
+  }
+
+  .border-yellow {
+    border-color: yellow;
+  }
+}

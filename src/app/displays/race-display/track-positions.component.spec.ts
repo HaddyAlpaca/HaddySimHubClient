@@ -9,10 +9,6 @@ describe('TrackPositionsComponent tests', () => {
   let component: TrackPositionsTestHostComponent;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [],
-    }).compileComponents();
-
     fixture = TestBed.createComponent(TrackPositionsTestHostComponent);
     component = fixture.componentInstance;
   });

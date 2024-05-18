@@ -8,27 +8,11 @@
         <div class="card-body">
           <div class="data-row">
             <div class="data-label">Vertrekpunt</div>
-            @if (!data().sourceCity && !data().sourceCompany) {
-              <div class="data-item" id="departure">-</div>
-            }
-            @if (data().sourceCity && !data().sourceCompany) {
-              <div class="data-item" id="departure">{{data().sourceCity}}</div>
-            }
-            @if (data().sourceCity && data().sourceCompany) {
-              <div class="data-item" id="departure">{{data().sourceCity}} ({{data().sourceCompany}})</div>
-            }
+            <app-waypoint [city]="data().sourceCity" [company]="data().sourceCompany" />
           </div>
           <div class="data-row">
             <div class="data-label">Bestemming</div>
-            @if (!data().destinationCity && !data().destinationCompany) {
-              <div class="data-item" id="destination">-</div>
-            }
-            @if (data().destinationCity && !data().destinationCompany) {
-              <div class="data-item" id="destination">{{data().destinationCity}}</div>
-            }
-            @if (data().destinationCity && data().destinationCompany) {
-              <div class="data-item" id="destination">{{data().destinationCity}} ({{data().destinationCompany}})</div>
-            }
+            <app-waypoint [city]="data().destinationCity" [company]="data().destinationCompany" />
           </div>
           <div class="data-row">
             <div class="data-label">Resterend</div>
@@ -179,10 +163,7 @@
       </div>
 
       <div class="center-column col-4">
-        <progress id="rpm" [value]="data().rpm" [max]="data().rpmMax"></progress>
-        <div class="current-speed">{{data().speed}}</div>
-        <div class="speed-unit">km/h</div>
-        <div class="current-gear">{{data().gear | gear}}</div>
+        <app-speedometer [rpm]="data().rpm" [speed]="data().speed" [gear]="data().gear" [multiReverse]="true" />
       </div>
 
       <div class="right-column col-4">

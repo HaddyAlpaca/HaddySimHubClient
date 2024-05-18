@@ -10,10 +10,6 @@ describe('ConnectionStatusComponent tests', () => {
   let component: ConnectionStatusTestComponent;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [],
-    }).compileComponents();
-
     fixture = TestBed.createComponent(ConnectionStatusTestComponent);
     component = fixture.componentInstance;
   });

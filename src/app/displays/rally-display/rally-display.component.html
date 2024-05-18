@@ -1,8 +1,23 @@
-<ul class="sectors">
-  @for (item of data().sectors; track item.sector) {
-    <li></li>
-  }
-</ul>
-<div class="rpm">data().rpm</div>
-<div class="gear">data().gear</div>
-<div class="speed">data().speed</div>
+<div class="container">
+  <div class="row" style="margin-top: 40px;">
+    <div class="col-4">
+      <div class="group-border border-blue">
+        <app-data-element description="Position" [value]="data().position" />
+        <app-data-element description="Distance travelled" [value]="data().distanceTravelled" unit="m" />
+        <app-data-element description="Completed" [value]="data().completedPct" unit="%" />
+        <app-data-element description="Sector" [value]="data().sector" />
+      </div>
+    </div>
+    <div class="col-4 group-border border-yellow">
+      <app-speedometer [rpm]="data().rpm" [gear]="data().gear" [speed]="data().speed" />
+    </div>
+    <div class="col-4" style="height: 100%;">
+      <div class="group-border border-blue">
+        <app-data-element description="Time elapsed" [value]="data().timeElapsed" [dataType]="DataType.LapTime" />
+        <app-data-element description="Sector 1" [value]="data().sector1Time" [dataType]="DataType.LapTime" />
+        <app-data-element description="Sector 2" [value]="data().sector2Time" [dataType]="DataType.LapTime" />
+        <app-data-element description="Stage" [value]="data().lapTime" [dataType]="DataType.LapTime" />
+      </div>
+    </div>
+  </div>
+</div>

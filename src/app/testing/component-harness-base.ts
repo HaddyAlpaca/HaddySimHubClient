@@ -1,4 +1,5 @@
 import { ComponentHarness } from '@angular/cdk/testing';
+import { DataElementComponentHarness } from '../components/data-element/data-element.component.harness';
 
 export class ComponentHarnessBase extends ComponentHarness {
   public async hasElement(selector: string): Promise<boolean> {
@@ -28,5 +29,10 @@ export class ComponentHarnessBase extends ComponentHarness {
     const elm = await this.locatorFor(selector)();
     const value = await elm.getAttribute('style');
     return value;
+  }
+
+  public async getDataElementHarness(id: string): Promise<DataElementComponentHarness> {
+    const harness = await this.locatorFor(DataElementComponentHarness.with({ id }))();
+    return harness;
   }
 }

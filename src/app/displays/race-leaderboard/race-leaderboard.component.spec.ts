@@ -10,10 +10,6 @@ describe('RaceLeaderboardComponent tests', () => {
   let component: RaceLeaderboardTestComponent;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [],
-    }).compileComponents();
-
     fixture = TestBed.createComponent(RaceLeaderboardTestComponent);
     component = fixture.componentInstance;
   });

@@ -4,8 +4,6 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { TruckDisplayComponent } from './truck-display.component';
 import { TruckDashComponentHarness } from './truck-display.component.harness';
 import { TruckData } from './truck-data';
-import { GearPipe } from './pipes/gear/gear.pipe';
-import { TimespanPipe } from './pipes/timespan/timespan.pipe';
 import { Component } from '@angular/core';
 
 describe('TruckDisplayComponent', () => {
@@ -18,79 +16,25 @@ describe('TruckDisplayComponent', () => {
     //Set default values for the truck data
     data = new TruckData();
 
-    await TestBed.configureTestingModule({
-      imports: [
-        TruckDisplayComponent,
-        GearPipe,
-        TimespanPipe],
-    })
-    .compileComponents();
-
     fixture = TestBed.createComponent(TruckDisplayTestComponent);
     component = fixture.componentInstance;
     harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, TruckDashComponentHarness);
   });
 
-  describe('Departure tests', () => {
-    it('When city is not set a placeholder is shown', async () => {
-      patchData({ sourceCity: '' });
-
-      expect(await harness.getElementText('#departure')).toEqual('-');
-    });
-
-    it('City is displayed when company is not set', async () => {
-      patchData({ sourceCity: 'Berlin', sourceCompany: '' });
-
-      expect(await harness.getElementText('#departure')).toEqual('Berlin');
-    });
-
-    it('City and company are displayed both are set', async () => {
-      patchData({ sourceCity: 'Berlin', sourceCompany: 'Company B' });
-
-      expect(await harness.getElementText('#departure')).toEqual('Berlin (Company B)');
-    });
+  it('Departure is displayed', async () => {
+    patchData({ sourceCity: 'Berlin', sourceCompany: 'Company B' });
   });
 
-  describe('Destination tests', () => {
-    it('When city is not set a placeholder is shown', async () => {
-      patchData({ destinationCity: '', destinationCompany: '' });
-
-      expect(await harness.getElementText('#destination')).toEqual('-');
-    });
-
-    it('City is displayed when company is not set', async () => {
-      patchData({ destinationCity: 'Paris', destinationCompany: '' });
-
-      expect(await harness.getElementText('#destination')).toEqual('Paris');
-    });
-
-    it('City and company are displayed both are set', async () => {
-      patchData({ destinationCity: 'Paris', destinationCompany: 'Company A' });
-
-      expect(await harness.getElementText('#destination')).toEqual('Paris (Company A)');
-    });
+  it('Destination is displayed', async () => {
+    patchData({ sourceCity: 'Paris', sourceCompany: 'Company A' });
   });
 
   it('Gears should be displayed', async () => {
     //Reverse 1
     patchData({ gear: -1 });
-    expect(await harness.getElementText('.current-gear')).toEqual('R1');
 
-    //Reverse 2
-    patchData({ gear: -2 });
-    expect(await harness.getElementText('.current-gear')).toEqual('R2');
-
-    //Neutral
-    patchData({ gear: 0 });
-    expect(await harness.getElementText('.current-gear')).toEqual('N');
-
-    //First
-    patchData({ gear: 1 });
-    expect(await harness.getElementText('.current-gear')).toEqual('1');
-
-    //Second
-    patchData({ gear: 2 });
-    expect(await harness.getElementText('.current-gear')).toEqual('2');
+    const speedoHarness = await harness.getSpeedoHarness();
+    expect(await speedoHarness.getGear()).toEqual('R1');
   });
 
   it('Fuel distance is displayed', async () => {

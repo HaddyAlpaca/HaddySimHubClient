@@ -1,4 +1,5 @@
 import { Component, computed, input } from '@angular/core';
+import { DataType } from '../components/data-element/data-element.component';
 
 @Component({
   template: '',
@@ -6,6 +7,8 @@ import { Component, computed, input } from '@angular/core';
 export abstract class DisplayComponent<T> {
   protected abstract checkDataType(data: unknown): boolean;
   protected abstract createDefaultData(): T;
+
+  public readonly DataType = DataType;
 
   public dataSource = input.required<unknown>({});
 

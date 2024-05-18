@@ -1,28 +1,31 @@
-import { ChangeDetectionStrategy, Component, effect } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, effect } from '@angular/core';
 import { RaceData } from './race-data';
 import { CommonModule } from '@angular/common';
 import { DeltaTimePipe } from './pipes/delta-time/delta-time.pipe';
-import { GearPipe } from './pipes/gear/gear.pipe';
 import { LapTimePipe } from './pipes/laptime/laptime.pipe';
 import { TimespanPipe } from './pipes/timespan/timespan.pipe';
 import { IRatingPipe } from './pipes/irating/irating.pipe';
 import { TrackPositionsComponent } from './track-positions.component';
 import { DisplayComponent } from '../display.component';
+import { SpeedometerComponent } from 'src/app/components/speedometer/speedometer.component';
+import { DataElementComponent } from 'src/app/components/data-element/data-element.component';
 
 @Component({
   selector: 'app-race-display',
   templateUrl: 'race-display.component.html',
   styleUrl: 'race-display.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [
     CommonModule,
     DeltaTimePipe,
-    GearPipe,
     LapTimePipe,
     TimespanPipe,
     IRatingPipe,
     TrackPositionsComponent,
+    SpeedometerComponent,
+    DataElementComponent,
   ],
 })
 export class RaceDisplayComponent extends DisplayComponent<RaceData> {

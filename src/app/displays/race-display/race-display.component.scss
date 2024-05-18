@@ -1,217 +1,196 @@
-.container {
-  max-width: unset;
-  color: white;
-  font-size: 3vw;
-  text-align: right;
-}
+app-race-display {
+  app-data-element {
+    label {
+      text-transform: uppercase;
+      font-size: 1.5vw;
+      text-align: right;
+      color: gold;
+    }
+  }
 
-.row {
-  margin-top: 10px;
-}
+  .container {
+    max-width: unset;
+    color: white;
+    font-size: 3vw;
+    text-align: right;
+  }
 
-.label {
-  text-transform: uppercase;
-  font-size: 1.5vw;
-  text-align: right;
-  color: gold;
-}
+  .row {
+    margin-top: 10px;
+  }
 
-.text-center {
-  text-align: center;
-}
+  .label {
+    text-transform: uppercase;
+    font-size: 1.5vw;
+    text-align: right;
+    color: gold;
+  }
 
-.clock {
-  text-align: left;
-  font-size: 1.8vw;
-}
+  .text-center {
+    text-align: center;
+  }
 
-.sessionType {
-  text-align: right;
-}
+  .sessionType {
+    text-align: right;
+  }
 
-.delta-time {
-  font-weight: bold;
-  text-align: center;
-}
+  .delta-time {
+    font-weight: bold;
+    text-align: center;
+  }
 
-.best-laptime {
-  color: purple;
-}
+  .best-laptime {
+    color: purple;
+  }
 
-.driver-name {
-  color: yellowgreen;
-  /* text-align: center; */
-}
+  .driver-name {
+    color: yellowgreen;
+  }
 
-.driver-irating {
-  color: black;
-  background-color: white;
-  border-radius: 5px;
-  padding: 0px 5px 0px 5px;
-  margin-left: 10px;
-}
+  .driver-irating {
+    color: black;
+    background-color: white;
+    border-radius: 5px;
+    padding: 0px 5px 0px 5px;
+    margin-left: 10px;
+  }
 
-.driver-class {
-  border-radius: 5px;
-  background-color: green;
-  padding: 0px 5px 0px 5px;
-  margin-left: 20px;
-}
+  .driver-class {
+    border-radius: 5px;
+    background-color: green;
+    padding: 0px 5px 0px 5px;
+    margin-left: 20px;
+  }
 
-.opponent-delta {
-  text-align: center;
-}
+  .opponent-delta {
+    text-align: center;
+  }
 
-.group-border {
-  border: white 4px solid;
-  padding: 10px 20px 10px 20px;
-  border-radius: 20px;
-  height: 100%;
-}
+  .group-border {
+    border: white 4px solid;
+    padding: 10px 20px 10px 20px;
+    border-radius: 20px;
+    height: 100%;
+  }
 
-.border-blue {
-  border-color: rgba(0, 0, 255, 0.555);
-}
+  .border-blue {
+    border-color: rgba(0, 0, 255, 0.555);
+  }
 
-.border-yellow {
-  border-color: yellow;
-}
+  .border-yellow {
+    border-color: yellow;
+  }
 
-#deltaTime {
-  font-size: 4vw;
-}
+  #deltaTime {
+    font-size: 4vw;
+  }
 
-#rpm, #speed {
-  font-size: 5vw;
-}
+  .hidden {
+    visibility: hidden;
+  }
 
-.gear {
-  text-align: center;
-  font-size: 10vw;
-}
+  .sof {
+    text-align: center;
+  }
 
-.hidden {
-  visibility: hidden;
-}
+  .text-red {
+    color: red;
+  }
 
-#clutch {
-  background-color: royalblue;
-}
+  .text-green {
+    color: green;
+  }
 
-#throttle {
-  background-color: green;
-}
+  .text-yellow {
+    color: yellow;
+  }
 
-#brake {
-  background-color: red;
-}
+  .pit-limiter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: orange;
+    font-size: 62pt;
+    color: black;
+    padding: 5px 45px 5px 45px;
+    border-radius: 15px;
+  }
 
-.sof {
-  text-align: center;
-}
+  .flag {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    width: 100%;
+    height: 135px;
+    transform: translateX(-50%);
+    border-radius: 15px;
+  }
 
-.text-red {
-  color: red;
-}
+  .flag.yellow {
+    background-color: yellow;
+  }
 
-.text-green {
-  color: green;
-}
+  .flag.green {
+    background-color: green;
+  }
 
-.text-yellow {
-  color: yellow;
-}
+  .flag.white {
+    background-color: white;
+  }
 
-.progress {
-  height: 25px;
-  margin-top: 18px;
-  margin-bottom: 18px;
-}
+  .flag.blue {
+    background-color: blue;
+  }
 
-.pit-limiter {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: orange;
-  font-size: 62pt;
-  color: black;
-  padding: 5px 45px 5px 45px;
-  border-radius: 15px;
-}
+  .flag.red {
+    background-color: red;
+  }
 
-.flag {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  width: 100%;
-  height: 135px;
-  transform: translateX(-50%);
-  border-radius: 15px;
-}
+  .flag.black {
+    background-color: black;
+    border: 1px solid white;
+  }
 
-.flag.yellow {
-  background-color: yellow;
-}
+  .flag.black-orange {
+    background-color: black;
+    border: 1px solid white;
+  }
 
-.flag.green {
-  background-color: green;
-}
+  .flag.black-orange::after {
+    content: '';
+    border-radius: 50%;
+    background-color: orange;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 75%;
+    aspect-ratio: 1;
+  }
 
-.flag.white {
-  background-color: white;
-}
+  .blink {
+    animation: blinker 2s linear infinite;
+  }
 
-.flag.blue {
-  background-color: blue;
-}
+  .blink-text {
+    animation: text-blinker 2s linear infinite;
+  }
 
-.flag.red {
-  background-color: red;
-}
+  .opponent-delta .label {
+    text-align: center;
+  }
 
-.flag.black {
-  background-color: black;
-  border: 1px solid white;
-}
+  @keyframes text-blinker {
+    50% {
+      color: transparent;
+    }
+  }
 
-.flag.black-orange {
-  background-color: black;
-  border: 1px solid white;
-}
-
-.flag.black-orange::after {
-  content: '';
-  border-radius: 50%;
-  background-color: orange;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  height: 75%;
-  aspect-ratio: 1;
-}
-
-.blink {
-  animation: blinker 2s linear infinite;
-}
-
-.blink-text {
-  animation: text-blinker 2s linear infinite;
-}
-
-.opponent-delta .label {
-  text-align: center;
-}
-
-@keyframes text-blinker {
-  50% {
-    color: transparent;
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
   }
 }
 
-@keyframes blinker {
-  50% {
-    opacity: 0;
-  }
-}
