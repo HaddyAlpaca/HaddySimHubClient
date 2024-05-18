@@ -6,10 +6,11 @@ label {
   text-transform: uppercase;
   text-align: center;
   width: 100%;
+  font-size: 2vw;
 }
 
-#rpm, #speed {
-  font-size: 5vw;
+.rpm, .speed {
+  font-size: 4vw;
 }
 
 .gear {
