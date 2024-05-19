@@ -11,4 +11,12 @@ export class RallyData {
   lapTime = 0;
   sector = 0;
   position = 0;
+  brakeTempFl = 0;
+  brakeTempFr = 0;
+  brakeTempRl = 0;
+  brakeTempRr = 0;
+  tyrePressFl = 0;
+  tyrePressFr = 0;
+  tyrePressRl = 0;
+  tyrePressRr = 0;
 }

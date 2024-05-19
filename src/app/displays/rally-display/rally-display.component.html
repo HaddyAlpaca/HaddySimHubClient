@@ -1,23 +1,83 @@
 <div class="container">
   <div class="row" style="margin-top: 40px;">
     <div class="col-4">
-      <div class="group-border border-blue">
-        <app-data-element description="Position" [value]="data().position" />
-        <app-data-element description="Distance travelled" [value]="data().distanceTravelled" unit="m" />
-        <app-data-element description="Completed" [value]="data().completedPct" unit="%" />
-        <app-data-element description="Sector" [value]="data().sector" />
-      </div>
+      <app-data-group borderColor="blue">
+        <div class="row">
+          <div class="col-6">
+            <app-data-element description="Position" [value]="data().position" />
+          </div>
+          <div class="col-6">
+            <app-data-element description="Time elapsed" [value]="data().timeElapsed" [dataType]="DataType.LapTime" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <app-data-element description="Sector" [value]="data().sector" />
+          </div>
+          <div class="col-6">
+            <app-data-element description="Sector 1" [value]="data().sector1Time" [dataType]="DataType.LapTime" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <app-data-element description="Completed" [value]="data().completedPct" unit="%" />
+          </div>
+          <div class="col-6">
+            <app-data-element description="Sector 2" [value]="data().sector2Time" [dataType]="DataType.LapTime" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <app-data-element description="Travelled" [value]="data().distanceTravelled" unit="m" />
+          </div>
+          <div class="col-6">
+            <app-data-element description="Stage" [value]="data().lapTime" [dataType]="DataType.LapTime" />
+          </div>
+        </div>
+      </app-data-group>
     </div>
-    <div class="col-4 group-border border-yellow">
-      <app-speedometer [rpm]="data().rpm" [gear]="data().gear" [speed]="data().speed" />
+    <div class="col-4">
+      <app-data-group borderColor="yellow">
+        <app-speedometer [rpm]="data().rpm" [gear]="data().gear" [speed]="data().speed" />
+      </app-data-group>
     </div>
     <div class="col-4" style="height: 100%;">
-      <div class="group-border border-blue">
-        <app-data-element description="Time elapsed" [value]="data().timeElapsed" [dataType]="DataType.LapTime" />
-        <app-data-element description="Sector 1" [value]="data().sector1Time" [dataType]="DataType.LapTime" />
-        <app-data-element description="Sector 2" [value]="data().sector2Time" [dataType]="DataType.LapTime" />
-        <app-data-element description="Stage" [value]="data().lapTime" [dataType]="DataType.LapTime" />
-      </div>
+      <app-data-group borderColor="blue" title="Brake temp">
+        <div class="row">
+          <div class="col-6">
+            <app-data-element description="Fl" [value]="data().brakeTempFl" />
+          </div>
+          <div class="col-6">
+            <app-data-element description="Fr" [value]="data().brakeTempFr" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <app-data-element description="Rl" [value]="data().brakeTempRl" />
+          </div>
+          <div class="col-6">
+            <app-data-element description="Rr" [value]="data().brakeTempRr" />
+          </div>
+        </div>
+      </app-data-group>
+      <app-data-group borderColor="blue" title="Tyre press">
+        <div class="row">
+          <div class="col-6">
+            <app-data-element description="Fl" [value]="data().tyrePressFl" />
+          </div>
+          <div class="col-6">
+            <app-data-element description="Fr" [value]="data().tyrePressFr" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <app-data-element description="Rl" [value]="data().tyrePressRl" />
+          </div>
+          <div class="col-6">
+            <app-data-element description="Rr" [value]="data().tyrePressRr" />
+          </div>
+        </div>
+      </app-data-group>
     </div>
   </div>
 </div>
