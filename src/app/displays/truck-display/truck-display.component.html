@@ -162,7 +162,7 @@
         <img class="dashboard-light" id="wipers" src="/assets/images/wipers.svg" [ngClass]="{'filter-blue': data().wipersOn}">
       </div>
 
-      <div class="center-column col-4">
+      <div class="center-column col-4" style="height: 100%;">
         <app-speedometer [rpm]="data().rpm" [speed]="data().speed" [gear]="data().gear" [multiReverse]="true" />
       </div>
 

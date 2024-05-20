@@ -1,10 +1,10 @@
-import { Component, input } from '@angular/core';
+import { Component, ViewEncapsulation, input } from '@angular/core';
 import { GearPipe } from './gear.pipe';
 
 @Component({
   selector: 'app-speedometer',
   templateUrl: './speedometer.component.html',
-  styleUrl: './speedometer.component.scss',
+  encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [GearPipe],
 })

@@ -8,6 +8,28 @@ app-race-display {
     }
   }
 
+  app-speedometer {
+    * {
+      color: white;
+    }
+
+    label {
+      text-transform: uppercase;
+      text-align: center;
+      width: 100%;
+      font-size: 2vw;
+    }
+
+    .rpm, .speed {
+      font-size: 4vw;
+    }
+
+    .gear {
+      text-align: center;
+      font-size: 10vw;
+    }
+  }
+
   .container {
     max-width: unset;
     color: white;

@@ -3,6 +3,28 @@ app-truck-display {
   font-family: Poppins, sans-serif;
   color: white;
 
+  app-speedometer {
+    * {
+      color: white;
+    }
+
+    label {
+      text-transform: uppercase;
+      text-align: center;
+      width: 100%;
+      font-size: 3vw;
+    }
+
+    .rpm, .speed {
+      font-size: 4vw;
+    }
+
+    .gear {
+      text-align: center;
+      font-size: 10vw;
+    }
+  }
+
   .row {
     margin-top: .75rem;
 
@@ -56,7 +78,8 @@ app-truck-display {
       flex-direction: row;
       flex-wrap: wrap;
       align-items: center;
-      gap: 40px;
+      gap: 10px;
+      align-content: baseline;
       padding: 50px;
     }
 
