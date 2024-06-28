@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-6">
+    <div class="col-3">
       <div class="card">
         <div class="card-header">
           <h2 class="card-title">Route</h2>
@@ -36,7 +36,53 @@
       </div>
     </div>
 
-    <div class="col-6">
+    <div class="col-3">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Opdracht</h2>
+        </div>
+        <div class="card-body">
+          <div class="data-row">
+            <div class="data-label">Truck</div>
+            @if(data().truckName) {
+              <div id="truckName" class="data-item">{{data().truckName}}</div>
+            }
+            @else {
+              <div id="truckName" class="data-item">-</div>
+            }
+          </div>
+          <div class="data-row">
+            <div class="data-label">Deadline</div>
+            @if (data().jobTimeRemaining) {
+              <div class="data-item">{{data().jobTimeRemaining | timespan}} ({{data().jobTimeRemainingIrl | timespan}})</div>
+            }
+            @else {
+              <div class="data-item">-</div>
+            }
+          </div>
+          <div class="data-row">
+            <div class="data-label">Inkomen</div>
+            @if (data().jobIncome) {
+              <div class="data-item" id="jobIncome">&euro; {{data().jobIncome | numbernl}}</div>
+            }
+            @else {
+              <div class="data-item" id="jobIncome">-</div>
+            }
+          </div>
+          <div class="data-row">
+            <div class="data-label">Lading</div>
+            @if (data().jobCargoName) {
+              <div class="data-item" id="jobCargoName">{{data().jobCargoName}} ({{data().jobCargoMass | numbernl}} kg)</div>
+            }
+            @else {
+              <div class="data-item" id="jobCargoName">-</div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-3">
       <div class="card">
         <div class="card-header">
           <h2 class="card-title">Truck schade</h2>
@@ -74,52 +120,15 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-6">
-      <div class="card">
-        <div class="card-header">
-          <h2 class="card-title">Opdracht</h2>
-        </div>
-        <div class="card-body">
-          <div class="data-row">
-            <div class="data-label">Deadline</div>
-            @if (data().jobTimeRemaining) {
-              <div class="data-item">{{data().jobTimeRemaining | timespan}} ({{data().jobTimeRemainingIrl | timespan}})</div>
-            }
-            @else {
-              <div class="data-item">-</div>
-            }
-          </div>
-          <div class="data-row">
-            <div class="data-label">Inkomen</div>
-            @if (data().jobIncome) {
-              <div class="data-item" id="jobIncome">&euro; {{data().jobIncome | numbernl}}</div>
-            }
-            @else {
-              <div class="data-item" id="jobIncome">-</div>
-            }
-          </div>
-          <div class="data-row">
-            <div class="data-label">Lading</div>
-            @if (data().jobCargoName) {
-              <div class="data-item" id="jobCargoName">{{data().jobCargoName}} ({{data().jobCargoMass | numbernl}} kg)</div>
-            }
-            @else {
-              <div class="data-item" id="jobCargoName">-</div>
-            }
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-6">
+    <div class="col-3">
       <div class="card">
         <div class="card-header">
           <h2 class="card-title">Trailer schade</h2>
         </div>
         <div class="card-body">
-          <div *ngIf="data().numberOfTrailersAttached <= 0">Geen trailer gekoppeld</div>
+          @if (data().numberOfTrailersAttached <= 0) {
+            <div>Geen trailer gekoppeld</div>
+          }
           <div class="container" [class.hidden]="data().numberOfTrailersAttached <= 0">
             <div class="row">
               <div class="col-6">
@@ -148,26 +157,41 @@
   </div>
 
   <div class="row">
-    <div class="card col-12 dashboard-row">
-      <div class="left-column col-4">
-        <img class="dashboard-light" id="low-beam" src="/assets/images/low-beam.svg" [ngClass]="{'filter-green': data().lowBeamOn}">
-        <img class="dashboard-light" id="high-beam" src="/assets/images/high-beam.svg"  [ngClass]="{'filter-blue': data().highBeamOn}">
-        <img class="dashboard-light" id="indicator-left" src="/assets/images/arrow-left.svg" [ngClass]="{'filter-green': data().blinkerLeftOn}">
-        <img class="dashboard-light" id="hazard-lights" src="/assets/images/hazard.svg" [ngClass]="{'filter-orange': data().hazardLightsOn}">
-        <img class="dashboard-light" id="indicator-right" src="/assets/images/arrow-right.svg" [ngClass]="{'filter-green': data().blinkerRightOn}">
-        <img class="dashboard-light" id="brake-warning" src="/assets/images/brake-warning.svg" [ngClass]="{'filter-red': data().parkingBrakeOn}">
-        <img class="dashboard-light" id="battery-warning" src="/assets/images/battery.svg" [ngClass]="{'filter-red': data().batteryWarningOn}">
-        <img class="dashboard-light" id="engine-water-temp-warning" src="/assets/images/engine-coolant.svg" [ngClass]="{'filter-red': data().engineWaterTempWarningOn }">
-        <img class="dashboard-light" id="oil-pressure-warning" src="/assets/images/oil-can.svg" [ngClass]="{'filter-red': data().oilPressureWarningOn}">
-        <img class="dashboard-light" id="wipers" src="/assets/images/wipers.svg" [ngClass]="{'filter-blue': data().wipersOn}">
+    <div class="col-6">
+      <div class="card gauge">
+        <label class="unit text-center">&nbsp;</label>
+        <div class="gear text-center">{{data().gear | gear: true}}</div>
+        <label class="unit text-center">RPM</label>
+        <div class="rpm-value text-center">{{data().rpm}}</div>
       </div>
-
-      <div class="center-column col-4" style="height: 100%;">
-        <app-speedometer [rpm]="data().rpm" [speed]="data().speed" [gear]="data().gear" [multiReverse]="true" />
-      </div>
-
-      <div class="right-column col-4">
+    </div>
+    <div class="col-6" style="padding-right: 10px;">
+      <div class="card gauge">
+        <label class="unit text-center">Km/h</label>
+        <div class="gear text-center">{{data().speed}}</div>
         <div class="speed-limit" [ngClass]="{'hidden': !data().speedLimit, 'over-speed-limit': data().speed > data().speedLimit}">{{data().speedLimit}}</div>
+      </div>
+    </div>
+  </div>
+
+    <div class="row">
+      <div class="col-6">
+        <div class="card dashboard-lights">
+          <img class="dashboard-light" id="low-beam" src="/assets/images/low-beam.svg" [ngClass]="{'filter-green': data().lowBeamOn}">
+          <img class="dashboard-light" id="high-beam" src="/assets/images/high-beam.svg"  [ngClass]="{'filter-blue': data().highBeamOn}">
+          <img class="dashboard-light" id="indicator-left" src="/assets/images/arrow-left.svg" [ngClass]="{'filter-green': data().blinkerLeftOn}">
+          <img class="dashboard-light" id="hazard-lights" src="/assets/images/hazard.svg" [ngClass]="{'filter-orange': data().hazardLightsOn}">
+          <img class="dashboard-light" id="indicator-right" src="/assets/images/arrow-right.svg" [ngClass]="{'filter-green': data().blinkerRightOn}">
+          <img class="dashboard-light" id="brake-warning" src="/assets/images/brake-warning.svg" [ngClass]="{'filter-red': data().parkingBrakeOn}">
+          <img class="dashboard-light" id="battery-warning" src="/assets/images/battery.svg" [ngClass]="{'filter-red': data().batteryWarningOn}">
+          <img class="dashboard-light" id="engine-water-temp-warning" src="/assets/images/engine-coolant.svg" [ngClass]="{'filter-red': data().engineWaterTempWarningOn }">
+          <img class="dashboard-light" id="oil-pressure-warning" src="/assets/images/oil-can.svg" [ngClass]="{'filter-red': data().oilPressureWarningOn}">
+          <img class="dashboard-light" id="wipers" src="/assets/images/wipers.svg" [ngClass]="{'filter-blue': data().wipersOn}">
+        </div>
+    </div>
+
+    <div class="col-6">
+      <div class="card dashboard-lights">
         <div class="icon-text-control">
           <img class="dashboard-light filter-white" src="/assets/images/fuel.svg" [ngClass]="{'filter-orange': data().fuelWarningOn}">
           <div id="fuelDistance">{{data().fuelDistance}} km</div>
@@ -177,18 +201,6 @@
           <div>{{data().cruiseControlSpeed}} km/h</div>
         </div>
       </div>
-    </div>
-  </div>
-
-  <div class="row footer-row">
-    <div class="card col-12">
-      @if(data().truckName) {
-        <span id="truckName">{{data().truckName}}</span>
-      }
-      @else {
-        <span id="truckName">&nbsp;</span>
-      }
-      <span class="clock">{{data().gameTime | date: 'HH:mm'}}</span>
     </div>
   </div>
 </div>

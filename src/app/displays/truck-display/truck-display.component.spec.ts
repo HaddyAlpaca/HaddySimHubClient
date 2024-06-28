@@ -32,9 +32,15 @@ describe('TruckDisplayComponent', () => {
   it('Gears should be displayed', async () => {
     //Reverse 1
     patchData({ gear: -1 });
+    expect(await harness.getElementText('.gear')).toEqual('R1');
 
-    const speedoHarness = await harness.getSpeedoHarness();
-    expect(await speedoHarness.getGear()).toEqual('R1');
+    //Neutral
+    patchData({ gear: 0 });
+    expect(await harness.getElementText('.gear')).toEqual('N');
+
+    //Forward
+    patchData({ gear: 7 });
+    expect(await harness.getElementText('.gear')).toEqual('7');
   });
 
   it('Fuel distance is displayed', async () => {
