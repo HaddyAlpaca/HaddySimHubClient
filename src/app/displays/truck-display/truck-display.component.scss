@@ -3,26 +3,68 @@ app-truck-display {
   font-family: Poppins, sans-serif;
   color: white;
 
-  app-speedometer {
-    * {
-      color: white;
-    }
+  .gauge {
+    align-content: center;
+  }
 
-    label {
-      text-transform: uppercase;
-      text-align: center;
-      width: 100%;
-      font-size: 3vw;
-    }
+  .gear {
+    text-align: center;
+    font-size: 6vw;
+  }
 
-    .rpm, .speed {
-      font-size: 4vw;
-    }
+  .text-center {
+    text-align: center;
+  }
 
-    .gear {
-      text-align: center;
-      font-size: 10vw;
-    }
+  .unit {
+    font-size: 1.5vw;
+  }
+
+  .rpm-value {
+    font-size: 2.5vw;
+  }
+
+  .dashboard-lights {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    justify-content: space-evenly;
+  }
+
+  .dashboard-light {
+    width: 2em;
+    height: auto;
+  }
+
+  .speed-limit {
+    display: inline-block;
+    border:.5rem solid red;
+    border-radius: 50%;
+    background-color: white;
+    color:black;
+    font-size: 1.6vw;
+    font-weight: 600;
+    width: 5vw;
+    height: 5vw;
+    text-align: center;
+    padding-top: .9vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .over-speed-limit {
+    color: red;
+  }
+
+  .icon-text-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    align-items: end;
   }
 
   .row {
@@ -30,11 +72,6 @@ app-truck-display {
 
     > *:not(:last-child) {
       padding-right: 0;
-    }
-
-    > .dashboard-row {
-      margin-left: .75rem;
-      margin-right: .75rem;
     }
   }
 
@@ -61,106 +98,6 @@ app-truck-display {
 
   .card-title {
     font-size: 1.4vw;
-  }
-
-  .dashboard-row {
-    font-size: 1.5vw;
-    display: flex;
-    flex-direction: row;
-
-    .center-column {
-      border-radius: 50px;
-      background-color: darkgray;
-    }
-
-    .left-column {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px;
-      align-content: baseline;
-      padding: 50px;
-    }
-
-    .right-column {
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      align-items: left;
-      gap: 40px;
-    }
-
-    .dashboard-light {
-      width: 2em;
-      height: auto;
-    }
-
-    .speed-limit {
-      display: inline-block;
-      border:.5rem solid red;
-      border-radius: 50%;
-      background-color: white;
-      color:black;
-      font-size: 1.8vw;
-      font-weight: 600;
-      width: 5vw;
-      height: 5vw;
-      text-align: center;
-      padding-top: .9vw;
-      position: relative;
-      left: 50px;
-      margin-top: 20px;
-    }
-
-    .over-speed-limit {
-      color: red;
-    }
-
-    .icon-text-control {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding-left: 30px;
-    }
-
-    .current-speed {
-      font-size: 6vw;
-      text-align: center;
-      margin-top: -20px;
-    }
-
-    .speed-unit {
-      font-size: 1em;
-      text-align: center;
-      position: relative;
-      top: -40px;
-    }
-
-    .current-gear {
-      font-size: 2.6vw;
-      text-align: center;
-      margin-top: -20px;
-    }
-
-    #rpm {
-      width: calc(100% - 40px);
-      height: 80px;
-      margin-top: 20px;
-      margin-left: 20px;
-    }
-  }
-
-  .footer-row {
-    min-height: 1.5vw;
-    font-size: 1.5vw;
-    margin-left: 0;
-    margin-right: 0;
-
-    .clock {
-      position: absolute;
-      right: 6px;;
-    }
   }
 
   .filter-white{
