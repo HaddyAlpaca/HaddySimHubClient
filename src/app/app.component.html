@@ -2,7 +2,9 @@
   <app-clock />
 </div>
 <div class="display">
-  @switch (displayUpdate().type) {
+  <app-race-display [dataSource]="displayUpdate().data" />
+
+  <!-- @switch (displayUpdate().type) {
     @case (DisplayType.TruckDashboard) {
       <app-truck-display [dataSource]="displayUpdate().data" />
     }
@@ -18,5 +20,5 @@
     @default {
       <app-connection-status [status]="connectionStatus()" />
     }
-  }
+  } -->
 </div>
