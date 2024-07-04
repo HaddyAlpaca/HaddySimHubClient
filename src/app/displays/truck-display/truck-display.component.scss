@@ -56,14 +56,15 @@ app-truck-display {
   }
 
   .over-speed-limit {
-    color: red;
+    color: rgb(187, 35, 35);
   }
 
   .icon-text-control {
     display: flex;
     gap: 10px;
     padding: 10px;
-    align-items: end;
+    align-items: center;
+    font-size: 1.8vw;
   }
 
   .row {
