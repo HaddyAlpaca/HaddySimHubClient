@@ -17,7 +17,12 @@
           <div class="data-row">
             <div class="data-label">Resterend</div>
             @if (data().timeRemaining) {
-              <div class="data-item"><span>{{data().timeRemaining | timespan}}</span> / <span>{{data().distanceRemaining}} km </span>({{data().timeRemainingIrl | timespan}})</div>
+              <div class="data-item">
+                <span>{{data().timeRemaining | timespan}}</span> / <span>{{data().distanceRemaining}} km </span>
+                @if (data().timeRemainingIrl > 0) {
+                  <span>({{data().timeRemainingIrl | timespan}})</span>
+                }
+              </div>
             }
             @else {
               <div class="data-item">-</div>
@@ -26,7 +31,12 @@
           <div class="data-row">
             <div class="data-label">Volgend rustmoment</div>
             @if (data().restTimeRemaining) {
-              <div class="data-item">{{data().restTimeRemaining | timespan}} ({{data().restTimeRemainingIrl | timespan}})</div>
+              <div class="data-item">
+                <span>{{data().restTimeRemaining | timespan}}&nbsp;</span>
+                @if (data().restTimeRemainingIrl > 0) {
+                  <span>({{data().restTimeRemainingIrl | timespan}})</span>
+                }
+              </div>
             }
             @else {
               <div class="data-item">-</div>
@@ -54,7 +64,12 @@
           <div class="data-row">
             <div class="data-label">Deadline</div>
             @if (data().jobTimeRemaining) {
-              <div class="data-item">{{data().jobTimeRemaining | timespan}} ({{data().jobTimeRemainingIrl | timespan}})</div>
+              <div class="data-item">
+                <span>{{data().jobTimeRemaining | timespan}}&nbsp;</span>
+                @if (data().jobTimeRemainingIrl > 0) {
+                  <span>({{data().jobTimeRemainingIrl | timespan}})</span>
+                }
+              </div>
             }
             @else {
               <div class="data-item">-</div>
