@@ -8,7 +8,11 @@ export class IRatingPipe implements PipeTransform {
   private readonly _numberFormat = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 });
   private readonly _kNumberFormat = new Intl.NumberFormat('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
-  transform(value: number): string {
+  transform(value: number | undefined): string {
+    if (!value) {
+      return '';
+    }
+
     if (value < 1000) {
       return this._numberFormat.format(value);
     } else {

@@ -1,0 +1,15 @@
+<div class="opponent-delta group-border border-blue">
+  <div class="label">{{caption()}}</div>
+  <div [class.hidden]="!name()">
+    <div class="delta-time">{{delta() | deltatime: false}}</div>
+    <div class="label driver-name">
+      <span>{{name()}}</span>
+      @if (license()) {
+        <span class="driver-class" [style.background-color]="licenseColor()">{{license()}}</span>
+      }
+      @if (rating()) {
+        <span class="driver-irating">{{rating() | irating}}</span>
+      }
+    </div>
+  </div>
+</div>

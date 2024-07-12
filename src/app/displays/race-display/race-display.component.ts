@@ -9,6 +9,7 @@ import { TrackPositionsComponent } from './track-positions.component';
 import { DisplayComponent } from '../display.component';
 import { SpeedometerComponent } from 'src/app/components/speedometer/speedometer.component';
 import { DataElementComponent } from 'src/app/components/data-element/data-element.component';
+import { OpponentDeltaComponent } from './opponent-delta.component';
 
 @Component({
   selector: 'app-race-display',
@@ -26,6 +27,7 @@ import { DataElementComponent } from 'src/app/components/data-element/data-eleme
     TrackPositionsComponent,
     SpeedometerComponent,
     DataElementComponent,
+    OpponentDeltaComponent,
   ],
 })
 export class RaceDisplayComponent extends DisplayComponent<RaceData> {
