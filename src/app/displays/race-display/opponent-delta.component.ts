@@ -2,6 +2,14 @@ import { Component, input } from '@angular/core';
 import { DeltaTimePipe } from './pipes/delta-time/delta-time.pipe';
 import { IRatingPipe } from './pipes/irating/irating.pipe';
 
+export interface DriverInfo {
+  name: string;
+  license: string;
+  licenseColor: string;
+  rating: number;
+  delta: number;
+}
+
 @Component({
   selector: 'app-opponent-delta',
   templateUrl: './opponent-delta.component.html',
@@ -13,9 +21,5 @@ import { IRatingPipe } from './pipes/irating/irating.pipe';
 })
 export class OpponentDeltaComponent {
   public caption = input.required<string>();
-  public name = input<string>();
-  public delta = input<number>();
-  public license = input<string>();
-  public licenseColor = input<string>();
-  public rating = input<number>();
+  public driverInfo = input.required<DriverInfo>();
 }

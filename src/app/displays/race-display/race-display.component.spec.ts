@@ -180,53 +180,19 @@ describe('Race display component tests', () => {
 
   describe('Driver behind', () => {
     it('Driver name and delta are displayed', async () => {
-      patchData({ driverBehindName: 'David Coulthard' });
+      patchData({ driverBehindName: 'David Coulthard', driverBehindDelta: 1.2 });
 
-      expect(await harness.getElementText('#driverBehind')).toEqual('David Coulthard');
-    });
-
-    it('Info is displayed when driver name is available', async () => {
-      patchData({ driverBehindName: 'David Coulthard' });
-
-      expect(await harness.elementHasClass('#driverBehindInfo', 'hidden')).toBeFalse();
-    });
-
-    it('Info is not displayed when driver name is not available', async () => {
-      patchData({ driverAheadName: '' });
-
-      expect(await harness.elementHasClass('#driverBehindInfo', 'hidden')).toBeTrue();
-    });
-
-    it('Delta time is displayed', async () => {
-      patchData({ driverBehindDelta: 1.2 });
-
-      expect(await harness.getElementText('#gapBehind')).toEqual('1.200');
+      expect(await harness.getElementText('#driverBehindInfo .driver-name')).toEqual('David Coulthard');
+      expect(await harness.getElementText('#driverBehindInfo .delta-time')).toEqual('1.200');
     });
   });
 
   describe('Driver ahead', () => {
     it('Driver name and delta are displayed', async () => {
-      patchData({ driverAheadName: 'Enrique Bernoldi' });
+      patchData({ driverAheadName: 'Enrique Bernoldi', driverAheadDelta: 1.2 });
 
-      expect(await harness.getElementText('#driverAhead')).toEqual('Enrique Bernoldi');
-    });
-
-    it('Info is displayed when driver name is available', async () => {
-      patchData({ driverAheadName: 'Enrique Bernoldi' });
-
-      expect(await harness.elementHasClass('#driverAheadInfo', 'hidden')).toBeFalse();
-    });
-
-    it('Info is not displayed when driver name is not available', async () => {
-      patchData({ driverAhead: '' });
-
-      expect(await harness.elementHasClass('#driverAheadInfo', 'hidden')).toBeTrue();
-    });
-
-    it('Delta time is displayed', async () => {
-      patchData({ driverAheadDelta: 1.2 });
-
-      expect(await harness.getElementText('#gapAhead')).toEqual('1.200');
+      expect(await harness.getElementText('#driverAheadInfo .driver-name')).toEqual('Enrique Bernoldi');
+      expect(await harness.getElementText('#driverAheadInfo .delta-time')).toEqual('1.200');
     });
   });
 

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, effect } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, effect } from '@angular/core';
 import { RaceData } from './race-data';
 import { CommonModule } from '@angular/common';
 import { DeltaTimePipe } from './pipes/delta-time/delta-time.pipe';
@@ -51,6 +51,27 @@ export class RaceDisplayComponent extends DisplayComponent<RaceData> {
     return this._gapAheadDelta;
   }
 
+  public driverBehindInfo = computed(() => {
+    return {
+      name: this.data().driverBehindName,
+      license: this.data().driverBehindLicense,
+      licenseColor: this.data().driverBehindLicenseColor,
+      rating: this.data().driverBehindIRating,
+      delta: this.data().driverBehindDelta,
+    }
+  });
+
+  public driverAheadInfo = computed(() => {
+    return {
+      name: this.data().driverAheadName,
+      license: this.data().driverAheadLicense,
+      licenseColor: this.data().driverAheadLicenseColor,
+      rating: this.data().driverAheadIRating,
+      delta: this.data().driverAheadDelta,
+    }
+  });
+
+
   constructor() {
     super();
 
@@ -62,5 +83,6 @@ export class RaceDisplayComponent extends DisplayComponent<RaceData> {
       this._gapAheadDelta = data.driverAheadDelta - this._lastGapAhead;
       this._lastGapAhead = data.driverAheadDelta;
     });
+
   }
 }
