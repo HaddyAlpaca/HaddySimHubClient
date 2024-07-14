@@ -21,14 +21,6 @@ describe('TruckDisplayComponent', () => {
     harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, TruckDashComponentHarness);
   });
 
-  it('Departure is displayed', async () => {
-    patchData({ sourceCity: 'Berlin', sourceCompany: 'Company B' });
-  });
-
-  it('Destination is displayed', async () => {
-    patchData({ sourceCity: 'Paris', sourceCompany: 'Company A' });
-  });
-
   it('Gears should be displayed', async () => {
     //Reverse 1
     patchData({ gear: -1 });
