@@ -160,21 +160,21 @@ describe('Race display component tests', () => {
     it('Delta time is not green and not red when 0', async () => {
       patchData({ bestLapTimeDelta: 0 });
 
-      expect(await harness.elementHasClass('#bestLapTimeDelta', 'text-green')).toBeFalse();
-      expect(await harness.elementHasClass('#bestLapTimeDelta', 'text-red')).toBeFalse();
+      expect(await harness.elementHasClass('#bestLapTimeDelta', 'text-green')).toBe(false);
+      expect(await harness.elementHasClass('#bestLapTimeDelta', 'text-red')).toBe(false);
 
     });
 
     it('Delta time is red when > 0', async () => {
       patchData({ bestLapTimeDelta: 0.234 });
 
-      expect(await harness.elementHasClass('#bestLapTimeDelta', 'text-red')).toBeTrue();
+      expect(await harness.elementHasClass('#bestLapTimeDelta', 'text-red')).toBe(true);
     });
 
     it('Delta time is green when < 0', async () => {
       patchData({ bestLapTimeDelta: -0.234 });
 
-      expect(await harness.elementHasClass('#bestLapTimeDelta', 'text-green')).toBeTrue();
+      expect(await harness.elementHasClass('#bestLapTimeDelta', 'text-green')).toBe(true);
     });
   });
 
@@ -200,13 +200,13 @@ describe('Race display component tests', () => {
     it('Pit limter is not shown when off', async () => {
       patchData({ pitLimiterOn: false });
 
-      expect(await harness.hasElement('.pit-limiter')).toBeFalse();
+      expect(await harness.hasElement('.pit-limiter')).toBe(false);
     })
 
     it('Pit limter is not shown when on', async () => {
       patchData({ pitLimiterOn: true });
 
-      expect(await harness.hasElement('.pit-limiter')).toBeTrue();
+      expect(await harness.hasElement('.pit-limiter')).toBe(true);
     })
   });
 
@@ -230,13 +230,13 @@ describe('Race display component tests', () => {
     it('Flag is not shown when not set', async () => {
       patchData({ flag: '' });
 
-      expect(await harness.hasElement('.flag')).toBeFalse();
+      expect(await harness.hasElement('.flag')).toBe(false);
     });
 
     it('Flag is shown when set', async () => {
       patchData({ flag: 'yellow' });
 
-      expect(await harness.hasElement('.flag')).toBeTrue();
+      expect(await harness.hasElement('.flag')).toBe(true);
     });
   });
 
