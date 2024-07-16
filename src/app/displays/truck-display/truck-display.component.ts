@@ -5,8 +5,8 @@ import { NgClass, DecimalPipe, CommonModule } from '@angular/common';
 import { NumberNlPipe } from '../pipes/number-nl/number-nl.pipe';
 import { DisplayComponent } from '../display.component';
 import { WaypointComponent } from './components/waypoint.component';
-import { SpeedometerComponent } from 'src/app/components/speedometer/speedometer.component';
-import { GearPipe } from 'src/app/components/speedometer/gear.pipe';
+import { SpeedometerComponent } from '../../components/speedometer/speedometer.component';
+import { GearPipe } from '../../components/speedometer/gear.pipe';
 
 @Component({
     selector: 'app-truck-display',

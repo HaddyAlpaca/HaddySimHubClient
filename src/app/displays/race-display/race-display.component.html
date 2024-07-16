@@ -65,21 +65,15 @@
   <div class="row" style="padding-right: 0; margin-top: 40px;">
     <div class="col-6">
       <app-opponent-delta
+        id="driverBehindInfo"
         caption="Driver behind"
-        [name]="data().driverBehindName"
-        [delta]="data().driverBehindDelta"
-        [license]="data().driverBehindLicense"
-        [licenseColor]="data().driverBehindLicenseColor"
-        [rating]="data().driverBehindIRating" />
+        [driverInfo]="driverBehindInfo()" />
     </div>
     <div class="col-6" style="padding-right: 0;">
       <app-opponent-delta
+        id="driverAheadInfo"
         caption="Driver ahead"
-        [name]="data().driverAheadName"
-        [delta]="data().driverAheadDelta"
-        [license]="data().driverAheadLicense"
-        [licenseColor]="data().driverAheadLicenseColor"
-        [rating]="data().driverAheadIRating" />
+        [driverInfo]="driverAheadInfo()" />
     </div>
   </div>
   <div class="row">

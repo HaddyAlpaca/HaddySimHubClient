@@ -1,8 +1,8 @@
 import { formatNumber } from '@angular/common';
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
-import { DeltaTimePipe } from 'src/app/displays/race-display/pipes/delta-time/delta-time.pipe';
-import { LapTimePipe } from 'src/app/displays/race-display/pipes/laptime/laptime.pipe';
-import { TimespanPipe } from 'src/app/displays/truck-display/pipes/timespan/timespan.pipe';
+import { TimespanPipe } from '../../displays/truck-display/pipes/timespan/timespan.pipe';
+import { LapTimePipe } from '../laptime/laptime.pipe';
+import { DeltaTimePipe } from '../delta-time/delta-time.pipe';
 
 export enum DataType {
   Unknown,

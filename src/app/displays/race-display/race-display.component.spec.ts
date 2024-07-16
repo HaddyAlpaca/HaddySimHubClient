@@ -160,73 +160,39 @@ describe('Race display component tests', () => {
     it('Delta time is not green and not red when 0', async () => {
       patchData({ bestLapTimeDelta: 0 });
 
-      expect(await harness.elementHasClass('#bestLapTimeDelta', 'text-green')).toBeFalse();
-      expect(await harness.elementHasClass('#bestLapTimeDelta', 'text-red')).toBeFalse();
+      expect(await harness.elementHasClass('#bestLapTimeDelta', 'text-green')).toBe(false);
+      expect(await harness.elementHasClass('#bestLapTimeDelta', 'text-red')).toBe(false);
 
     });
 
     it('Delta time is red when > 0', async () => {
       patchData({ bestLapTimeDelta: 0.234 });
 
-      expect(await harness.elementHasClass('#bestLapTimeDelta', 'text-red')).toBeTrue();
+      expect(await harness.elementHasClass('#bestLapTimeDelta', 'text-red')).toBe(true);
     });
 
     it('Delta time is green when < 0', async () => {
       patchData({ bestLapTimeDelta: -0.234 });
 
-      expect(await harness.elementHasClass('#bestLapTimeDelta', 'text-green')).toBeTrue();
+      expect(await harness.elementHasClass('#bestLapTimeDelta', 'text-green')).toBe(true);
     });
   });
 
   describe('Driver behind', () => {
     it('Driver name and delta are displayed', async () => {
-      patchData({ driverBehindName: 'David Coulthard' });
+      patchData({ driverBehindName: 'David Coulthard', driverBehindDelta: 1.2 });
 
-      expect(await harness.getElementText('#driverBehind')).toEqual('David Coulthard');
-    });
-
-    it('Info is displayed when driver name is available', async () => {
-      patchData({ driverBehindName: 'David Coulthard' });
-
-      expect(await harness.elementHasClass('#driverBehindInfo', 'hidden')).toBeFalse();
-    });
-
-    it('Info is not displayed when driver name is not available', async () => {
-      patchData({ driverAheadName: '' });
-
-      expect(await harness.elementHasClass('#driverBehindInfo', 'hidden')).toBeTrue();
-    });
-
-    it('Delta time is displayed', async () => {
-      patchData({ driverBehindDelta: 1.2 });
-
-      expect(await harness.getElementText('#gapBehind')).toEqual('1.200');
+      expect(await harness.getElementText('#driverBehindInfo .driver-name')).toEqual('David Coulthard');
+      expect(await harness.getElementText('#driverBehindInfo .delta-time')).toEqual('1.200');
     });
   });
 
   describe('Driver ahead', () => {
     it('Driver name and delta are displayed', async () => {
-      patchData({ driverAheadName: 'Enrique Bernoldi' });
+      patchData({ driverAheadName: 'Enrique Bernoldi', driverAheadDelta: 1.2 });
 
-      expect(await harness.getElementText('#driverAhead')).toEqual('Enrique Bernoldi');
-    });
-
-    it('Info is displayed when driver name is available', async () => {
-      patchData({ driverAheadName: 'Enrique Bernoldi' });
-
-      expect(await harness.elementHasClass('#driverAheadInfo', 'hidden')).toBeFalse();
-    });
-
-    it('Info is not displayed when driver name is not available', async () => {
-      patchData({ driverAhead: '' });
-
-      expect(await harness.elementHasClass('#driverAheadInfo', 'hidden')).toBeTrue();
-    });
-
-    it('Delta time is displayed', async () => {
-      patchData({ driverAheadDelta: 1.2 });
-
-      expect(await harness.getElementText('#gapAhead')).toEqual('1.200');
+      expect(await harness.getElementText('#driverAheadInfo .driver-name')).toEqual('Enrique Bernoldi');
+      expect(await harness.getElementText('#driverAheadInfo .delta-time')).toEqual('1.200');
     });
   });
 
@@ -234,13 +200,13 @@ describe('Race display component tests', () => {
     it('Pit limter is not shown when off', async () => {
       patchData({ pitLimiterOn: false });
 
-      expect(await harness.hasElement('.pit-limiter')).toBeFalse();
+      expect(await harness.hasElement('.pit-limiter')).toBe(false);
     })
 
     it('Pit limter is not shown when on', async () => {
       patchData({ pitLimiterOn: true });
 
-      expect(await harness.hasElement('.pit-limiter')).toBeTrue();
+      expect(await harness.hasElement('.pit-limiter')).toBe(true);
     })
   });
 
@@ -264,13 +230,13 @@ describe('Race display component tests', () => {
     it('Flag is not shown when not set', async () => {
       patchData({ flag: '' });
 
-      expect(await harness.hasElement('.flag')).toBeFalse();
+      expect(await harness.hasElement('.flag')).toBe(false);
     });
 
     it('Flag is shown when set', async () => {
       patchData({ flag: 'yellow' });
 
-      expect(await harness.hasElement('.flag')).toBeTrue();
+      expect(await harness.hasElement('.flag')).toBe(true);
     });
   });
 

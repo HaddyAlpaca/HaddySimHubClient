@@ -1,15 +1,15 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, effect } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, effect } from '@angular/core';
 import { RaceData } from './race-data';
 import { CommonModule } from '@angular/common';
-import { DeltaTimePipe } from './pipes/delta-time/delta-time.pipe';
-import { LapTimePipe } from './pipes/laptime/laptime.pipe';
-import { TimespanPipe } from './pipes/timespan/timespan.pipe';
 import { IRatingPipe } from './pipes/irating/irating.pipe';
 import { TrackPositionsComponent } from './track-positions.component';
 import { DisplayComponent } from '../display.component';
-import { SpeedometerComponent } from 'src/app/components/speedometer/speedometer.component';
-import { DataElementComponent } from 'src/app/components/data-element/data-element.component';
+import { SpeedometerComponent } from '../../components/speedometer/speedometer.component';
+import { DataElementComponent } from '../../components/data-element/data-element.component';
 import { OpponentDeltaComponent } from './opponent-delta.component';
+import { DeltaTimePipe } from '../../components/delta-time/delta-time.pipe';
+import { LapTimePipe } from '../../components/laptime/laptime.pipe';
+import { TimespanPipe } from '../../components/timespan/timespan.pipe';
 
 @Component({
   selector: 'app-race-display',
@@ -51,6 +51,27 @@ export class RaceDisplayComponent extends DisplayComponent<RaceData> {
     return this._gapAheadDelta;
   }
 
+  public driverBehindInfo = computed(() => {
+    return {
+      name: this.data().driverBehindName,
+      license: this.data().driverBehindLicense,
+      licenseColor: this.data().driverBehindLicenseColor,
+      rating: this.data().driverBehindIRating,
+      delta: this.data().driverBehindDelta,
+    }
+  });
+
+  public driverAheadInfo = computed(() => {
+    return {
+      name: this.data().driverAheadName,
+      license: this.data().driverAheadLicense,
+      licenseColor: this.data().driverAheadLicenseColor,
+      rating: this.data().driverAheadIRating,
+      delta: this.data().driverAheadDelta,
+    }
+  });
+
+
   constructor() {
     super();
 
@@ -62,5 +83,6 @@ export class RaceDisplayComponent extends DisplayComponent<RaceData> {
       this._gapAheadDelta = data.driverAheadDelta - this._lastGapAhead;
       this._lastGapAhead = data.driverAheadDelta;
     });
+
   }
 }
