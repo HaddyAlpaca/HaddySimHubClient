@@ -1,9 +1,9 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { DisplayComponent } from '../display.component';
+import { DisplayComponent } from '@displays/display.component';
 import { RallyData } from './rally-data';
-import { SpeedometerComponent } from 'src/app/components/speedometer/speedometer.component';
-import { DataElementComponent } from 'src/app/components/data-element/data-element.component';
-import { DataGroupComponent } from 'src/app/components/data-group/data-group.component';
+import { SpeedometerComponent } from '@components/speedometer/speedometer.component';
+import { DataElementComponent } from '@components/data-element/data-element.component';
+import { DataGroupComponent } from '@components/data-group/data-group.component';
 
 @Component({
   selector: 'app-rally-display',

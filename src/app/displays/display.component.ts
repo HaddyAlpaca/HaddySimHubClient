@@ -1,5 +1,5 @@
 import { Component, computed, input } from '@angular/core';
-import { DataType } from '../components/data-element/data-element.component';
+import { DataType } from '@components/data-element/data-element.component';
 
 @Component({
   template: '',

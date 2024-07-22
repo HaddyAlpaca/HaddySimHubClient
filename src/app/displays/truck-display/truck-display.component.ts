@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { TruckData } from './truck-data';
-import { TimespanPipe } from './pipes/timespan/timespan.pipe';
+import { TimespanPipe } from './timespan.pipe';
 import { NgClass, DecimalPipe, CommonModule } from '@angular/common';
-import { NumberNlPipe } from '../pipes/number-nl/number-nl.pipe';
-import { DisplayComponent } from '../display.component';
-import { WaypointComponent } from './components/waypoint.component';
-import { SpeedometerComponent } from '../../components/speedometer/speedometer.component';
-import { GearPipe } from '../../components/speedometer/gear.pipe';
+import { NumberNlPipe } from '@components/number-nl/number-nl.pipe';
+import { DisplayComponent } from '@displays/display.component';
+import { WaypointComponent } from './waypoint.component';
+import { SpeedometerComponent } from '@components/speedometer/speedometer.component';
+import { GearPipe } from '@components/speedometer/gear.pipe';
 
 @Component({
     selector: 'app-truck-display',

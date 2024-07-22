@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { DisplayComponent } from '../display.component';
+import { DisplayComponent } from '@displays/display.component';
 import { RaceLeaderboardData } from './race-leaderboard.data';
 import { MatTableModule } from '@angular/material/table';
 

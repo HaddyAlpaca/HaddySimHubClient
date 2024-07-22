@@ -1,5 +1,5 @@
 import { ComponentHarness } from '@angular/cdk/testing';
-import { DataElementComponentHarness } from '../components/data-element/data-element.component.harness';
+import { DataElementComponentHarness } from '@components/data-element/data-element.component.harness';
 
 export class ComponentHarnessBase extends ComponentHarness {
   public async hasElement(selector: string): Promise<boolean> {

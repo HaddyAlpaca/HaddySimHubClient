@@ -1,5 +1,5 @@
-import { SpeedometerComponentHarness } from '../../components/speedometer/speedometer.component.harness';
-import { ComponentHarnessBase } from '../../testing/component-harness-base';
+import { SpeedometerComponentHarness } from '@components/speedometer/speedometer.component.harness';
+import { ComponentHarnessBase } from '@testing/component-harness-base';
 
 export class TruckDashComponentHarness extends ComponentHarnessBase {
   static hostSelector = 'app-truck-dash';
