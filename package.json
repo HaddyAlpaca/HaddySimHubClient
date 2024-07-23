@@ -12,6 +12,12 @@
   },
   "jest": {
     "preset": "jest-preset-angular",
+    "moduleNameMapper": {
+      "@components/(.*)": "<rootDir>/src/app/components/$1",
+      "@services/(.*)": "<rootDir>/src/app/services/$1",
+      "@testing/(.*)": "<rootDir>/src/app/testing/$1",
+      "@displays/(.*)": "<rootDir>/src/app/displays/$1"
+    },
     "setupFilesAfterEnv": [
       "<rootDir>/setup-jest.ts"
     ]
@@ -50,9 +56,9 @@
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
     "eslint": "^8.57.0",
-    "jasmine-core": "~5.1.2",
     "jest": "^29.7.0",
     "jest-preset-angular": "^14.1.1",
+    "jest-extended": "^4.0.2",
     "typescript": "~5.4.2"
   }
 }

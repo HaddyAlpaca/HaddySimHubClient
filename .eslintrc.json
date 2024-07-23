@@ -9,7 +9,7 @@
         "*.ts"
       ],
       "env": {
-        "jasmine": true,
+        "jest": true,
         "browser": true
       },
       "parserOptions": {
