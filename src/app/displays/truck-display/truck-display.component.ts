@@ -7,6 +7,7 @@ import { DisplayComponent } from '@displays/display.component';
 import { WaypointComponent } from './waypoint.component';
 import { SpeedometerComponent } from '@components/speedometer/speedometer.component';
 import { GearPipe } from '@components/speedometer/gear.pipe';
+import { NumberFlexDigitPipe } from '@components/number-flex-digit/number-flex-digit.pipe';
 
 @Component({
     selector: 'app-truck-display',
@@ -24,6 +25,7 @@ import { GearPipe } from '@components/speedometer/gear.pipe';
       WaypointComponent,
       SpeedometerComponent,
       GearPipe,
+      NumberFlexDigitPipe,
     ],
 })
 export class TruckDisplayComponent extends DisplayComponent<TruckData> {

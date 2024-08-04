@@ -18,7 +18,7 @@
             <div class="data-label">Resterend</div>
             @if (data().timeRemaining) {
               <div class="data-item">
-                <span>{{data().timeRemaining | timespan}}</span> / <span>{{data().distanceRemaining}} km </span>
+                <span>{{data().timeRemaining | timespan}}</span> / <span>{{data().distanceRemaining | numberFlexDigit}} km </span>
                 @if (data().timeRemainingIrl > 0) {
                   <span>({{data().timeRemainingIrl | timespan}})</span>
                 }
@@ -207,13 +207,17 @@
 
     <div class="col-6">
       <div class="card dashboard-lights">
-        <div class="icon-text-control">
+        <div class="icon-text-control" id="fuel">
           <img class="dashboard-light filter-white" src="/assets/images/fuel.svg" [ngClass]="{'filter-orange': data().fuelWarningOn}">
-          <div id="fuelDistance">{{data().fuelDistance}} km</div>
+          <div>{{data().fuelDistance | numberFlexDigit}} km ({{data().fuelAmount | numberFlexDigit}} L)</div>
         </div>
         <div class="icon-text-control" [ngClass]="{'hidden': !data().cruiseControlOn}">
           <img class="dashboard-light" src="/assets/images/cruise-control.png">
           <div>{{data().cruiseControlSpeed}} km/h</div>
+        </div>
+        <div class="icon-text-control"  id="adBlue">
+          <img class="dashboard-light filter-white" src="/assets/images/adblue.svg" [ngClass]="{'filter-orange': data().adBlueWarningOn}">
+          <div>{{data().adBlueAmount  | numberFlexDigit}} L</div>
         </div>
       </div>
     </div>

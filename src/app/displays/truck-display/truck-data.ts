@@ -9,6 +9,9 @@ export class TruckData {
   restTimeRemaining = 0;
   restTimeRemainingIrl = 0;
   fuelDistance = 0;
+  fuelAmount = 0;
+  adBlueAmount = 0;
+  adBlueWarningOn = false;
   jobTimeRemaining = 0;
   jobTimeRemainingIrl = 0;
   jobIncome = 0;

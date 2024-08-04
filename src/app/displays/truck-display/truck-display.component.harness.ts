@@ -9,4 +9,10 @@ export class TruckDashComponentHarness extends ComponentHarnessBase {
 
     return harness;
   }
+
+  public async getWarning(selector: string): Promise<boolean> {
+    const elm = await this.locatorFor(`${selector} > img`)();
+    const warning = await elm.hasClass('filter-orange');
+    return warning;
+  }
 }
