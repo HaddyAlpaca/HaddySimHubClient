@@ -20,7 +20,8 @@
       "@displays/(.*)": "<rootDir>/src/app/displays/$1"
     },
     "setupFilesAfterEnv": [
-      "<rootDir>/setup-jest.ts"
+      "<rootDir>/setup-jest.ts",
+      "jest-extended/all"
     ]
   },
   "private": true,
@@ -58,8 +59,8 @@
     "@typescript-eslint/parser": "^7.2.0",
     "eslint": "^8.57.0",
     "jest": "^29.7.0",
-    "jest-preset-angular": "^14.1.1",
     "jest-extended": "^4.0.2",
+    "jest-preset-angular": "^14.1.1",
     "typescript": "~5.4.2"
   }
 }

@@ -39,24 +39,24 @@ describe('TruckDisplayComponent', () => {
     patchData({ fuelDistance: 814, fuelAmount: 1200, fuelWarningOn: false });
 
     expect(await harness.getElementText('#fuel')).toEqual('814 km (1.200 L)');
-    expect(await harness.getWarning('#fuel')).toBe(false);
+    expect(await harness.getWarning('#fuel')).toBeFalse();
 
     patchData({ fuelDistance: 7.2, fuelAmount: 8.3, fuelWarningOn: true });
 
     expect(await harness.getElementText('#fuel')).toEqual('7.2 km (8.3 L)');
-    expect(await harness.getWarning('#fuel')).toBe(true);
+    expect(await harness.getWarning('#fuel')).toBeTrue();
   });
 
   it('AdBlue info is displayed', async () => {
     patchData({ adBlueAmount: 100.2, adBlueWarningOn: false });
 
     expect(await harness.getElementText('#adBlue')).toEqual('100 L');
-    expect(await harness.getWarning('#adBlue')).toBe(false);
+    expect(await harness.getWarning('#adBlue')).toBeFalse();
 
     patchData({ adBlueAmount: 7.2, adBlueWarningOn: true });
 
     expect(await harness.getElementText('#adBlue')).toEqual('7.2 L');
-    expect(await harness.getWarning('#adBlue')).toBe(true);
+    expect(await harness.getWarning('#adBlue')).toBeTrue();
   });
 
   describe('Job', () => {
